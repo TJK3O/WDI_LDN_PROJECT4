@@ -1,10 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import HomeRoute from './components/pages/HomeRoute';
+import IndexRoute from './components/content/IndexRoute';
+import ShowRoute from './components/content/ShowRoute';
 
 class App extends React.Component {
+
   render() {
     return (
-      <h1>WDI32 Project 4</h1>
+      // Any routes need to sit in the BrowserRouter tags
+      <BrowserRouter>
+        {/* Switch shows a single route at once. */}
+        <main>
+          <Switch>
+            <Route path="/content/:id" component={ShowRoute} />
+            <Route path="/content" component={IndexRoute} />
+            <Route path="/" component={HomeRoute} />
+          </Switch>
+        </main>
+      </BrowserRouter>
     );
   }
 }
