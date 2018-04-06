@@ -18,12 +18,13 @@ function login(req, res, next) {
         return res.status(401).json({ message: 'Unauthorized' });
       }
 
-      const token = jwt.sign({ sub: user._id }, secret, { expirseIn: '24h' });
+      const token = jwt.sign({ sub: user._id }, secret, { expiresIn: '24h' });
       res.json({user, token, message: `Welcome back ${user.username}` });
     })
     .catch(next);
 }
 
 module.exports = {
-  register
+  register,
+  login
 };

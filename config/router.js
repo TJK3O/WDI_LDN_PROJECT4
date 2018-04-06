@@ -7,7 +7,7 @@ router.route('/spotify')
   .get(spotify.search);
 
 router.route('/register')
-  .post(auth.index);
+  .post(auth.register);
 
 router.route('/login')
   .post(auth.login);
