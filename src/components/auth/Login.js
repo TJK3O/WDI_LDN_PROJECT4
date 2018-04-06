@@ -11,8 +11,10 @@ class Login extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     axios.post('/api/login', this.state)
-      .then(res => Auth.setToken(res.data.token))
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        Auth.setToken(res.data.token);
+      })
       .then(() => this.props.history.push('/content'));
   }
 

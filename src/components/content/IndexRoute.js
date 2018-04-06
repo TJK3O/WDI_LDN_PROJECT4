@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Search from './Search';
+import Auth from '../../lib/Auth';
 
 class IndexRoute extends React.Component {
 
@@ -18,8 +19,16 @@ class IndexRoute extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const search = this.state.search;
-    axios.get(`/api/spotify/?q=${search}&type=track`)
+    axios.get('/api/spotify', {
+      params: {
+        q: this.state.search,
+        type: 'track'
+      },
+      // Now that spotify is a secure route we need to add an authorization header to the request
+      headers: {
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    })
       .then(res => this.setState({ searchResults: res.data.tracks.items}, () => console.log(this.state.searchResults)));
   }
 
