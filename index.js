@@ -1,10 +1,13 @@
 const express = require('express');
-
+const mongoose = require('mongoose');
 const app = express();
 const router = require('./config/router');
 const bodyParser = require('body-parser');
 
-const port = process.env.PORT || 4000;
+const { port, dbURI }  = require('./config/environment');
+
+mongoose.connect(dbURI);
+
 app.use(express.static(`${__dirname}/public`));
 // to access the body of a request we needed bodyParser
 app.use(bodyParser.json());
