@@ -14,6 +14,8 @@ class ShowRoute extends React.Component {
     const userId = this.props.match.params.id;
     axios.get(`/api/user/${userId}`)
       .then(res => this.setState({ user: res.data }, () => console.log(this.state)));
+    axios.get('/api/content')
+      .then(res => console.log(`db contents: ${res[0]}`));
   }
 
   render() {

@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 
 const contentSchema = new mongoose.Schema({
-  name: { type: String, required: 'Name is required' },
-  artist: { type: String, required: 'Artist is required' },
-  album: { type: String, required: 'Album is required' },
-  mediaType: { type: String, required: true },
-  previewUrl: { type: String, required: 'Release date is required' },
-  consumedStatus: { type: Boolean, required: true }
+  artwork: { type: String },
+  name: { type: String },
+  artist: { type: String },
+  album: { type: String  },
+  mediaType: { type: String  },
+  previewUrl: { type: String },
+  consumedStatus: { type: Boolean },
+  userId: { type: String }
 }, {
   timestamps: true
 });
