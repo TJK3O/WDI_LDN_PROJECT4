@@ -13,6 +13,9 @@ router.route('/register')
 router.route('/login')
   .post(auth.login);
 
+router.route('/user/:id')
+  .get(auth.show);
+
 router.route('/*')
   .all((req, res) => res.status(404).json({ message: 'Not found'}));
 

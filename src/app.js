@@ -5,8 +5,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HomeRoute from './components/pages/HomeRoute';
 import IndexRoute from './components/content/IndexRoute';
 import ShowRoute from './components/content/ShowRoute';
-import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+import AuthShowRoute from './components/auth/ShowRoute';
 
 class App extends React.Component {
 
@@ -17,6 +18,7 @@ class App extends React.Component {
         {/* Switch shows a single route at once. */}
         <main>
           <Switch>
+            <Route path="/user/:id" component={AuthShowRoute} />
             <Route path="/content/:id" component={ShowRoute} />
             <Route path="/content" component={IndexRoute} />
             <Route path="/login" component={Login} />

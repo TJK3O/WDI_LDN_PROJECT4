@@ -24,7 +24,15 @@ function login(req, res, next) {
     .catch(next);
 }
 
+function show(req, res, next) {
+  return User.findById(req.params.id)
+    .then(user => res.json(user))
+    .then(console.log(`response: ${res}`))
+    .catch(next);
+}
+
 module.exports = {
   register,
-  login
+  login,
+  show
 };
