@@ -14,12 +14,15 @@ router.route('/register')
 router.route('/login')
   .post(auth.login);
 
+router.route('/user/:id/content')
+  // .get(content.index)
+  .put(auth.todoCreate);
+
 router.route('/user/:id')
   .get(auth.show);
 
-router.route('/content')
-  .get(content.index)
-  .post(content.create);
+router.route('/user/:id/content/:id')
+  .put(secureRoute, content.update);
 
 router.route('/*')
   .all((req, res) => res.status(404).json({ message: 'Not found'}));

@@ -27,12 +27,31 @@ function login(req, res, next) {
 function show(req, res, next) {
   return User.findById(req.params.id)
     .then(user => res.json(user))
-    .then(console.log(`response: ${res}`))
+    .catch(next);
+}
+
+function update(req, res, next) {
+  return User.findById(req.params.id)
+    .then(content => Object.assign(content, req.body))
+    .then(content => content.save())
+    .then(content => res.json(content))
+    .catch(next);
+}
+
+function todoCreate(req, res, next){
+  return User.findById(req.params.id)
+    .then(user => {
+      user.content.push(req.body.content);
+      return user.save();
+    })
+    .then(user => res.json(user))
     .catch(next);
 }
 
 module.exports = {
   register,
   login,
-  show
+  show,
+  update,
+  todoCreate
 };

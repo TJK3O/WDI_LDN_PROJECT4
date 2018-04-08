@@ -9,6 +9,8 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import AuthShowRoute from './components/auth/ShowRoute';
 
+import 'bulma';
+
 class App extends React.Component {
 
   render() {

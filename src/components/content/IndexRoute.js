@@ -43,13 +43,15 @@ class IndexRoute extends React.Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
-        {this.state.searchResults.map((track, i) =>
-          <li key={i}>
-            {this.state.searchResults &&
-              <Link to={`/content/${this.state.searchResults[i].external_ids.isrc}`}>
-                <img src={track.album.images[0].url} />
-              </Link>}
-          </li>)}
+        <div className="columns">
+          {this.state.searchResults.map((track, i) =>
+            <div key={i} className="columns">
+              {this.state.searchResults &&
+                <Link to={`/content/${this.state.searchResults[i].external_ids.isrc}`}>
+                  <img src={track.album.images[0].url} />
+                </Link>}
+            </div>)}
+        </div>
       </section>
     );
   }
