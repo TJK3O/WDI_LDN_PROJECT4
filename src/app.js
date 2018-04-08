@@ -8,6 +8,7 @@ import ShowRoute from './components/content/ShowRoute';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import AuthShowRoute from './components/auth/ShowRoute';
+import Navbar from './components/common/Navbar';
 
 import 'bulma';
 
@@ -18,15 +19,18 @@ class App extends React.Component {
       // Any routes need to sit in the BrowserRouter tags
       <BrowserRouter>
         {/* Switch shows a single route at once. */}
-        <main className="container">
-          <Switch>
-            <Route path="/user/:id" component={AuthShowRoute} />
-            <Route path="/content/:id" component={ShowRoute} />
-            <Route path="/content" component={IndexRoute} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/" component={HomeRoute} />
-          </Switch>
+        <main>
+          <Navbar />
+          <section className="container">
+            <Switch>
+              <Route path="/user/:id" component={AuthShowRoute} />
+              <Route path="/content/:id" component={ShowRoute} />
+              <Route path="/content" component={IndexRoute} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/" component={HomeRoute} />
+            </Switch>
+          </section>
         </main>
       </BrowserRouter>
     );
