@@ -14,7 +14,8 @@ const userSchema = new mongoose.Schema({
     previewUrl: { type: String },
     consumedStatus: { type: Boolean },
     userId: { type: String }
-  }]
+  }],
+  musicLoverBadge: { type: String }
 });
 
 userSchema

@@ -18,7 +18,7 @@ class App extends React.Component {
       // Any routes need to sit in the BrowserRouter tags
       <BrowserRouter>
         {/* Switch shows a single route at once. */}
-        <main>
+        <main className="container">
           <Switch>
             <Route path="/user/:id" component={AuthShowRoute} />
             <Route path="/content/:id" component={ShowRoute} />

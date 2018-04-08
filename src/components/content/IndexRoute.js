@@ -32,26 +32,45 @@ class IndexRoute extends React.Component {
       .then(res => this.setState({ searchResults: res.data.tracks.items}, () => console.log(this.state.searchResults)));
   }
 
+  componentDidMount() {
+    axios.get('/api/spotify/topFifty', {
+      headers: {
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    })
+      .then(res => this.setState(res.data, () => console.log(this.state)));
+  }
+
   render() {
     return (
       <section>
         <h1>Index</h1>
-        <div>
-
-        </div>
         <Search
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
-        <div className="columns">
+        <ul className="columns is-multiline">
           {this.state.searchResults.map((track, i) =>
-            <div key={i} className="columns">
+            <div key={i} className="column is-one-third">
               {this.state.searchResults &&
                 <Link to={`/content/${this.state.searchResults[i].external_ids.isrc}`}>
                   <img src={track.album.images[0].url} />
                 </Link>}
             </div>)}
-        </div>
+        </ul>
+        {this.state.items && !this.state.search &&
+        <ul className="columns is-multiline">
+          {this.state.items.map((track, i) =>
+            <div key={i} className="column is-one-third">
+              {this.state.items &&
+                <Link to={`/content/${this.state.items[i].track.external_ids.isrc}`}>
+                  <img src={track.track.album.images[0].url} />
+                </Link>}
+            </div>
+          )}
+        </ul>
+        }
+
       </section>
     );
   }
