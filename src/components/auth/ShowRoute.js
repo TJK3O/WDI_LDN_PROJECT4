@@ -37,7 +37,7 @@ handleTick = (content) => {
   // toggle the content's consumedStatus
   content.consumedStatus = !content.consumedStatus;
   // if consumedStatus is true, add 1 to the relevant badge else take one off.
-  const newBadge = content.consumedStatus ? this.state[badge] + 1 : this.state[badge] - 1;
+  const newBadge = content.consumedStatus ? parseInt(this.state[badge] + 1) : parseInt(this.state[badge] - 1);
   // using slice means that we don't mutate state directly, we instead create a new variable containing a copy with our updated content inserted. We passed in the content in a callback function in the render
   const newContent = [
     ...this.state.content.slice(0, index),
