@@ -8,20 +8,30 @@ import Auth from '../../lib/Auth';
 class IndexRoute extends React.Component {
 
   state = {
-    search: '',
-    searchResults: []
+    music: {
+    },
+    musicSearch: '',
+    musicSearchResults: []
   }
 
-  handleChange = (e) => {
-    this.setState({ search: e.target.value }, () => console.log(this.state));
+  handleContentSelection = (e) => {
+    this.setState({ selectedContent: e.target.name }, () => console.log(this.state));
+    // this.fetchFilms();
+    // if(this.state.selectedContent === 'music') this.fetchMusic();
+    // if(this.state.selectedContent === 'films') this.fetchFilms();
+    // if(this.state.selectedContent === 'tv') this.fetchTV();
   }
 
-  handleSubmit = (e) => {
+  handleMusicChange = (e) => {
+    this.setState({ musicSearch: e.target.value }, () => console.log(this.state));
+  }
+
+  handleMusicSubmit = (e) => {
     e.preventDefault();
 
     axios.get('/api/spotify', {
       params: {
-        q: this.state.search,
+        q: this.state.musicSearch,
         type: 'track'
       },
       // Now that spotify is a secure route we need to add an authorization header to the request
@@ -29,51 +39,96 @@ class IndexRoute extends React.Component {
         Authorization: `Bearer ${Auth.getToken()}`
       }
     })
-      .then(res => this.setState({ searchResults: res.data.tracks.items}, () => console.log(this.state.searchResults)));
+      .then(res => this.setState({ musicSearchResults: res.data.tracks.items }, () => console.log(this.state.MusicSearchResults)));
   }
 
   componentDidMount() {
-    axios.get('/api/spotify/topFifty', {
-      headers: {
-        Authorization: `Bearer ${Auth.getToken()}`
-      }
-    })
-      .then(res => this.setState(res.data, () => console.log(this.state)));
+    if(!this.state.selectedContent) {
+      this.setState({ selectedContent: 'music' });
+      axios.get('/api/spotify/topFifty', {
+        headers: {
+          Authorization: `Bearer ${Auth.getToken()}`
+        }
+      })
+        .then(res => this.setState({ music: res.data }, () => console.log(this.state)));
+    }
   }
 
   render() {
     return (
       <section>
         <h1>Index</h1>
+        <div>
+          <a
+            onClick={this.handleContentSelection}
+            name="music"
+          >music</a> |
+          <a
+            onClick={this.handleContentSelection}
+            name="films"
+          >films</a> |
+          <a
+            onClick={this.handleContentSelection}
+            name="tv"
+          >tv</a>
+        </div>
         <Search
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+          handleChange={this.handleMusicChange}
+          handleSubmit={this.handleMusicSubmit}
         />
         <ul className="columns is-multiline">
-          {this.state.searchResults.map((track, i) =>
+          {this.state.musicSearchResults.map((track, i) =>
             <div key={i} className="column is-one-third">
-              {this.state.searchResults &&
-                <Link to={`/content/${this.state.searchResults[i].external_ids.isrc}`}>
+              {this.state.musicSearchResults &&
+                <Link to={`/content/${this.state.musicSearchResults[i].external_ids.isrc}`}>
                   <img src={track.album.images[0].url} />
                 </Link>}
             </div>)}
         </ul>
-        {this.state.items && !this.state.search &&
+        {this.state.music.items && !this.state.musicSearch && this.state.selectedContent === 'music' &&
         <ul className="columns is-multiline">
-          {this.state.items.map((track, i) =>
+          {this.state.music.items.map((track, i) =>
             <div key={i} className="column is-one-third">
-              {this.state.items &&
-                <Link to={`/content/${this.state.items[i].track.external_ids.isrc}`}>
+              {this.state.music.items &&
+                <Link to={`/content/${this.state.music.items[i].track.external_ids.isrc}`}>
                   <img src={track.track.album.images[0].url} />
                 </Link>}
             </div>
           )}
         </ul>
         }
-
       </section>
     );
   }
 }
 
 export default IndexRoute;
+
+
+
+// fetchFilms = () => {
+//   axios.get('/api/tmdbmovies', {
+//     headers: {
+//       Authorization: `Bearer ${Auth.getToken()}`
+//     }
+//   })
+//     .then(res => console.log(`here is res: ${res}`));
+// }
+//
+// fetchMusic = () => {
+//   axios.get('/api/spotify/topFifty', {
+//     headers: {
+//       Authorization: `Bearer ${Auth.getToken()}`
+//     }
+//   })
+//     .then(res => this.setState(res.data, () => console.log(this.state)));
+// }
+//
+// fetchTV = () => {
+//   axios.get('/api/tmdbmovies', {
+//     headers: {
+//       Authorization: `Bearer ${Auth.getToken()}`
+//     }
+//   })
+//     .then(res => console.log(`here is res: ${res}`));
+// }
