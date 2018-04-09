@@ -1,6 +1,6 @@
 const rp = require('request-promise');
 // request-promise is like axios. its a way of formatting api requests
-function search(req, res) {
+function searchMusic(req, res) {
   rp({
     method: 'POST',
     url: 'https://accounts.spotify.com/api/token',
@@ -35,7 +35,7 @@ function search(req, res) {
 
 }
 
-function topFifty(req, res) {
+function topMusic(req, res) {
   rp({
     method: 'POST',
     url: 'https://accounts.spotify.com/api/token',
@@ -69,6 +69,6 @@ function topFifty(req, res) {
 }
 
 module.exports = {
-  search,
-  topFifty
+  searchMusic,
+  topMusic
 };

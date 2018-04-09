@@ -6,18 +6,24 @@ const content = require('../controllers/content');
 const spotify = require('../controllers/spotify');
 const tmdb = require('../controllers/tmdb');
 
-router.route('/spotify/topFifty')
-  .get(secureRoute, spotify.topFifty);
+router.route('/spotify/topMusic')
+  .get(secureRoute, spotify.topMusic);
 
 // when a get request is sent to /api/spotify it will use the request body in the spotify search function we have just imported
 router.route('/spotify')
-  .get(secureRoute, spotify.search);
+  .get(secureRoute, spotify.searchMusic);
 
 router.route('/tmdbmovies/topFilms')
   .get(secureRoute, tmdb.topFilms);
 
 router.route('/tmdbmovies')
-  .get(secureRoute, tmdb.search);
+  .get(secureRoute, tmdb.searchFilms);
+
+router.route('/tmdbtv/topTv')
+  .get(secureRoute, tmdb.topTv);
+
+router.route('/tmdbTv')
+  .get(secureRoute, tmdb.searchTv);
 
 router.route('/register')
   .post(auth.register);

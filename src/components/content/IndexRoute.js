@@ -10,16 +10,20 @@ class IndexRoute extends React.Component {
   state = {
     music: {},
     films: {},
+    tv: {},
     musicSearch: '',
     musicSearchResults: [],
     filmsSearch: '',
-    filmsSearchResults: []
+    filmsSearchResults: [],
+    tvSearch: '',
+    tvSearchResults: []
   }
 
   handleContentSelection = (e) => {
     this.setState({ selectedContent: e.target.name }, () => console.log(this.state));
     this.setState({ musicSearch: '' });
     this.setState({ filmsSearch: '' });
+    this.setState({ tvSearch: '' });
   }
 
   handleMusicChange = (e) => {
@@ -61,10 +65,29 @@ class IndexRoute extends React.Component {
       .then(res => this.setState({ filmsSearchResults: res.data.results }, () => console.log(this.state.filmsSearchResults)));
   }
 
+  handleTvChange = (e) => {
+    this.setState({ tvSearch: e.target.value }, () => console.log(this.state));
+  }
+
+  handleTvSubmit = (e) => {
+    e.preventDefault();
+
+    axios.get('/api/tmdbTv', {
+      params: {
+        query: this.state.tvSearch
+      },
+      // Now that spotify is a secure route we need to add an authorization header to the request
+      headers: {
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    })
+      .then(res => this.setState({ tvSearchResults: res.data.results }, () => console.log(this.state.tvSearchResults)));
+  }
+
   componentDidMount() {
     if(!this.state.selectedContent) {
       this.setState({ selectedContent: 'music' });
-      axios.get('/api/spotify/topFifty', {
+      axios.get('/api/spotify/topMusic', {
         headers: {
           Authorization: `Bearer ${Auth.getToken()}`
         }
@@ -77,6 +100,13 @@ class IndexRoute extends React.Component {
         }
       })
         .then(res => this.setState({ films: res.data }, () => console.log(this.state)));
+
+      axios.get('/api/tmdbtv/topTv', {
+        headers: {
+          Authorization: `Bearer ${Auth.getToken()}`
+        }
+      })
+        .then(res => this.setState({ tv: res.data }, () => console.log(this.state)));
 
     }
   }
@@ -109,6 +139,12 @@ class IndexRoute extends React.Component {
         <Search
           handleChange={this.handleFilmsChange}
           handleSubmit={this.handleFilmsSubmit}
+        />
+        }
+        {this.state.selectedContent === 'tv' &&
+        <Search
+          handleChange={this.handleTvChange}
+          handleSubmit={this.handleTvSubmit}
         />
         }
         {this.state.selectedContent === 'music' && this.state.musicSearch &&
@@ -157,38 +193,32 @@ class IndexRoute extends React.Component {
             </div>)}
         </ul>
         }
+
+        {this.state.tv.results && !this.state.tvSearch && this.state.selectedContent === 'tv' &&
+        <ul className="columns is-multiline">
+          {this.state.tv.results.map((tv, i) =>
+            <div key={i} className="column is-one-third">
+              {this.state.tv.results &&
+                  <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />
+              }
+            </div>
+          )}
+        </ul>
+        }
+        {this.state.selectedContent === 'tv' && this.state.tvSearch &&
+        <ul className="columns is-multiline">
+          {this.state.tvSearchResults.map((tv, i) =>
+            <div key={i} className="column is-one-third">
+              {this.state.filmsSearchResults &&
+                <Link to={`/content/${this.state.tvSearchResults[i].id}`}>
+                  <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />
+                </Link>}
+            </div>)}
+        </ul>
+        }
       </section>
     );
   }
 }
 
 export default IndexRoute;
-
-
-
-// fetchFilms = () => {
-//   axios.get('/api/tmdbmovies', {
-//     headers: {
-//       Authorization: `Bearer ${Auth.getToken()}`
-//     }
-//   })
-//     .then(res => console.log(`here is res: ${res}`));
-// }
-//
-// fetchMusic = () => {
-//   axios.get('/api/spotify/topFifty', {
-//     headers: {
-//       Authorization: `Bearer ${Auth.getToken()}`
-//     }
-//   })
-//     .then(res => this.setState(res.data, () => console.log(this.state)));
-// }
-//
-// fetchTV = () => {
-//   axios.get('/api/tmdbmovies', {
-//     headers: {
-//       Authorization: `Bearer ${Auth.getToken()}`
-//     }
-//   })
-//     .then(res => console.log(`here is res: ${res}`));
-// }
