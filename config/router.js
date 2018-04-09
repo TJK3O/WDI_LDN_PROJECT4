@@ -13,8 +13,11 @@ router.route('/spotify/topFifty')
 router.route('/spotify')
   .get(secureRoute, spotify.search);
 
-router.route('/tmdbmovies')
+router.route('/tmdbmovies/topFilms')
   .get(secureRoute, tmdb.topFilms);
+
+router.route('/tmdbmovies')
+  .get(secureRoute, tmdb.search);
 
 router.route('/register')
   .post(auth.register);

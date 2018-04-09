@@ -7,7 +7,7 @@ function search(req, res) {
     // we put the access token in the header of our get request
     url: 'https://api.themoviedb.org/3/search/movie?api_key=97afb868878559b1e26dfa5d00ed3a2a&language=en-US',
     // req.body gives us the body of a request, req.query gives the query
-    qs: 'return%20of%20the%20jedi',
+    qs: req.query,
     json: true
   })
 

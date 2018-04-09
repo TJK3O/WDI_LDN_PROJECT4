@@ -18,6 +18,8 @@ class IndexRoute extends React.Component {
 
   handleContentSelection = (e) => {
     this.setState({ selectedContent: e.target.name }, () => console.log(this.state));
+    this.setState({ musicSearch: '' });
+    this.setState({ filmsSearch: '' });
   }
 
   handleMusicChange = (e) => {
@@ -40,6 +42,25 @@ class IndexRoute extends React.Component {
       .then(res => this.setState({ musicSearchResults: res.data.tracks.items }, () => console.log(this.state.MusicSearchResults)));
   }
 
+  handleFilmsChange = (e) => {
+    this.setState({ filmsSearch: e.target.value }, () => console.log(this.state));
+  }
+
+  handleFilmsSubmit = (e) => {
+    e.preventDefault();
+
+    axios.get('/api/tmdbmovies', {
+      params: {
+        query: this.state.filmsSearch
+      },
+      // Now that spotify is a secure route we need to add an authorization header to the request
+      headers: {
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    })
+      .then(res => this.setState({ filmsSearchResults: res.data.results }, () => console.log(this.state.filmsSearchResults)));
+  }
+
   componentDidMount() {
     if(!this.state.selectedContent) {
       this.setState({ selectedContent: 'music' });
@@ -50,7 +71,7 @@ class IndexRoute extends React.Component {
       })
         .then(res => this.setState({ music: res.data }, () => console.log(this.state)));
 
-      axios.get('/api/tmdbmovies', {
+      axios.get('/api/tmdbmovies/topFilms', {
         headers: {
           Authorization: `Bearer ${Auth.getToken()}`
         }
@@ -78,10 +99,19 @@ class IndexRoute extends React.Component {
             name="tv"
           >tv</a>
         </div>
+        {this.state.selectedContent === 'music' &&
         <Search
           handleChange={this.handleMusicChange}
           handleSubmit={this.handleMusicSubmit}
         />
+        }
+        {this.state.selectedContent === 'films' &&
+        <Search
+          handleChange={this.handleFilmsChange}
+          handleSubmit={this.handleFilmsSubmit}
+        />
+        }
+        {this.state.selectedContent === 'music' && this.state.musicSearch &&
         <ul className="columns is-multiline">
           {this.state.musicSearchResults.map((track, i) =>
             <div key={i} className="column is-one-third">
@@ -91,6 +121,7 @@ class IndexRoute extends React.Component {
                 </Link>}
             </div>)}
         </ul>
+        }
         {this.state.music.items && !this.state.musicSearch && this.state.selectedContent === 'music' &&
         <ul className="columns is-multiline">
           {this.state.music.items.map((track, i) =>
@@ -103,6 +134,7 @@ class IndexRoute extends React.Component {
           )}
         </ul>
         }
+
         {this.state.films.results && !this.state.filmsSearch && this.state.selectedContent === 'films' &&
         <ul className="columns is-multiline">
           {this.state.films.results.map((film, i) =>
@@ -112,6 +144,17 @@ class IndexRoute extends React.Component {
               }
             </div>
           )}
+        </ul>
+        }
+        {this.state.selectedContent === 'films' && this.state.filmsSearch &&
+        <ul className="columns is-multiline">
+          {this.state.filmsSearchResults.map((film, i) =>
+            <div key={i} className="column is-one-third">
+              {this.state.filmsSearchResults &&
+                <Link to={`/content/${this.state.filmsSearchResults[i].id}`}>
+                  <img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} />
+                </Link>}
+            </div>)}
         </ul>
         }
       </section>
