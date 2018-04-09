@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
     consumedStatus: { type: Boolean },
     userId: { type: String }
   }],
-  musicLoverBadge: { type: String }
+  musicLoverBadge: { type: String },
+  filmLoverBadge: { type: String }
 });
 
 userSchema
@@ -39,5 +40,12 @@ userSchema.pre('save', function hashPassword(next) {
 userSchema.methods.validatePassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 };
+
+userSchema.set('toJSON', {
+  transform(doc, json) {
+    delete json.password;
+    delete json.__v;
+  }
+});
 
 module.exports = mongoose.model('User', userSchema);

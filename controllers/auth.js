@@ -31,10 +31,14 @@ function show(req, res, next) {
 }
 
 function update(req, res, next) {
+  console.log(req.body);
   return User.findById(req.params.id)
-    .then(content => Object.assign(content, req.body))
-    .then(content => content.save())
-    .then(content => res.json(content))
+    .then(user => Object.assign(user, req.body))
+    .then(user => {
+      console.log(user);
+      return user.save();
+    })
+    .then(user => res.json(user))
     .catch(next);
 }
 

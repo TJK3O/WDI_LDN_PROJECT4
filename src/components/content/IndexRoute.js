@@ -152,7 +152,7 @@ class IndexRoute extends React.Component {
           {this.state.musicSearchResults.map((track, i) =>
             <div key={i} className="column is-one-third">
               {this.state.musicSearchResults &&
-                <Link to={`/content/${this.state.musicSearchResults[i].external_ids.isrc}`}>
+                <Link to={`/content/music/${this.state.musicSearchResults[i].external_ids.isrc}`}>
                   <img src={track.album.images[0].url} />
                 </Link>}
             </div>)}
@@ -163,7 +163,7 @@ class IndexRoute extends React.Component {
           {this.state.music.items.map((track, i) =>
             <div key={i} className="column is-one-third">
               {this.state.music.items &&
-                <Link to={`/content/${this.state.music.items[i].track.external_ids.isrc}`}>
+                <Link to={`/content/music/${this.state.music.items[i].track.external_ids.isrc}`}>
                   <img src={track.track.album.images[0].url} />
                 </Link>}
             </div>
@@ -176,7 +176,9 @@ class IndexRoute extends React.Component {
           {this.state.films.results.map((film, i) =>
             <div key={i} className="column is-one-third">
               {this.state.films.results &&
+                <Link to={`/content/films/${this.state.films.results[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} />
+                </Link>
               }
             </div>
           )}
@@ -187,7 +189,7 @@ class IndexRoute extends React.Component {
           {this.state.filmsSearchResults.map((film, i) =>
             <div key={i} className="column is-one-third">
               {this.state.filmsSearchResults &&
-                <Link to={`/content/${this.state.filmsSearchResults[i].id}`}>
+                <Link to={`/content/films/${this.state.filmsSearchResults[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} />
                 </Link>}
             </div>)}

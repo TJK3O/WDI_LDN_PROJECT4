@@ -1,5 +1,16 @@
 const rp = require('request-promise');
 // request-promise is like axios. its a way of formatting api requests
+function topFilms(req, res) {
+  return rp({
+    // we then immediately fire a get request using the access_token from the response
+    method: 'GET',
+    url: 'https://api.themoviedb.org/3/discover/movie?api_key=97afb868878559b1e26dfa5d00ed3a2a&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1',
+    json: true
+  })
+    .then(data => res.json(data));
+
+}
+
 function searchFilms(req, res) {
   return rp({
     // we then immediately fire a get request using the access_token from the response
@@ -15,15 +26,21 @@ function searchFilms(req, res) {
 
 }
 
-function topFilms(req, res) {
+function showFilm(req, res) {
   return rp({
-    // we then immediately fire a get request using the access_token from the response
     method: 'GET',
-    url: 'https://api.themoviedb.org/3/discover/movie?api_key=97afb868878559b1e26dfa5d00ed3a2a&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1',
+    url: `http://api.themoviedb.org/3/movie/${req.params.id}`,
+    qs: {
+      api_key: '97afb868878559b1e26dfa5d00ed3a2a',
+      language: 'en-US',
+      sort_by: 'popularity.desc',
+      include_adult: false,
+      include_video: false,
+      page: 1
+    },
     json: true
   })
     .then(data => res.json(data));
-
 }
 
 function searchTv(req, res) {
@@ -38,7 +55,6 @@ function searchTv(req, res) {
   })
 
     .then(data => res.json(data));
-
 }
 
 function topTv(req, res) {
@@ -49,12 +65,12 @@ function topTv(req, res) {
     json: true
   })
     .then(data => res.json(data));
-
 }
 
 module.exports = {
   searchFilms,
   topFilms,
+  showFilm,
   searchTv,
   topTv
 };

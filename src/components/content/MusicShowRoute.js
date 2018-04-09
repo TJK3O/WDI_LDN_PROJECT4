@@ -3,7 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import Auth from '../../lib/Auth';
 
-class ShowRoute extends React.Component {
+class MusicShowRoute extends React.Component {
 
   state = {
     content: {
@@ -81,4 +81,4 @@ class ShowRoute extends React.Component {
   }
 }
 
-export default ShowRoute;
+export default MusicShowRoute;

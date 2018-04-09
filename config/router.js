@@ -13,6 +13,9 @@ router.route('/spotify/topMusic')
 router.route('/spotify')
   .get(secureRoute, spotify.searchMusic);
 
+router.route('/tmdbmovies/show/:id')
+  .get(secureRoute, tmdb.showFilm);
+
 router.route('/tmdbmovies/topFilms')
   .get(secureRoute, tmdb.topFilms);
 
@@ -36,7 +39,9 @@ router.route('/user/:id/content')
   .put(auth.todoCreate);
 
 router.route('/user/:id')
-  .get(auth.show);
+  .get(auth.show)
+  // HERE
+  .put(auth.update);
 
 router.route('/user/:id/content/:id')
   .put(secureRoute, content.update);

@@ -16,7 +16,7 @@ class Navbar extends React.Component {
 
   handleLogout = () => {
     Auth.logout();
-    this.props.history.push('/content');
+    this.props.history.push('/login');
   }
 
   componentWillUpdate() {
@@ -44,7 +44,7 @@ class Navbar extends React.Component {
             <Link className="navbar-item" to="/content">Browse content</Link>
             {Auth.isAuthenticated() &&
               <div>
-                <Link className="navbar-item" to={'/user/5aca0a5726bfe15344a04d23'}>Profile</Link>
+                <Link className="navbar-item" to={`/user/${Auth.getPayload().sub}`}>Profile</Link>
                 <a className="navbar-item" onClick={this.handleLogout}>Logout</a>
               </div>
             }
