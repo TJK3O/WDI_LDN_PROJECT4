@@ -6,6 +6,7 @@ import HomeRoute from './components/pages/HomeRoute';
 import IndexRoute from './components/content/IndexRoute';
 import MusicShowRoute from './components/content/MusicShowRoute';
 import FilmsShowRoute from './components/content/FilmsShowRoute';
+import TvShowRoute from './components/content/TvShowRoute';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import AuthShowRoute from './components/auth/ShowRoute';
@@ -27,6 +28,7 @@ class App extends React.Component {
               <Route path="/user/:id" component={AuthShowRoute} />
               <Route path="/content/music/:id" component={MusicShowRoute} />
               <Route path="/content/films/:id" component={FilmsShowRoute} />
+              <Route path="/content/tv/:id" component={TvShowRoute} />
               <Route path="/content" component={IndexRoute} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />

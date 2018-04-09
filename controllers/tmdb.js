@@ -67,10 +67,28 @@ function topTv(req, res) {
     .then(data => res.json(data));
 }
 
+function showTv(req, res) {
+  return rp({
+    method: 'GET',
+    url: `http://api.themoviedb.org/3/tv/${req.params.id}`,
+    qs: {
+      api_key: '97afb868878559b1e26dfa5d00ed3a2a',
+      language: 'en-US',
+      sort_by: 'popularity.desc',
+      include_adult: false,
+      include_video: false,
+      page: 1
+    },
+    json: true
+  })
+    .then(data => res.json(data));
+}
+
 module.exports = {
   searchFilms,
   topFilms,
   showFilm,
   searchTv,
-  topTv
+  topTv,
+  showTv
 };

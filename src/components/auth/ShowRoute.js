@@ -18,7 +18,8 @@ class ShowRoute extends React.Component {
       userId: ''
     }],
     musicLoverBadge: 0,
-    filmLoverBadge: 0
+    filmLoverBadge: 0,
+    tvLoverBadge: 0
   }
 
 
@@ -54,17 +55,22 @@ handleTick = (content) => {
   });
 }
 
-  handleAdd = (e) => {
-    e.preventDefault();
-    console.log(this.state);
-    axios.put(`/api/user/${this.state.content.userId}/content`, this.state, {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      .then(() => this.props.history.push('/content'));
-  }
+  handleRemove = (content) => {
+    // find index of current clicked content
+    const index = this.state.content.indexOf(content);
+    // create new variable with everything up to but not including clicked content and everything after
+    const newContent = [
+      ...this.state.content.slice(0, index),
+      ...this.state.content.slice(index+1)
+    ];
 
-  handleRemove = (e) => {
-    console.log(e.target.value);
+    this.setState({ content: newContent }, () => {
+    // finally we need to update the user record so that their to dos remain when they navigate away
+      axios.put(`/api/user/${content.userId}`, this.state, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      });
+      console.log(this.state);
+    });
   }
 
   render() {
@@ -78,6 +84,9 @@ handleTick = (content) => {
         }
         {this.state.filmLoverBadge === 2 &&
           <h1>User is a film lover!!</h1>
+        }
+        {this.state.tvLoverBadge === 2 &&
+          <h1>User is a tv lover!!</h1>
         }
         <ul className="columns is-multiline">
           {this.state.content.map((content, i) =>

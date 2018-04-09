@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema({
     userId: { type: String }
   }],
   musicLoverBadge: { type: String },
-  filmLoverBadge: { type: String }
+  filmLoverBadge: { type: String },
+  tvLoverBadge: { type: String }
 });
 
 userSchema

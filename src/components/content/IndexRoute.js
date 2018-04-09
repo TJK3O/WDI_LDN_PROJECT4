@@ -201,7 +201,9 @@ class IndexRoute extends React.Component {
           {this.state.tv.results.map((tv, i) =>
             <div key={i} className="column is-one-third">
               {this.state.tv.results &&
+                <Link to={`/content/tv/${this.state.tv.results[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />
+                </Link>
               }
             </div>
           )}

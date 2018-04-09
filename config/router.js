@@ -22,6 +22,9 @@ router.route('/tmdbmovies/topFilms')
 router.route('/tmdbmovies')
   .get(secureRoute, tmdb.searchFilms);
 
+router.route('/tmdbtv/show/:id')
+  .get(secureRoute, tmdb.showTv);
+
 router.route('/tmdbtv/topTv')
   .get(secureRoute, tmdb.topTv);
 
