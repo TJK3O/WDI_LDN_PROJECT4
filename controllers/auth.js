@@ -30,6 +30,12 @@ function show(req, res, next) {
     .catch(next);
 }
 
+function index(req, res, next) {
+  return User.find()
+    .then(user => res.json(user))
+    .catch(next);
+}
+
 function update(req, res, next) {
   console.log(req.body);
   return User.findById(req.params.id)
@@ -56,6 +62,7 @@ module.exports = {
   register,
   login,
   show,
+  index,
   update,
   todoCreate
 };

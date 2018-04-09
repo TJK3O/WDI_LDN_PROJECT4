@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Auth from '../../lib/Auth';
+import { Link } from 'react-router-dom';
 
 class ShowRoute extends React.Component {
 
@@ -77,6 +78,9 @@ handleTick = (content) => {
     return (
       <section>
         <h1>Profile page</h1>
+        <Link to={`/user/${this.state.content[0].userId}/edit`}>
+          Edit profile
+        </Link>
         <h2>{this.state.email}</h2>
         <h2>{this.state.username}</h2>
         {this.state.musicLoverBadge === 2 &&

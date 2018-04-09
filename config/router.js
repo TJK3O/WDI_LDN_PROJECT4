@@ -41,9 +41,14 @@ router.route('/user/:id/content')
   // .get(content.index)
   .put(auth.todoCreate);
 
+router.route('/content/user')
+  .get(auth.index);
+
+router.route('/content/user/:id')
+  .get(auth.show);
+
 router.route('/user/:id')
   .get(auth.show)
-  // HERE
   .put(auth.update);
 
 router.route('/user/:id/content/:id')

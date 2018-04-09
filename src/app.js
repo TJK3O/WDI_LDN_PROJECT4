@@ -10,6 +10,8 @@ import TvShowRoute from './components/content/TvShowRoute';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import AuthShowRoute from './components/auth/ShowRoute';
+import AuthEditRoute from './components/auth/EditRoute';
+import UserShowRoute from './components/content/UserShowRoute';
 import Navbar from './components/common/Navbar';
 
 import 'bulma';
@@ -25,7 +27,9 @@ class App extends React.Component {
           <Navbar />
           <section className="container">
             <Switch>
+              <Route path="/user/:id/edit" component={AuthEditRoute} />
               <Route path="/user/:id" component={AuthShowRoute} />
+              <Route path="/content/user/:id" component={UserShowRoute} />
               <Route path="/content/music/:id" component={MusicShowRoute} />
               <Route path="/content/films/:id" component={FilmsShowRoute} />
               <Route path="/content/tv/:id" component={TvShowRoute} />

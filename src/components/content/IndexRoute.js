@@ -108,6 +108,12 @@ class IndexRoute extends React.Component {
       })
         .then(res => this.setState({ tv: res.data }, () => console.log(this.state)));
 
+      axios.get('/api/content/user', {
+        headers: {
+          Authorization: `Bearer ${Auth.getToken()}`
+        }
+      })
+        .then(res => this.setState({ users: res.data }, () => console.log(this.state)));
     }
   }
 
@@ -123,11 +129,15 @@ class IndexRoute extends React.Component {
           <a
             onClick={this.handleContentSelection}
             name="films"
-          >films</a> |
+          > films</a> |
           <a
             onClick={this.handleContentSelection}
             name="tv"
-          >tv</a>
+          > tv</a> |
+          <a
+            onClick={this.handleContentSelection}
+            name="users"
+          > users</a>
         </div>
         {this.state.selectedContent === 'music' &&
         <Search
@@ -218,6 +228,17 @@ class IndexRoute extends React.Component {
                   <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />
                 </Link>}
             </div>)}
+        </ul>
+        }
+        {this.state.selectedContent === 'users' &&
+        <ul className="columns is-multiline">
+          {this.state.users.map((user, i) =>
+            <div key={i} className="column is-one-third">
+              <Link to={`/content/user/${this.state.users[i]._id}`}>
+                <h1>{user.username}</h1>
+              </Link>
+            </div>
+          )}
         </ul>
         }
       </section>

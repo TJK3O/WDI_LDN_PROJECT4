@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema({
     consumedStatus: { type: Boolean },
     userId: { type: String }
   }],
+  followedUsers: [{
+    userId: { type: String }
+  }],
   musicLoverBadge: { type: String },
   filmLoverBadge: { type: String },
   tvLoverBadge: { type: String }
