@@ -8,18 +8,16 @@ import Auth from '../../lib/Auth';
 class IndexRoute extends React.Component {
 
   state = {
-    music: {
-    },
+    music: {},
+    films: {},
     musicSearch: '',
-    musicSearchResults: []
+    musicSearchResults: [],
+    filmsSearch: '',
+    filmsSearchResults: []
   }
 
   handleContentSelection = (e) => {
     this.setState({ selectedContent: e.target.name }, () => console.log(this.state));
-    // this.fetchFilms();
-    // if(this.state.selectedContent === 'music') this.fetchMusic();
-    // if(this.state.selectedContent === 'films') this.fetchFilms();
-    // if(this.state.selectedContent === 'tv') this.fetchTV();
   }
 
   handleMusicChange = (e) => {
@@ -51,6 +49,14 @@ class IndexRoute extends React.Component {
         }
       })
         .then(res => this.setState({ music: res.data }, () => console.log(this.state)));
+
+      axios.get('/api/tmdbmovies', {
+        headers: {
+          Authorization: `Bearer ${Auth.getToken()}`
+        }
+      })
+        .then(res => this.setState({ films: res.data }, () => console.log(this.state)));
+
     }
   }
 
@@ -93,6 +99,17 @@ class IndexRoute extends React.Component {
                 <Link to={`/content/${this.state.music.items[i].track.external_ids.isrc}`}>
                   <img src={track.track.album.images[0].url} />
                 </Link>}
+            </div>
+          )}
+        </ul>
+        }
+        {this.state.films.results && !this.state.filmsSearch && this.state.selectedContent === 'films' &&
+        <ul className="columns is-multiline">
+          {this.state.films.results.map((film, i) =>
+            <div key={i} className="column is-one-third">
+              {this.state.films.results &&
+                  <img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} />
+              }
             </div>
           )}
         </ul>

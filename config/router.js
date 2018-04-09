@@ -14,7 +14,7 @@ router.route('/spotify')
   .get(secureRoute, spotify.search);
 
 router.route('/tmdbmovies')
-  .get(secureRoute, tmdb.search);
+  .get(secureRoute, tmdb.topFilms);
 
 router.route('/register')
   .post(auth.register);

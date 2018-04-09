@@ -19,8 +19,7 @@ function topFilms(req, res) {
   return rp({
     // we then immediately fire a get request using the access_token from the response
     method: 'GET',
-    // we put the access token in the header of our get request
-    url: 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc',
+    url: 'https://api.themoviedb.org/3/discover/movie?api_key=97afb868878559b1e26dfa5d00ed3a2a&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1',
     json: true
   })
     .then(data => res.json(data));
