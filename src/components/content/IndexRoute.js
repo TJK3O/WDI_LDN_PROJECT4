@@ -118,23 +118,55 @@ class IndexRoute extends React.Component {
   }
 
   render() {
+    // Inline styles
+    const main = {
+      width: '90vw',
+      margin: '0 auto'
+    };
+
+    const contentNav = {
+      width: '90vw',
+      margin: '0 auto',
+      textAlign: 'center'
+    };
+
+    const contentNavButtons = {
+      color: 'grey',
+      fontSize: '20px'
+    };
+
+    const categoryFont = {
+      color: 'grey',
+      fontSize: '30px'
+    };
+
+    const hr = {
+      width: '100%',
+      color: 'grey',
+      border: 'none',
+      height: '4px'
+    };
+
     return (
-      <section>
-        <h1>Index</h1>
-        <div>
+      <section style={main}>
+        <div style={contentNav}>
           <a
+            style={contentNavButtons}
             onClick={this.handleContentSelection}
             name="music"
           >music</a> |
           <a
+            style={contentNavButtons}
             onClick={this.handleContentSelection}
             name="films"
           > films</a> |
           <a
+            style={contentNavButtons}
             onClick={this.handleContentSelection}
             name="tv"
           > tv</a> |
           <a
+            style={contentNavButtons}
             onClick={this.handleContentSelection}
             name="users"
           > users</a>
@@ -157,8 +189,12 @@ class IndexRoute extends React.Component {
           handleSubmit={this.handleTvSubmit}
         />
         }
+        <h1 style={categoryFont}>Music</h1>
+        <hr style={hr}/>
         {this.state.selectedContent === 'music' && this.state.musicSearch &&
-        <ul className="columns is-multiline">
+        <ul
+          className="columns is-multiline content-grid"
+        >
           {this.state.musicSearchResults.map((track, i) =>
             <div key={i} className="column is-one-third">
               {this.state.musicSearchResults &&

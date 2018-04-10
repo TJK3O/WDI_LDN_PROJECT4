@@ -40,6 +40,7 @@ router.route('/login')
 router.route('/user/:id')
   .get(auth.show)
   .post(auth.suggestedContentCreate);
+// .delete(auth.suggestedContentDelete);
 
 router.route('/user')
   .get(auth.index);

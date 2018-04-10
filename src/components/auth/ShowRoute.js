@@ -84,6 +84,14 @@ class ShowRoute extends React.Component {
       .then(() => this.props.history.push('/content'));
   }
 
+  // handleRemoveSuggestedContent = (suggestions) => {
+  //   console.log(suggestions);
+  //   axios.delete(`/api/user/${this.props.match.params.id}`, {
+  //     headers: { Authorization: `Bearer ${Auth.getToken()}` }
+  //   })
+  //     .then(() => this.props.history.push('/content'));
+  // }
+
   handleFollowUser = () => {
     console.log(this.state);
     // because the userId is all we need for the post request we don't need to pass any other data. But since post requests require you to pass data, we pass null.
@@ -111,7 +119,6 @@ class ShowRoute extends React.Component {
           <button onClick={this.handleFollowUser}>Follow this user</button>
         }
         <h2>{this.state.email}</h2>
-        <h2>{this.state.username}</h2>
         <h2>{this.state.username}</h2>
         <img src={`${this.state.image}`} />
         {this.state.musicLoverBadge >2 &&
@@ -151,9 +158,15 @@ class ShowRoute extends React.Component {
         </ul>
         <ul className="columns is-multiline">
           {this.state.suggestedContent.map((suggestions, i) =>
-            <li key={i} className="column is-one-third">
-              <img src={suggestions.artwork} />
-            </li>
+            <div key={i}>
+              <li className="column is-one-third">
+                <img src={suggestions.artwork} />
+              </li>
+              <button
+                value={i}
+                onClick={() => this.handleRemoveSuggestedContent(suggestions)}
+              >Remove</button>
+            </div>
           )}
         </ul>
         <ul className="columns is-multiline">

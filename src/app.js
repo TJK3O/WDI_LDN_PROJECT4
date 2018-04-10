@@ -12,8 +12,10 @@ import Login from './components/auth/Login';
 import AuthShowRoute from './components/auth/ShowRoute';
 import AuthEditRoute from './components/auth/EditRoute';
 import Navbar from './components/common/Navbar';
+import Navbar2 from './components/common/Navbar2';
 
 import 'bulma';
+import './assets/styles/styles.scss';
 
 class App extends React.Component {
 
@@ -23,7 +25,8 @@ class App extends React.Component {
       <BrowserRouter>
         {/* Switch shows a single route at once. */}
         <main>
-          <Navbar />
+          {/* <Navbar /> */}
+          <Navbar2 />
           <section className="container">
             <Switch>
               <Route path="/user/:id/edit" component={AuthEditRoute} />

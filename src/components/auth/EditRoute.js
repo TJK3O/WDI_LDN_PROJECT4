@@ -18,7 +18,8 @@ class EditRoute extends React.Component {
 
   componentDidMount() {
     axios.get(`/api/user/${this.props.match.params.id}`)
-      .then(res => this.setState(res.data));
+      .then(res => this.setState(res.data))
+      .then(console.log(Auth.getPayload().sub));
   }
 
   handleChange = (e) => {
@@ -31,7 +32,7 @@ class EditRoute extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => Auth.setToken(res.data.token))
-      .then(() => this.props.history.push(`/user/${Auth.getPayload().sub}`));
+      .then(() => this.props.history.push(`/user/${this.props.match.params.id}`));
   }
 
   render() {

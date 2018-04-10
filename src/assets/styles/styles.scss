@@ -1,0 +1,19 @@
+body {
+  height: 100vh;
+  background: linear-gradient(#84C2FE, #EFF7FF);
+
+  .columns {
+    margin-top: 30px;
+  }
+
+  .bottom-nav-button {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    .nav-button {
+      line-height: 2em;
+      color: black;
+      font-size: 25px;
+    }
+  }
+}
