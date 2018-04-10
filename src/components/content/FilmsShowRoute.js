@@ -90,6 +90,8 @@ class FilmsShowRoute extends React.Component {
       <section>
         <h1>Show</h1>
         <img src={this.state.content.artwork}/>
+        <h1>{this.state.content.name}</h1>
+        <h2>{this.state.content.overview}</h2>
         <div>
           <button
             onClick={this.handleAdd}

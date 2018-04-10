@@ -97,6 +97,8 @@ class MusicShowRoute extends React.Component {
       <section>
         <h1>Show</h1>
         <img src={this.state.content.artwork}/>
+        <h1>{this.state.content.name}</h1>
+        <audio controls src={this.state.content.previewUrl}></audio>
         <div>
           <button
             onClick={this.handleAdd}

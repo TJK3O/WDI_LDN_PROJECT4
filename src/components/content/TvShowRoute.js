@@ -39,7 +39,7 @@ class TvShowRoute extends React.Component {
         this.setState({
           content: {
             artwork: `https://image.tmdb.org/t/p/w500/${res.data.poster_path}`,
-            name: res.data.title,
+            name: res.data.name,
             overview: res.data.overview,
             mediaType: 'tv',
             consumedStatus: false,
@@ -91,6 +91,8 @@ class TvShowRoute extends React.Component {
       <section>
         <h1>Show</h1>
         <img src={this.state.content.artwork}/>
+        <h1>{this.state.content.name}</h1>
+        <h2>{this.state.content.overview}</h2>
         <div>
           <button
             onClick={this.handleAdd}

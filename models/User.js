@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     userId: { type: String },
     resourceId: { type: String }
   }],
+  image: { type: String },
   followedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   suggestedContent: [],
   musicLoverBadge: { type: String },

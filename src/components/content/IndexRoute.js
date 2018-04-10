@@ -165,6 +165,12 @@ class IndexRoute extends React.Component {
                 <Link to={`/content/music/${this.state.musicSearchResults[i].external_ids.isrc}`}>
                   <img src={track.album.images[0].url} />
                 </Link>}
+              <h2>{track.album.name}</h2>
+
+              {/* artists are in an array so we need to map over them */}
+              {track.album.artists.map((artists, j) =>
+                <h3 key={j}>{artists.name}</h3>)}
+
             </div>)}
         </ul>
         }
@@ -176,6 +182,9 @@ class IndexRoute extends React.Component {
                 <Link to={`/content/music/${this.state.music.items[i].track.external_ids.isrc}`}>
                   <img src={track.track.album.images[0].url} />
                 </Link>}
+              <h2>{track.track.album.name}</h2>
+              {track.track.album.artists.map((artists, j) =>
+                <h3 key={j}>{artists.name}</h3>)}
             </div>
           )}
         </ul>
@@ -188,8 +197,8 @@ class IndexRoute extends React.Component {
               {this.state.films.results &&
                 <Link to={`/content/films/${this.state.films.results[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} />
-                </Link>
-              }
+                </Link>}
+              <h1>{film.original_title}</h1>
             </div>
           )}
         </ul>
@@ -202,6 +211,7 @@ class IndexRoute extends React.Component {
                 <Link to={`/content/films/${this.state.filmsSearchResults[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} />
                 </Link>}
+              <h1>{film.original_title}</h1>
             </div>)}
         </ul>
         }
@@ -213,8 +223,8 @@ class IndexRoute extends React.Component {
               {this.state.tv.results &&
                 <Link to={`/content/tv/${this.state.tv.results[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />
-                </Link>
-              }
+                </Link>}
+              <h1>{tv.original_name}</h1>
             </div>
           )}
         </ul>
@@ -227,6 +237,7 @@ class IndexRoute extends React.Component {
                 <Link to={`/content/${this.state.tvSearchResults[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />
                 </Link>}
+              <h1>{tv.original_name}</h1>
             </div>)}
         </ul>
         }

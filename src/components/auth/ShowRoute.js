@@ -8,6 +8,7 @@ class ShowRoute extends React.Component {
   state = {
     username: '',
     email: '',
+    image: '',
     content: [{
       artwork: '',
       name: '',
@@ -111,14 +112,25 @@ class ShowRoute extends React.Component {
         }
         <h2>{this.state.email}</h2>
         <h2>{this.state.username}</h2>
+        <h2>{this.state.username}</h2>
+        <img src={`${this.state.image}`} />
         {this.state.musicLoverBadge >2 &&
-          <h1>User is a music lover!!</h1>
+          <div>
+            <img src="../../assets/music.png" />
+            <h1>User is a music lover!!</h1>
+          </div>
         }
         {this.state.filmLoverBadge > 2 &&
-          <h1>User is a film lover!!</h1>
+          <div>
+            <h1>User is a film lover!!</h1>
+            <img src="../../assets/film.png" />
+          </div>
         }
         {this.state.tvLoverBadge > 2 &&
-          <h1>User is a tv lover!!</h1>
+          <div>
+            <h1>User is a tv lover!!</h1>
+            <img src="../../assets/tv.png" />
+          </div>
         }
 
         <ul className="columns is-multiline">
