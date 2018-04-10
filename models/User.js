@@ -15,15 +15,8 @@ const userSchema = new mongoose.Schema({
     consumedStatus: { type: Boolean },
     userId: { type: String }
   }],
-  followedUsers: [{
-    content: { type: String },
-    email: { type: String },
-    filmLoverBadge: { type: String },
-    musicLoverBadge: { type: String },
-    tvLoverBadge: { type: String },
-    userId: { type: String },
-    username: { type: String }
-  }],
+  followedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+  suggestedContent: [],
   musicLoverBadge: { type: String },
   filmLoverBadge: { type: String },
   tvLoverBadge: { type: String }

@@ -13,7 +13,17 @@ class TvShowRoute extends React.Component {
       mediaType: '',
       consumedStatus: false,
       userId: ''
-    }
+    },
+    followedUsers: [{
+      content: [],
+      email: '',
+      filmLoverBadge: '',
+      followedUsers: '',
+      musicLoverBadge: '',
+      tvLoverBadge: '',
+      username: ''
+    }],
+    share: false
   }
 
   componentDidMount() {
@@ -36,6 +46,13 @@ class TvShowRoute extends React.Component {
             userId: userId
           }
         }, () => console.log(this.state)));
+
+    axios.get(`/api/user/${Auth.getPayload().sub}`, {
+      headers: {
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    })
+      .then(res => this.setState({ followedUsers: res.data.followedUsers }));
   }
 
   handleAdd = (e) => {
@@ -57,6 +74,17 @@ class TvShowRoute extends React.Component {
   //     .then(() => this.props.history.push('/content'));
   // }
 
+  handleShareToggle = () => {
+    this.setState({ share: !this.state.share }, () => console.log(this.state));
+  }
+
+  handleShare = (e) => {
+    console.log(e.target.value);
+    axios.post(`/api/user/${e.target.value}`, this.state, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    });
+  }
+
   render() {
     return (
       <section>
@@ -70,6 +98,23 @@ class TvShowRoute extends React.Component {
             onClick={this.handleContentConsumed}
           >Ticked</button> */}
         </div>
+
+        {/* Share this content with a followedUser */}
+        <button
+          onClick={this.handleShareToggle}
+        >Share</button>
+        {this.state.share &&
+        <ul className="columns is-multiline">
+          {this.state.followedUsers.map((user, i) =>
+            <div key={i} className="column is-one-third">
+              <button
+                value={user._id}
+                onClick={this.handleShare}
+              >{user.username}</button>
+            </div>
+          )}
+        </ul>
+        }
       </section>
     );
   }

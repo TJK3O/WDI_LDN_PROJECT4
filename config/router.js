@@ -37,22 +37,26 @@ router.route('/register')
 router.route('/login')
   .post(auth.login);
 
-router.route('/content/user/:id')
-  .get(auth.show);
+router.route('/user/:id')
+  .get(auth.show)
+  .post(auth.suggestedContentCreate);
 
-router.route('/content/user')
+router.route('/user')
   .get(auth.index);
 
 router.route('/user/:id/content/:id')
   .put(secureRoute, content.update);
 
-router.route('/user/:id/followuser')
-  .put(auth.followUser);
-  
+router.route('/user/:id/follow')
+// if we follow/unfollow we post or delete their userId from our user record. On the post route we need to populate the user so that they are an object and not just an ObjectId
+  .post(secureRoute, auth.followUser)
+  .delete(secureRoute, auth.unFollowUser);
+
 router.route('/user/:id/content')
   // .get(content.index)
   .put(auth.todoCreate);
 
+// this user show route can now be the currently logged in user or another user
 router.route('/user/:id')
   .get(auth.show)
   .put(auth.update);

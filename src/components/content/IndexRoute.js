@@ -108,7 +108,7 @@ class IndexRoute extends React.Component {
       })
         .then(res => this.setState({ tv: res.data }));
 
-      axios.get('/api/content/user', {
+      axios.get('/api/user', {
         headers: {
           Authorization: `Bearer ${Auth.getToken()}`
         }
@@ -234,7 +234,7 @@ class IndexRoute extends React.Component {
         <ul className="columns is-multiline">
           {this.state.users.map((user, i) =>
             <div key={i} className="column is-one-third">
-              <Link to={`/content/user/${this.state.users[i]._id}`}>
+              <Link to={`/user/${this.state.users[i]._id}`}>
                 <h1>{user.username}</h1>
               </Link>
             </div>
