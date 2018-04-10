@@ -37,11 +37,9 @@ function index(req, res, next) {
 }
 
 function update(req, res, next) {
-  console.log(req.body);
   return User.findById(req.params.id)
     .then(user => Object.assign(user, req.body))
     .then(user => {
-      console.log(user);
       return user.save();
     })
     .then(user => res.json(user))
@@ -58,11 +56,22 @@ function todoCreate(req, res, next){
     .catch(next);
 }
 
+function followUser(req, res, next){
+  return User.findById(req.params.id)
+    .then(user => {
+      user.followedUsers.push(req.body.followedUsers);
+      return user.save();
+    })
+    .then(user => res.json(user))
+    .catch(next);
+}
+
 module.exports = {
   register,
   login,
   show,
   index,
   update,
-  todoCreate
+  todoCreate,
+  followUser
 };

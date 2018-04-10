@@ -37,22 +37,26 @@ router.route('/register')
 router.route('/login')
   .post(auth.login);
 
-router.route('/user/:id/content')
-  // .get(content.index)
-  .put(auth.todoCreate);
+router.route('/content/user/:id')
+  .get(auth.show);
 
 router.route('/content/user')
   .get(auth.index);
 
-router.route('/content/user/:id')
-  .get(auth.show);
+router.route('/user/:id/content/:id')
+  .put(secureRoute, content.update);
+
+router.route('/user/:id/followuser')
+  .put(auth.followUser);
+  
+router.route('/user/:id/content')
+  // .get(content.index)
+  .put(auth.todoCreate);
 
 router.route('/user/:id')
   .get(auth.show)
   .put(auth.update);
 
-router.route('/user/:id/content/:id')
-  .put(secureRoute, content.update);
 
 router.route('/*')
   .all((req, res) => res.status(404).json({ message: 'Not found'}));

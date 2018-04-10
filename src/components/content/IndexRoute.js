@@ -92,28 +92,28 @@ class IndexRoute extends React.Component {
           Authorization: `Bearer ${Auth.getToken()}`
         }
       })
-        .then(res => this.setState({ music: res.data }, () => console.log(this.state)));
+        .then(res => this.setState({ music: res.data }));
 
       axios.get('/api/tmdbmovies/topFilms', {
         headers: {
           Authorization: `Bearer ${Auth.getToken()}`
         }
       })
-        .then(res => this.setState({ films: res.data }, () => console.log(this.state)));
+        .then(res => this.setState({ films: res.data }));
 
       axios.get('/api/tmdbtv/topTv', {
         headers: {
           Authorization: `Bearer ${Auth.getToken()}`
         }
       })
-        .then(res => this.setState({ tv: res.data }, () => console.log(this.state)));
+        .then(res => this.setState({ tv: res.data }));
 
       axios.get('/api/content/user', {
         headers: {
           Authorization: `Bearer ${Auth.getToken()}`
         }
       })
-        .then(res => this.setState({ users: res.data }, () => console.log(this.state)));
+        .then(res => this.setState({ users: res.data }));
     }
   }
 

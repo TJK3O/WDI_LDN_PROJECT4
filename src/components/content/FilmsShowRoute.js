@@ -35,18 +35,17 @@ class FilmsShowRoute extends React.Component {
             consumedStatus: false,
             userId: userId
           }
-        }, () => console.log(this.state)));
+        }));
   }
 
   handleAdd = (e) => {
     e.preventDefault();
-    console.log(this.state);
     axios.put(`/api/user/${this.state.content.userId}/content`, this.state, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => this.props.history.push('/content'));
   }
-  // 
+  //
   // handleContentConsumed = (e) => {
   //   e.preventDefault();
   //   const filmId = this.props.match.params.id;

@@ -18,6 +18,15 @@ class ShowRoute extends React.Component {
       consumedStatus: '',
       userId: ''
     }],
+    followedUsers: [{
+      content: '',
+      email: '',
+      filmLoverBadge: '',
+      musicLoverBadge: '',
+      tvLoverBadge: '',
+      userId: '',
+      username: ''
+    }],
     musicLoverBadge: 0,
     filmLoverBadge: 0,
     tvLoverBadge: 0
@@ -52,7 +61,6 @@ handleTick = (content) => {
     axios.put(`/api/user/${content.userId}`, this.state, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     });
-    console.log(this.state);
   });
 }
 
@@ -70,7 +78,24 @@ handleTick = (content) => {
       axios.put(`/api/user/${content.userId}`, this.state, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
       });
-      console.log(this.state);
+    });
+  }
+
+  handleRemove = (followedUser) => {
+    const userId = Auth.getPayload().sub;
+    // find index of current clicked content
+    const index = this.state.followedUsers.indexOf(followedUser);
+    // create new variable with everything up to but not including clicked content and everything after
+    const newFollowedUsers = [
+      ...this.state.followedUsers.slice(0, index),
+      ...this.state.followedUsers.slice(index+1)
+    ];
+
+    this.setState({ followedUsers: newFollowedUsers }, () => {
+    // finally we need to update the user record so that their to dos remain when they navigate away
+      axios.put(`/api/user/${userId}`, this.state, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      });
     });
   }
 
@@ -83,13 +108,13 @@ handleTick = (content) => {
         </Link>
         <h2>{this.state.email}</h2>
         <h2>{this.state.username}</h2>
-        {this.state.musicLoverBadge === 2 &&
+        {this.state.musicLoverBadge >2 &&
           <h1>User is a music lover!!</h1>
         }
-        {this.state.filmLoverBadge === 2 &&
+        {this.state.filmLoverBadge > 2 &&
           <h1>User is a film lover!!</h1>
         }
-        {this.state.tvLoverBadge === 2 &&
+        {this.state.tvLoverBadge > 2 &&
           <h1>User is a tv lover!!</h1>
         }
         <ul className="columns is-multiline">
@@ -104,6 +129,18 @@ handleTick = (content) => {
               <button
                 value={i}
                 onClick={() => this.handleRemove(content)}
+              >Remove</button>
+            </li>
+          )}
+        </ul>
+        <ul className="columns is-multiline">
+          {this.state.followedUsers.map((followedUser, i) =>
+            <li key={i} className="column is-one-third">
+              {!this.state.content[i].consumedStatus &&
+              <h1>{followedUser.username} </h1>}
+              <button
+                value={i}
+                onClick={() => this.handleRemove(followedUser)}
               >Remove</button>
             </li>
           )}

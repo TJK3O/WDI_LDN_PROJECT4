@@ -16,7 +16,13 @@ const userSchema = new mongoose.Schema({
     userId: { type: String }
   }],
   followedUsers: [{
-    userId: { type: String }
+    content: { type: String },
+    email: { type: String },
+    filmLoverBadge: { type: String },
+    musicLoverBadge: { type: String },
+    tvLoverBadge: { type: String },
+    userId: { type: String },
+    username: { type: String }
   }],
   musicLoverBadge: { type: String },
   filmLoverBadge: { type: String },
