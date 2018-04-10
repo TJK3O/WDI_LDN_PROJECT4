@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
     mediaType: { type: String  },
     previewUrl: { type: String },
     consumedStatus: { type: Boolean },
-    userId: { type: String }
+    userId: { type: String },
+    resourceId: { type: String }
   }],
   followedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   suggestedContent: [],

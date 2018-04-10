@@ -51,6 +51,7 @@ function update(req, res, next) {
 function todoCreate(req, res, next){
   return User.findById(req.params.id)
     .then(user => {
+      if(user.content.find(content => content.resourceId === req.body.content.resourceId)) return user;
       user.content.push(req.body.content);
       return user.save();
     })
@@ -61,6 +62,7 @@ function todoCreate(req, res, next){
 function suggestedContentCreate(req, res, next){
   return User.findById(req.params.id)
     .then(user => {
+      if(user.suggestedContent.find(content => content.resourceId === req.body.content.resourceId)) return user;
       user.suggestedContent.push(req.body.content);
       return user.save();
     })

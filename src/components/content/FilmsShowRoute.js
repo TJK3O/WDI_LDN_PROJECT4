@@ -43,7 +43,8 @@ class FilmsShowRoute extends React.Component {
             overview: res.data.overview,
             mediaType: 'film',
             consumedStatus: false,
-            userId: userId
+            userId: userId,
+            resourceId: res.data.imdb_id
           }
         }));
 

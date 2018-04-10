@@ -49,7 +49,8 @@ class MusicShowRoute extends React.Component {
           mediaType: 'music',
           previewUrl: res.data.tracks.items[0].preview_url,
           consumedStatus: false,
-          userId: userId
+          userId: userId,
+          resourceId: res.data.tracks.items[0].id
         }
       }));
 

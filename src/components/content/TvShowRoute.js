@@ -43,9 +43,10 @@ class TvShowRoute extends React.Component {
             overview: res.data.overview,
             mediaType: 'tv',
             consumedStatus: false,
-            userId: userId
+            userId: userId,
+            resourceId: res.data.id
           }
-        }, () => console.log(this.state)));
+        }));
 
     axios.get(`/api/user/${Auth.getPayload().sub}`, {
       headers: {
