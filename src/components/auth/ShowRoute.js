@@ -29,8 +29,10 @@ class ShowRoute extends React.Component {
 
   componentDidMount() {
     const userId = this.props.match.params.id;
-    axios.get(`/api/user/${userId}`)
-      .then(res => this.setState(res.data));
+    axios.get(`/api/user/${userId}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(res => this.setState(res.data,() => console.log('here: ', this.state)));
   }
 
   handleTickContent = (content) => {
@@ -107,80 +109,219 @@ class ShowRoute extends React.Component {
   }
 
   render() {
+
+    const main = {
+      width: '90vw',
+      margin: '0 auto'
+    };
+
+    const showButtons = {
+      width: '30px',
+      height: '100%',
+      marginRight: '10px',
+      paddingBottom: '10px'
+    };
+
+    const categoryFont = {
+      color: 'grey',
+      fontSize: '30px'
+    };
+
+    const hr = {
+      width: '100%',
+      color: 'grey',
+      border: 'none',
+      height: '4px'
+    };
+
     return (
-      <section>
-        <h1>Profile page</h1>
+      <section style={main}>
+        <img src={`${this.state.image}`} />
+        <h2>username: {this.state.username}</h2>
+        <h2>email {this.state.email}</h2>
         {this.isCurrentUser() &&
-          <Link to={`/user/${this.state.content[0].userId}/edit`}>
-            Edit profile
+          <Link to={`/user/${this.props.match.params.id}/edit`}>
+          Edit profile
           </Link>
         }
         {!this.isCurrentUser() &&
           <button onClick={this.handleFollowUser}>Follow this user</button>
         }
-        <h2>{this.state.email}</h2>
-        <h2>{this.state.username}</h2>
-        <img src={`${this.state.image}`} />
         {this.state.musicLoverBadge >2 &&
           <div>
-            <img src="../../assets/music.png" />
+            <img src="/assets/music-medal.png" />
             <h1>User is a music lover!!</h1>
           </div>
         }
         {this.state.filmLoverBadge > 2 &&
           <div>
             <h1>User is a film lover!!</h1>
-            <img src="../../assets/film.png" />
+            <img src="/assets/film-medal.png" />
           </div>
         }
         {this.state.tvLoverBadge > 2 &&
           <div>
             <h1>User is a tv lover!!</h1>
-            <img src="../../assets/tv.png" />
+            <img src="/assets/tv-medal.png" />
           </div>
         }
+        <div>
+          {/* Music Todo */}
+          <h1 style={categoryFont}>music</h1>
+          <hr style={hr}/>
+          <ul className="columns is-multiline">
+            {this.state.content.map((content, i) =>
+              this.state.content[i].mediaType === 'music' && !this.state.content[i].consumedStatus &&
+              <li key={i} className="column is-one-fifth">
+                {!this.state.content[i].consumedStatus &&
+                    <img src={content.artwork} />}
 
-        <ul className="columns is-multiline">
-          {this.state.content.map((content, i) =>
-            <li key={i} className="column is-one-third">
-              {!this.state.content[i].consumedStatus &&
-              <img src={content.artwork} />}
-              <button
-                value={i}
-                onClick={() => this.handleTickContent(content)}
-              >Ticked</button>
-              <button
-                value={i}
-                onClick={() => this.handleRemoveContent(content)}
-              >Remove</button>
-            </li>
-          )}
-        </ul>
-        <ul className="columns is-multiline">
-          {this.state.suggestedContent.map((suggestions, i) =>
-            <div key={i}>
-              <li className="column is-one-third">
-                <img src={suggestions.artwork} />
+                {this.isCurrentUser() && !this.state.content[i].consumedStatus &&
+                  <div>
+                    <img
+                      style={showButtons}
+                      src="/assets/tick.png"
+                      value={i}
+                      onClick={() => this.handleTickContent(content)}
+                    />
+                    <img
+                      style={showButtons}
+                      src="/assets/trash.png"
+                      value={i}
+                      onClick={() => this.handleRemoveContent(content)}
+                    />
+                  </div>
+                }
               </li>
-              <button
-                value={i}
-                onClick={() => this.handleRemoveSuggestedContent(suggestions)}
-              >Remove</button>
+            )}
+          </ul>
+
+          {/* Films Todo */}
+          <h1 style={categoryFont}>films</h1>
+          <hr style={hr}/>
+          <ul className="columns is-multiline">
+            {this.state.content.map((content, i) =>
+              this.state.content[i].mediaType === 'film'  && !this.state.content[i].consumedStatus &&
+              <li key={i} className="column is-one-fifth">
+                {!this.state.content[i].consumedStatus &&
+                    <img src={content.artwork} />}
+
+                {this.isCurrentUser() && !this.state.content[i].consumedStatus &&
+                  <div>
+                    <button
+                      value={i}
+                      onClick={() => this.handleTickContent(content)}
+                    >Ticked</button>
+                    <button
+                      value={i}
+                      onClick={() => this.handleRemoveContent(content)}
+                    >Remove</button>
+                  </div>
+                }
+              </li>
+            )}
+          </ul>
+
+          {/* TV Todo */}
+          <h1 style={categoryFont}>tv</h1>
+          <hr style={hr}/>
+          <ul className="columns is-multiline">
+            {this.state.content.map((content, i) =>
+              this.state.content[i].mediaType === 'tv'  && !this.state.content[i].consumedStatus &&
+              <li key={i} className="column is-one-fifth">
+                {!this.state.content[i].consumedStatus &&
+                    <img src={content.artwork} />}
+
+                {this.isCurrentUser() && !this.state.content[i].consumedStatus &&
+                  <div>
+                    <button
+                      value={i}
+                      onClick={() => this.handleTickContent(content)}
+                    >Ticked</button>
+                    <button
+                      value={i}
+                      onClick={() => this.handleRemoveContent(content)}
+                    >Remove</button>
+                  </div>
+                }
+              </li>
+            )}
+          </ul>
+
+          {/* Consumed */}
+          <h1 style={categoryFont}>done :)</h1>
+          <hr style={hr}/>
+          <ul className="columns is-multiline">
+            {this.state.content.map((content, i) =>
+              this.state.content[i].consumedStatus &&
+              <li key={i} className="column is-one-fifth">
+                {this.state.content[i].consumedStatus &&
+                    <img src={content.artwork} />}
+
+                {this.isCurrentUser() &&
+                  <div>
+                    <img
+                      style={showButtons}
+                      src="/assets/cross.png"
+                      value={i}
+                      onClick={() => this.handleTickContent(content)}
+                    />
+                    <button
+                      value={i}
+                      onClick={() => this.handleRemoveContent(content)}
+                    >Remove</button>
+                  </div>
+                }
+              </li>
+            )}
+          </ul>
+          {this.state.suggestedContent.length > 0 &&
+            <div>
+              <h1 style={categoryFont}>suggested by others</h1>
+              <hr style={hr}/>
             </div>
-          )}
-        </ul>
-        <ul className="columns is-multiline">
-          {this.state.followedUsers.map((followedUser, i) =>
-            <li key={i} className="column is-one-third">
-              {!this.state.content[i].consumedStatus &&
-              <h1>{followedUser.username} </h1>}
-              <button
-                value={i}
-                onClick={() => this.handleRemoveFollowedUser(followedUser)}
-              >Remove</button>
-            </li>
-          )}
-        </ul>
+          }
+          <ul className="columns is-multiline">
+            {this.state.suggestedContent.map((suggestions, i) =>
+              <div key={i}>
+                <li className="column is-one-fifth">
+                  <img src={suggestions.artwork} />
+                </li>
+                {this.isCurrentUser() &&
+                  <button
+                    value={i}
+                    onClick={() => this.handleRemoveSuggestedContent(suggestions)}
+                  >Remove</button>
+                }
+              </div>
+            )}
+          </ul>
+
+          {/* Followed users */}
+          {this.state.followedUsers.length > 0 &&
+            <div>
+              <h1 style={categoryFont}>followed users</h1>
+              <hr style={hr}/>
+            </div>
+          }
+          <ul className="columns is-multiline">
+            {this.state.followedUsers.map((followedUser, i) =>
+              <li key={i} className="column is-one-fifth">
+                <img src={followedUser.image} />
+                <h1>{followedUser.username}</h1>
+                {this.isCurrentUser() &&
+                  <button
+                    value={i}
+                    onClick={() => this.handleRemoveFollowedUser(followedUser)}
+                  >Remove</button>
+                }
+              </li>
+            )}
+          </ul>
+
+        </div>
+
+
       </section>
     );
   }

@@ -87,37 +87,57 @@ class TvShowRoute extends React.Component {
   }
 
   render() {
-    return (
-      <section>
-        <h1>Show</h1>
-        <img src={this.state.content.artwork}/>
-        <h1>{this.state.content.name}</h1>
-        <h2>{this.state.content.overview}</h2>
-        <div>
-          <button
-            onClick={this.handleAdd}
-          >Add</button>
-          {/* <button
-            onClick={this.handleContentConsumed}
-          >Ticked</button> */}
-        </div>
 
-        {/* Share this content with a followedUser */}
-        <button
-          onClick={this.handleShareToggle}
-        >Share</button>
-        {this.state.share &&
-        <ul className="columns is-multiline">
-          {this.state.followedUsers.map((user, i) =>
-            <div key={i} className="column is-one-third">
-              <button
-                value={user._id}
-                onClick={this.handleShare}
-              >{user.username}</button>
-            </div>
-          )}
-        </ul>
-        }
+    const showContainer = {
+      width: '60vw',
+      margin: '0 auto'
+    };
+
+    const showButtons = {
+      width: '30px',
+      height: '40px',
+      marginRight: '10px',
+      paddingBottom: '10px'
+
+    };
+
+    return (
+      <section  className="columns" style={showContainer}>
+        <div className="column">
+          <img src={this.state.content.artwork}/>
+
+        </div>
+        <div className="column">
+          <h1>{this.state.content.name}</h1>
+          <h2>{this.state.content.overview}</h2>
+          <div>
+            <img
+              style={showButtons}
+              src="/assets/plus.png"
+              onClick={this.handleAdd}
+            />
+            {/* Share this content with a followedUser */}
+            <img
+              style={showButtons}
+              src="/assets/share.png"
+              onClick={this.handleShareToggle}
+            />
+            {/* Share this content with a followedUser */}
+            {this.state.share &&
+                <ul className="columns is-multiline">
+                  {this.state.followedUsers.map((user, i) =>
+                    <div key={i} className="column is-one-third">
+                      <button
+                        value={user._id}
+                        onClick={this.handleShare}
+                      >{user.username}</button>
+                    </div>
+                  )}
+                </ul>
+            }
+          </div>
+
+        </div>
       </section>
     );
   }

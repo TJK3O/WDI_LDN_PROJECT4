@@ -38,12 +38,12 @@ router.route('/login')
   .post(auth.login);
 
 router.route('/user/:id')
-  .get(auth.show)
-  .post(auth.suggestedContentCreate);
+  .get(secureRoute, auth.show)
+  .post(secureRoute, auth.suggestedContentCreate);
 // .delete(auth.suggestedContentDelete);
 
 router.route('/user')
-  .get(auth.index);
+  .get(secureRoute, auth.index);
 
 router.route('/user/:id/content/:id')
   .put(secureRoute, content.update);
@@ -55,12 +55,12 @@ router.route('/user/:id/follow')
 
 router.route('/user/:id/content')
   // .get(content.index)
-  .put(auth.todoCreate);
+  .put(secureRoute, auth.todoCreate);
 
 // this user show route can now be the currently logged in user or another user
 router.route('/user/:id')
-  .get(auth.show)
-  .put(auth.update);
+  .get(secureRoute, auth.show)
+  .put(secureRoute, auth.update);
 
 
 router.route('/*')

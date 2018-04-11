@@ -9,7 +9,7 @@ class MusicShowRoute extends React.Component {
     content: {
       artwork: '',
       name: '',
-      artist: '',
+      artists: [],
       album: '',
       mediaType: '',
       previewUrl: '',
@@ -25,7 +25,8 @@ class MusicShowRoute extends React.Component {
       tvLoverBadge: '',
       username: ''
     }],
-    share: false
+    share: false,
+    playing: false
   }
 
   componentDidMount() {
@@ -44,7 +45,8 @@ class MusicShowRoute extends React.Component {
         content: {
           artwork: res.data.tracks.items[0].album.images[0].url,
           name: res.data.tracks.items[0].name,
-          artist: res.data.tracks.items[0].album.artists[0].name,
+          // artist: res.data.tracks.items[0].album.artists[0].name,
+          artists: res.data.tracks.items[0].album.artists,
           album: res.data.tracks.items[0].album.name,
           mediaType: 'music',
           previewUrl: res.data.tracks.items[0].preview_url,
@@ -92,38 +94,77 @@ class MusicShowRoute extends React.Component {
     });
   }
 
+  handlePlay = () => {
+    if(this.audioElem.paused) this.audioElem.play();
+    else this.audioElem.pause();
+
+    const playing = !this.state.playing;
+    this.setState({ playing: playing });
+  }
+
   render() {
+
+    const showContainer = {
+      width: '60vw',
+      margin: '0 auto'
+    };
+
+    const showButtons = {
+      width: '30px',
+      height: '100%',
+      marginRight: '10px',
+      paddingBottom: '10px'
+
+    };
+
     return (
-      <section>
-        <h1>Show</h1>
-        <img src={this.state.content.artwork}/>
-        <h1>{this.state.content.name}</h1>
-        <audio controls src={this.state.content.previewUrl}></audio>
-        <div>
-          <button
-            onClick={this.handleAdd}
-          >Add</button>
-          <button
-            onClick={this.handleContentConsumed}
-          >Ticked</button>
+      <section className="columns" style={showContainer}>
+        <div className="column">
+          <img src={this.state.content.artwork}/>
+        </div>
+        <div className="column">
+          <h1>{this.state.content.name}</h1>
+          <ul>{this.state.content.artists.map((artist, i) =>
+            <li key={i}>{artist.name}</li>
+          )} </ul>
+          <audio src={this.state.content.previewUrl} ref={element => this.audioElem = element}></audio>
+          <div>
+            <img
+              style={showButtons}
+              src={!this.state.playing ? '/assets/play.png' : '/assets/pause.png'}
+              onClick={this.handlePlay}
+            />
+            <img
+              style={showButtons}
+              src="/assets/plus.png"
+              onClick={this.handleAdd}
+            />
+            <img
+              style={showButtons}
+              src="/assets/tick.png"
+              onClick={this.handleContentConsumed}
+            />
+            {/* Share this content with a followedUser */}
+            <img
+              style={showButtons}
+              src="/assets/share.png"
+              onClick={this.handleShareToggle}
+            />
+            {this.state.share &&
+                <ul className="columns is-multiline">
+                  {this.state.followedUsers.map((user, i) =>
+                    <div key={i} className="column is-one-third">
+                      <button
+                        value={user._id}
+                        onClick={this.handleShare}
+                      >{user.username}</button>
+                    </div>
+                  )}
+                </ul>
+            }
+          </div>
         </div>
 
-        {/* Share this content with a followedUser */}
-        <button
-          onClick={this.handleShareToggle}
-        >Share</button>
-        {this.state.share &&
-        <ul className="columns is-multiline">
-          {this.state.followedUsers.map((user, i) =>
-            <div key={i} className="column is-one-third">
-              <button
-                value={user._id}
-                onClick={this.handleShare}
-              >{user.username}</button>
-            </div>
-          )}
-        </ul>
-        }
       </section>
     );
   }

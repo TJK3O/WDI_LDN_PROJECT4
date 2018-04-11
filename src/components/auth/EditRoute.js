@@ -6,10 +6,8 @@ import ReactFilestack from 'filestack-react';
 class EditRoute extends React.Component {
 
   state = {
-    username: 'Tom',
-    email: 'tom@me.com',
-    password: 'password',
-    passwordConfirmation: 'password',
+    username: '',
+    email: '',
     content: [],
     musicLoverBadge: '',
     filmLoverBadge: '',
@@ -17,9 +15,10 @@ class EditRoute extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/user/${this.props.match.params.id}`)
-      .then(res => this.setState(res.data))
-      .then(console.log(Auth.getPayload().sub));
+    axios.get(`/api/user/${this.props.match.params.id}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(res => this.setState(res.data, ()=> console.log(this.state)));
   }
 
   handleChange = (e) => {
@@ -31,7 +30,6 @@ class EditRoute extends React.Component {
     axios.put(`/api/user/${Auth.getPayload().sub}`, this.state, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(res => Auth.setToken(res.data.token))
       .then(() => this.props.history.push(`/user/${this.props.match.params.id}`));
   }
 

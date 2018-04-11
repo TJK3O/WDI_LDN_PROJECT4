@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 // import Auth
 import Auth from '../../lib/Auth';
 
-class Navbar extends React.Component {
+class Navbar2 extends React.Component {
 
   state = {
     navIsOpen: false
@@ -25,38 +25,119 @@ class Navbar extends React.Component {
 
   render() {
 
+    const inactiveBottomNav = {
+      textAlign: 'center',
+      width: '100%',
+      height: '60px',
+      position: 'fixed',
+      zIndex: '3',
+      bottom: '0',
+      left: '0',
+      backgroundColor: 'white',
+      color: 'white',
+      overflowX: 'hidden',
+      transition: '0.5s'
+    };
+
+    const activeBottomNav = {
+      textAlign: 'center',
+      width: '100%',
+      height: '300px',
+      position: 'fixed',
+      zIndex: '3',
+      bottom: '0',
+      left: '0',
+      backgroundColor: 'lightGrey',
+      color: 'white',
+      overflowX: 'hidden',
+      transition: '0.5s',
+      overflow: 'scroll'
+    };
+
+
+    const bottomNavLeft = {
+      display: 'inline-block',
+      width: '30%'
+    };
+
+    const bottomNavRight = {
+      display: 'inline-block',
+      width: '30%'
+    };
+
+    const bottomNavMiddle = {
+      display: 'inline-block',
+      width: '40%',
+      verticalAlign: 'top',
+      lineHeight: '4em',
+      color: 'black'
+    };
+
+    const burger = {
+      width: '30px',
+      height: '30px',
+      float: 'left',
+      marginLeft: '10px',
+      marginTop: '15px'
+    };
+
+    const profile = {
+      width: '30px',
+      height: '30px',
+      float: 'right',
+      marginRight: '10px',
+      marginTop: '15px'
+    };
+
+    const contentLogo = {
+      marginTop: '10px',
+      height: '40px'
+    };
+
     return (
-      <nav
-        className="navbar">
-        <div className="navbar-brand">
-          <Link className="navbar-item" to="/">
-            content
-          </Link>
-          <div
-            className={`navbar-burger ${this.state.navIsOpen ? 'is-active' : ''}`}
+      <div
+        style={this.state.navIsOpen ? activeBottomNav : inactiveBottomNav}
+      >
+        <div style={bottomNavRight}>
+          <img
             onClick={this.handleToggle}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+            className="nav-button"
+            src="/assets/burger.png"
+            style={burger}
+          />
         </div>
-        <div className={`navbar-menu ${this.state.navIsOpen ? 'is-active' : ''}`}>
-          <div className="navbar-end">
-            <Link className="navbar-item" to="/content">Browse content</Link>
-            {Auth.isAuthenticated() &&
-              <div>
-                <Link className="navbar-item" to={`/user/${Auth.getPayload().sub}`}>Profile</Link>
-                <a className="navbar-item" onClick={this.handleLogout}>Logout</a>
+        <div style={bottomNavMiddle}>
+          <img src="/assets/content-logo.png" style={contentLogo} />
+          {this.state.navIsOpen &&
+            <div>
+              <div className="bottom-nav-button">
+                <Link className="nav-button" to="/">home</Link>
               </div>
-            }
-            {!Auth.isAuthenticated() && <Link className="navbar-item" to="/login">Login</Link>}
-            {!Auth.isAuthenticated() && <Link className="navbar-item" to="/register">Register</Link>}
-          </div>
+              <div className="bottom-nav-button">
+                <Link className="nav-button" to="/content">browse</Link>
+              </div>
+              <div className="bottom-nav-button">
+                {Auth.isAuthenticated() &&
+                  <a onClick={this.handleLogout} className="nav-button">logout</a>
+                }
+              </div>
+              <div className="bottom-nav-button">
+                {!Auth.isAuthenticated() && <Link className="nav-button" to="/login">Login</Link>}
+              </div>
+              <div className="bottom-nav-button">
+                {!Auth.isAuthenticated() && <Link className="nav-button" to="/register">Register</Link>}
+              </div>
+            </div>
+          }
         </div>
-      </nav>
+        <div style={bottomNavLeft}>
+          {Auth.isAuthenticated() && !this.state.navIsOpen &&
+              <Link style={profile} className="nav-button" to={`/user/${Auth.getPayload().sub}`}><img src="/assets/profile.png" /></Link>
+          }
+        </div>
+      </div>
     );
   }
 }
 
-export default withRouter(Navbar);
+export default withRouter(Navbar2);

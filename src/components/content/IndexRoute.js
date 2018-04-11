@@ -125,7 +125,7 @@ class IndexRoute extends React.Component {
     };
 
     const contentNav = {
-      width: '90vw',
+      width: '100%',
       margin: '0 auto',
       textAlign: 'center'
     };
@@ -189,7 +189,7 @@ class IndexRoute extends React.Component {
           handleSubmit={this.handleTvSubmit}
         />
         }
-        <h1 style={categoryFont}>Music</h1>
+        <h1 style={categoryFont}>{this.state.selectedContent}</h1>
         <hr style={hr}/>
         {this.state.selectedContent === 'music' && this.state.musicSearch &&
         <ul
@@ -229,7 +229,7 @@ class IndexRoute extends React.Component {
         {this.state.films.results && !this.state.filmsSearch && this.state.selectedContent === 'films' &&
         <ul className="columns is-multiline">
           {this.state.films.results.map((film, i) =>
-            <div key={i} className="column is-one-third">
+            <div key={i} className="column is-one-quarter is-half-mobile">
               {this.state.films.results &&
                 <Link to={`/content/films/${this.state.films.results[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} />
@@ -242,7 +242,7 @@ class IndexRoute extends React.Component {
         {this.state.selectedContent === 'films' && this.state.filmsSearch &&
         <ul className="columns is-multiline">
           {this.state.filmsSearchResults.map((film, i) =>
-            <div key={i} className="column is-one-third">
+            <div key={i} className="column is-one-quarter is-half-mobile">
               {this.state.filmsSearchResults &&
                 <Link to={`/content/films/${this.state.filmsSearchResults[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} />
@@ -255,7 +255,7 @@ class IndexRoute extends React.Component {
         {this.state.tv.results && !this.state.tvSearch && this.state.selectedContent === 'tv' &&
         <ul className="columns is-multiline">
           {this.state.tv.results.map((tv, i) =>
-            <div key={i} className="column is-one-third">
+            <div key={i} className="column is-one-quarter is-half-mobile">
               {this.state.tv.results &&
                 <Link to={`/content/tv/${this.state.tv.results[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />
@@ -268,7 +268,7 @@ class IndexRoute extends React.Component {
         {this.state.selectedContent === 'tv' && this.state.tvSearch &&
         <ul className="columns is-multiline">
           {this.state.tvSearchResults.map((tv, i) =>
-            <div key={i} className="column is-one-third">
+            <div key={i} className="column is-one-quarter is-half-mobile">
               {this.state.filmsSearchResults &&
                 <Link to={`/content/${this.state.tvSearchResults[i].id}`}>
                   <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />

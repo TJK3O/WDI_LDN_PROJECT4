@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import ProtectedRoute from './components/common/ProtectedRoute';
+import FlashMessages from './components/common/FlashMessages';
 import HomeRoute from './components/pages/HomeRoute';
 import IndexRoute from './components/content/IndexRoute';
 import MusicShowRoute from './components/content/MusicShowRoute';
@@ -12,7 +14,6 @@ import Login from './components/auth/Login';
 import AuthShowRoute from './components/auth/ShowRoute';
 import AuthEditRoute from './components/auth/EditRoute';
 import Navbar from './components/common/Navbar';
-import Navbar2 from './components/common/Navbar2';
 
 import 'bulma';
 import './assets/styles/styles.scss';
@@ -25,16 +26,16 @@ class App extends React.Component {
       <BrowserRouter>
         {/* Switch shows a single route at once. */}
         <main>
-          {/* <Navbar /> */}
-          <Navbar2 />
+          <Navbar />
+          <FlashMessages />
           <section className="container">
             <Switch>
-              <Route path="/user/:id/edit" component={AuthEditRoute} />
-              <Route path="/user/:id" component={AuthShowRoute} />
-              <Route path="/content/music/:id" component={MusicShowRoute} />
-              <Route path="/content/films/:id" component={FilmsShowRoute} />
-              <Route path="/content/tv/:id" component={TvShowRoute} />
-              <Route path="/content" component={IndexRoute} />
+              <ProtectedRoute path="/user/:id/edit" component={AuthEditRoute} />
+              <ProtectedRoute path="/user/:id" component={AuthShowRoute} />
+              <ProtectedRoute path="/content/music/:id" component={MusicShowRoute} />
+              <ProtectedRoute path="/content/films/:id" component={FilmsShowRoute} />
+              <ProtectedRoute path="/content/tv/:id" component={TvShowRoute} />
+              <ProtectedRoute path="/content" component={IndexRoute} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/" component={HomeRoute} />

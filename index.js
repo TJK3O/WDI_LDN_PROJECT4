@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 const router = require('./config/router');
 const bodyParser = require('body-parser');
-// const errorHandler = require('./lib/errorHandler');
+const errorHandler = require('./lib/errorHandler');
 
 const { port, dbURI }  = require('./config/environment');
 
@@ -19,6 +19,7 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
+app.use(errorHandler);
 app.listen(port, () => console.log(`Express running on port ${port}`));
 
 module.exports = app;
