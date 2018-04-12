@@ -95,13 +95,8 @@ class MusicShowRoute extends React.Component {
 
   render() {
 
-    const showContainer = {
-      width: '60vw',
-      margin: '0 auto'
-    };
-
     return (
-      <section className="columns" style={showContainer}>
+      <section className="columns">
         <div className="column">
           <img src={this.state.content.artwork}/>
         </div>

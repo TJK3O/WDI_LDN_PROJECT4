@@ -62,7 +62,7 @@ class ShowRoute extends React.Component {
       ...this.state.content.slice(index+1)
     ];
     // next we setState with our newContent and newBadge
-    this.setState({ content: newContent, [badge]: newBadge }, () => {
+    this.setState({ content: newContent, [badge]: parseInt(newBadge) }, () => {
     // finally we need to update the user record so that their to dos remain when they navigate away
       axios.put(`/api/user/${content.userId}`, this.state, {
         headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -123,47 +123,28 @@ class ShowRoute extends React.Component {
   }
 
   hasMusicTodo = () => {
-    return this.state.content.filter(content => content.mediaType === 'music');
+    return this.state.content.filter(content => content.mediaType === 'music' && content.consumedStatus === false);
   }
 
   hasFilmTodo = () => {
-    return this.state.content.filter(content => content.mediaType === 'film');
+    return this.state.content.filter(content => content.mediaType === 'film' && content.consumedStatus === false);
   }
 
   hasTvTodo = () => {
-    return this.state.content.filter(content => content.mediaType === 'tv');
+    return this.state.content.filter(content => content.mediaType === 'tv' && content.consumedStatus === false);
   }
 
   render() {
 
-    const main = {
-      width: '90vw',
-      margin: '0 auto'
-    };
-
-    const profileCard = {
-      width: '400px',
-      height: '400px',
-      margin: '0 auto',
-      textAlign: 'center',
-      fontSize: '20px'
-    };
-
     const categoryFont = {
-      color: 'grey',
+      color: 'white',
       fontSize: '30px'
     };
 
-    const profilePic = {
-      width: '120px',
-      height: '120px',
-      borderRadius: '50%'
-    };
-
     return (
-      <section style={main}>
-        <div style={profileCard}>
-          <img src={`${this.state.image}`} />
+      <section className="show-container">
+        <div className="profile-card">
+          <img src={`${this.state.image}`} className="profile-pic" />
           <h2>username: {this.state.username}</h2>
           <h2>email {this.state.email}</h2>
           {this.isCurrentUser() &&
@@ -172,27 +153,30 @@ class ShowRoute extends React.Component {
             </Link>
           }
           {!this.isCurrentUser() &&
-          <button onClick={this.handleFollowUser}>Follow this user</button>
+            <button onClick={this.handleFollowUser}>Follow this user</button>
           }
         </div>
-        {this.state.musicLoverBadge >2 &&
-          <div>
-            <img src="/assets/music-medal.png" />
-            <h1>User is a music lover!!</h1>
-          </div>
-        }
-        {this.state.filmLoverBadge > 2 &&
-          <div>
-            <h1>User is a film lover!!</h1>
-            <img src="/assets/film-medal.png" />
-          </div>
-        }
-        {this.state.tvLoverBadge > 2 &&
-          <div>
-            <h1>User is a tv lover!!</h1>
-            <img src="/assets/tv-medal.png" />
-          </div>
-        }
+        <div className="badges-card">
+          {this.state.musicLoverBadge > 2 &&
+            <img
+              src="/assets/music-medal.png"
+              className="badges"
+            />
+          }
+          {this.state.filmLoverBadge > 2 &&
+            <img
+              src="/assets/film-medal.png"
+              className="badges"
+            />
+          }
+          {this.state.tvLoverBadge > 2 &&
+            <img
+              src="/assets/tv-medal.png"
+              className="badges"
+            />
+          }
+        </div>
+
         <div>
           {/* Music Todo */}
           {this.hasMusicTodo().length > 0 &&
@@ -394,7 +378,7 @@ class ShowRoute extends React.Component {
             {this.state.followedUsers.map((followedUser, i) =>
               <li key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
                 <Link to={`/user/${followedUser._id}`}>
-                  <img style={profilePic} src={followedUser.image} />
+                  <img className="profile-pic" src={followedUser.image} />
                 </Link>
                 <h1>{followedUser.username}</h1>
                 {this.isCurrentUser() &&

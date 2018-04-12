@@ -44,6 +44,7 @@ class Register extends React.Component {
         />
         {this.state.errors.email && <small>{this.state.errors.email}</small>}
         <input
+          type="password"
           className="input-styles"
           placeholder="password"
           name="password"
@@ -51,6 +52,7 @@ class Register extends React.Component {
         />
         {this.state.errors.password && <small>{this.state.errors.password}</small>}
         <input
+          type="password"
           className="input-styles"
           placeholder="password confirmation"
           name="passwordConfirmation"

@@ -30,6 +30,7 @@ class Login extends React.Component {
           name="email"
         />
         <input
+          type="password"
           className="input-styles"
           placeholder="password"
           onChange={this.handleChange}

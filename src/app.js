@@ -14,6 +14,7 @@ import Login from './components/auth/Login';
 import AuthShowRoute from './components/auth/ShowRoute';
 import AuthEditRoute from './components/auth/EditRoute';
 import Navbar from './components/common/Navbar';
+import NotFound from './components/common/NotFound';
 
 import 'bulma';
 import './assets/styles/styles.scss';
@@ -39,6 +40,7 @@ class App extends React.Component {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/" component={HomeRoute} />
+              <Route component={NotFound} />
             </Switch>
           </section>
         </main>

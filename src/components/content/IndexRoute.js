@@ -120,7 +120,8 @@ class IndexRoute extends React.Component {
   render() {
     const contentNav = {
       width: '100%',
-      textAlign: 'center'
+      textAlign: 'center',
+      paddingTop: '40px'
     };
 
     const contentNavButtons = {
