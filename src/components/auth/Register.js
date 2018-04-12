@@ -26,27 +26,48 @@ class Register extends React.Component {
   }
 
   render() {
+
+    const formStyles = {
+      width: '400px',
+      margin: '10px auto'
+    };
+
+    const inputStyles = {
+      width: '100%',
+      color: 'grey',
+      lineHeight: '1.5em',
+      fontSize: '25px',
+      outline: 'none',
+      border: 'none',
+      borderBottom: '4px solid grey',
+      backgroundColor: 'rgba(255,255,255,0)'
+    };
+
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form style={formStyles} onSubmit={this.handleSubmit}>
         <input
+          style={inputStyles}
           placeholder="username"
           name="username"
           onChange={this.handleChange}
         />
         {this.state.errors.username && <small>{this.state.errors.username}</small>}
         <input
+          style={inputStyles}
           placeholder="email"
           name="email"
           onChange={this.handleChange}
         />
         {this.state.errors.email && <small>{this.state.errors.email}</small>}
         <input
+          style={inputStyles}
           placeholder="password"
           name="password"
           onChange={this.handleChange}
         />
         {this.state.errors.password && <small>{this.state.errors.password}</small>}
         <input
+          style={inputStyles}
           placeholder="password confirmation"
           name="passwordConfirmation"
           onChange={this.handleChange}

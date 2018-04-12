@@ -122,6 +122,18 @@ class ShowRoute extends React.Component {
     return this.state.content.filter(content => content.consumedStatus);
   }
 
+  hasMusicTodo = () => {
+    return this.state.content.filter(content => content.mediaType === 'music');
+  }
+
+  hasFilmTodo = () => {
+    return this.state.content.filter(content => content.mediaType === 'film');
+  }
+
+  hasTvTodo = () => {
+    return this.state.content.filter(content => content.mediaType === 'tv');
+  }
+
   render() {
 
     const main = {
@@ -129,11 +141,12 @@ class ShowRoute extends React.Component {
       margin: '0 auto'
     };
 
-    const showButtons = {
-      width: '30px',
-      height: '100%',
-      marginRight: '10px',
-      paddingBottom: '10px'
+    const profileCard = {
+      width: '400px',
+      height: '400px',
+      margin: '0 auto',
+      textAlign: 'center',
+      fontSize: '20px'
     };
 
     const categoryFont = {
@@ -141,26 +154,27 @@ class ShowRoute extends React.Component {
       fontSize: '30px'
     };
 
-    const hr = {
-      width: '100%',
-      color: 'grey',
-      border: 'none',
-      height: '4px'
+    const profilePic = {
+      width: '120px',
+      height: '120px',
+      borderRadius: '50%'
     };
 
     return (
       <section style={main}>
-        <img src={`${this.state.image}`} />
-        <h2>username: {this.state.username}</h2>
-        <h2>email {this.state.email}</h2>
-        {this.isCurrentUser() &&
-          <Link to={`/user/${this.props.match.params.id}/edit`}>
-          Edit profile
-          </Link>
-        }
-        {!this.isCurrentUser() &&
+        <div style={profileCard}>
+          <img src={`${this.state.image}`} />
+          <h2>username: {this.state.username}</h2>
+          <h2>email {this.state.email}</h2>
+          {this.isCurrentUser() &&
+            <Link to={`/user/${this.props.match.params.id}/edit`}>
+            Edit profile
+            </Link>
+          }
+          {!this.isCurrentUser() &&
           <button onClick={this.handleFollowUser}>Follow this user</button>
-        }
+          }
+        </div>
         {this.state.musicLoverBadge >2 &&
           <div>
             <img src="/assets/music-medal.png" />
@@ -181,8 +195,12 @@ class ShowRoute extends React.Component {
         }
         <div>
           {/* Music Todo */}
-          <h1 style={categoryFont}>music</h1>
-          <hr style={hr}/>
+          {this.hasMusicTodo().length > 0 &&
+            <div>
+              <h1 style={categoryFont}>music</h1>
+              <hr/>
+            </div>
+          }
           <ul className="columns is-multiline">
             {this.state.content.map((content, i) =>
               this.state.content[i].mediaType === 'music' && !this.state.content[i].consumedStatus &&
@@ -198,13 +216,13 @@ class ShowRoute extends React.Component {
                 {this.isCurrentUser() && !this.state.content[i].consumedStatus &&
                   <div>
                     <img
-                      style={showButtons}
+                      className="show-buttons"
                       src="/assets/tick.png"
                       value={i}
                       onClick={() => this.handleTickContent(content)}
                     />
                     <img
-                      style={showButtons}
+                      className="show-buttons"
                       src="/assets/trash.png"
                       value={i}
                       onClick={() => this.handleRemoveContent(content)}
@@ -216,8 +234,12 @@ class ShowRoute extends React.Component {
           </ul>
 
           {/* Films Todo */}
-          <h1 style={categoryFont}>films</h1>
-          <hr style={hr}/>
+          {this.hasFilmTodo().length > 0 &&
+            <div>
+              <h1 style={categoryFont}>films</h1>
+              <hr/>
+            </div>
+          }
           <ul className="columns is-multiline">
             {this.state.content.map((content, i) =>
               this.state.content[i].mediaType === 'film'  && !this.state.content[i].consumedStatus &&
@@ -230,14 +252,18 @@ class ShowRoute extends React.Component {
 
                 {this.isCurrentUser() && !this.state.content[i].consumedStatus &&
                   <div>
-                    <button
+                    <img
+                      className="show-buttons"
+                      src="/assets/tick.png"
                       value={i}
                       onClick={() => this.handleTickContent(content)}
-                    >Ticked</button>
-                    <button
+                    />
+                    <img
+                      className="show-buttons"
+                      src="/assets/trash.png"
                       value={i}
                       onClick={() => this.handleRemoveContent(content)}
-                    >Remove</button>
+                    />
                   </div>
                 }
               </li>
@@ -245,8 +271,12 @@ class ShowRoute extends React.Component {
           </ul>
 
           {/* TV Todo */}
-          <h1 style={categoryFont}>tv</h1>
-          <hr style={hr}/>
+          {this.hasTvTodo().length > 0 &&
+            <div>
+              <h1 style={categoryFont}>tv</h1>
+              <hr/>
+            </div>
+          }
           <ul className="columns is-multiline">
             {this.state.content.map((content, i) =>
               this.state.content[i].mediaType === 'tv'  && !this.state.content[i].consumedStatus &&
@@ -259,14 +289,18 @@ class ShowRoute extends React.Component {
 
                 {this.isCurrentUser() && !this.state.content[i].consumedStatus &&
                   <div>
-                    <button
+                    <img
+                      className="show-buttons"
+                      src="/assets/tick.png"
                       value={i}
                       onClick={() => this.handleTickContent(content)}
-                    >Ticked</button>
-                    <button
+                    />
+                    <img
+                      className="show-buttons"
+                      src="/assets/trash.png"
                       value={i}
                       onClick={() => this.handleRemoveContent(content)}
-                    >Remove</button>
+                    />
                   </div>
                 }
               </li>
@@ -278,7 +312,7 @@ class ShowRoute extends React.Component {
           {this.hasConsumedContent().length > 0 &&
             <div>
               <h1 style={categoryFont}>done :)</h1>
-              <hr style={hr}/>
+              <hr/>
             </div>
           }
 
@@ -292,7 +326,7 @@ class ShowRoute extends React.Component {
                 {this.isCurrentUser() &&
                   <div>
                     <img
-                      style={showButtons}
+                      className="show-buttons"
                       src="/assets/cross.png"
                       value={i}
                       onClick={() => this.handleTickContent(content)}
@@ -311,7 +345,7 @@ class ShowRoute extends React.Component {
           {this.state.suggestedContent.length > 0 &&
             <div>
               <h1 style={categoryFont}>suggested by others</h1>
-              <hr style={hr}/>
+              <hr/>
             </div>
           }
           <ul className="columns is-multiline">
@@ -351,14 +385,14 @@ class ShowRoute extends React.Component {
           {this.state.followedUsers.length > 0 &&
             <div>
               <h1 style={categoryFont}>followed users</h1>
-              <hr style={hr}/>
+              <hr/>
             </div>
           }
           <ul className="columns is-multiline">
             {this.state.followedUsers.map((followedUser, i) =>
               <li key={i} className="column is-one-fifth">
                 <Link to={`/user/${followedUser._id}`}>
-                  <img src={followedUser.image} />
+                  <img style={profilePic} src={followedUser.image} />
                 </Link>
                 <h1>{followedUser.username}</h1>
                 {this.isCurrentUser() &&

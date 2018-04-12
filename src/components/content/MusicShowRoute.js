@@ -74,16 +74,6 @@ class MusicShowRoute extends React.Component {
       .then(() => this.props.history.push('/content'));
   }
 
-  handleContentConsumed = (e) => {
-    e.preventDefault();
-    const trackId = this.props.match.params.id;
-    console.log(trackId);
-    // axios.put(`/api/content/${trackId}`, this.state, {
-    //   headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    // })
-    //   .then(() => this.props.history.push('/content'));
-  }
-
   handleShareToggle = () => {
     this.setState({ share: !this.state.share }, () => console.log(this.state));
   }
@@ -110,14 +100,6 @@ class MusicShowRoute extends React.Component {
       margin: '0 auto'
     };
 
-    const showButtons = {
-      width: '30px',
-      height: '100%',
-      marginRight: '10px',
-      paddingBottom: '10px'
-
-    };
-
     return (
       <section className="columns" style={showContainer}>
         <div className="column">
@@ -131,23 +113,18 @@ class MusicShowRoute extends React.Component {
           <audio src={this.state.content.previewUrl} ref={element => this.audioElem = element}></audio>
           <div>
             <img
-              style={showButtons}
+              className="show-buttons"
               src={!this.state.playing ? '/assets/play.png' : '/assets/pause.png'}
               onClick={this.handlePlay}
             />
             <img
-              style={showButtons}
+              className="show-buttons"
               src="/assets/plus.png"
               onClick={this.handleAdd}
             />
-            <img
-              style={showButtons}
-              src="/assets/tick.png"
-              onClick={this.handleContentConsumed}
-            />
             {/* Share this content with a followedUser */}
             <img
-              style={showButtons}
+              className="show-buttons"
               src="/assets/share.png"
               onClick={this.handleShareToggle}
             />

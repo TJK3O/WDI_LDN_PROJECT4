@@ -2,10 +2,26 @@ body {
   min-height: 100vh;
   background: linear-gradient(#84C2FE, #EFF7FF);
   padding-bottom: 80px;
+  color: white;
+  margin-top: 0;
 
-  .columns {
-    margin-top: 30px;
+  section.columns {
+    margin-top: 50px;
   }
+
+  hr {
+    width: 100%;
+    color: white;
+    border: none;
+    height: 4px;
+  };
+
+  .show-buttons {
+    width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    margin-right: 10px;
+  };
 
   .bottom-nav-button {
     width: 50%;
@@ -19,21 +35,6 @@ body {
   }
 }
 
-// Rotates the chevron when opening and closing the bottom nav
-.chevron-image {
-  width: 25px;
-  height: 25px;
-  color: #fff;
-  transform: rotate(0deg);
-  transition: transform 500ms linear;
-}
-
-.chevron-image.active-chevron {
-  width: 25px;
-  height: 25px;
-  color: #fff;
-  transform: rotate(180deg);
-}
 
 // Animates the flash messages:
 .flash {

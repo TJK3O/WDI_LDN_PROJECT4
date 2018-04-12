@@ -131,20 +131,13 @@ class IndexRoute extends React.Component {
     };
 
     const contentNavButtons = {
-      color: 'grey',
+      color: 'white',
       fontSize: '20px'
     };
 
     const categoryFont = {
-      color: 'grey',
+      color: 'white',
       fontSize: '30px'
-    };
-
-    const hr = {
-      width: '100%',
-      color: 'grey',
-      border: 'none',
-      height: '4px'
     };
 
     return (
@@ -190,7 +183,7 @@ class IndexRoute extends React.Component {
         />
         }
         <h1 style={categoryFont}>{this.state.selectedContent}</h1>
-        <hr style={hr}/>
+        <hr/>
         {this.state.selectedContent === 'music' && this.state.musicSearch &&
         <ul
           className="columns is-multiline content-grid"
@@ -282,6 +275,7 @@ class IndexRoute extends React.Component {
           {this.state.users.map((user, i) =>
             <div key={i} className="column is-one-third">
               <Link to={`/user/${this.state.users[i]._id}`}>
+                <img src={user.image} />
                 <h1>{user.username}</h1>
               </Link>
             </div>

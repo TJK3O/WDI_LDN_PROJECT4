@@ -65,16 +65,6 @@ class FilmsShowRoute extends React.Component {
     })
       .then(() => this.props.history.push('/content'));
   }
-  //
-  // handleContentConsumed = (e) => {
-  //   e.preventDefault();
-  //   const filmId = this.props.match.params.id;
-  //   console.log(filmId);
-  //   axios.put(`/api/content/${trackId}`, this.state, {
-  //     headers: { Authorization: `Bearer ${Auth.getToken()}` }
-  //   })
-  //     .then(() => this.props.history.push('/content'));
-  // }
 
   handleShareToggle = () => {
     this.setState({ share: !this.state.share }, () => console.log(this.state));
@@ -94,14 +84,6 @@ class FilmsShowRoute extends React.Component {
       margin: '0 auto'
     };
 
-    const showButtons = {
-      width: '30px',
-      height: '40px',
-      marginRight: '10px',
-      paddingBottom: '10px'
-
-    };
-
     return (
       <section className="columns is-multiline" style={showContainer}>
 
@@ -114,14 +96,14 @@ class FilmsShowRoute extends React.Component {
           <h2>{this.state.content.overview}</h2>
 
           <img
-            style={showButtons}
+            className="show-buttons"
             src="/assets/plus.png"
             onClick={this.handleAdd}
           />
 
           {/* Share this content with a followedUser */}
           <img
-            style={showButtons}
+            className="show-buttons"
             src="/assets/share.png"
             onClick={this.handleShareToggle}
           />

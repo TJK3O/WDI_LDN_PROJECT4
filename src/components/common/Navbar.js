@@ -42,7 +42,7 @@ class Navbar2 extends React.Component {
     const activeBottomNav = {
       textAlign: 'center',
       width: '100%',
-      height: '300px',
+      height: '350px',
       position: 'fixed',
       zIndex: '3',
       bottom: '0',

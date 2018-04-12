@@ -18,13 +18,40 @@ class Login extends React.Component {
   }
 
   render() {
+
+    const formStyles = {
+      width: '400px',
+      margin: '10px auto'
+    };
+
+    const inputStyles = {
+      width: '100%',
+      color: 'grey',
+      lineHeight: '1.5em',
+      fontSize: '25px',
+      outline: 'none',
+      border: 'none',
+      borderBottom: '4px solid grey',
+      backgroundColor: 'rgba(255,255,255,0)'
+    };
+
+    // const button = {
+    //   width: '60px'
+    // };
+
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form
+        style={formStyles}
+        onSubmit={this.handleSubmit}>
         <input
+          style={inputStyles}
+          placeholder="email"
           onChange={this.handleChange}
           name="email"
         />
         <input
+          style={inputStyles}
+          placeholder="password"
           onChange={this.handleChange}
           name="password"
         />
