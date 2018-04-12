@@ -35,21 +35,25 @@ class EditRoute extends React.Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form className="form-styles" onSubmit={this.handleSubmit}>
         <input
+          className="input-styles"
           placeholder="username"
           name="username"
+          value={this.state.username}
           onChange={this.handleChange}
         />
         <ReactFilestack
           apikey={'AathCQHBORnSzPBb8eXW6z'}
-          buttonText="Click me"
-          buttonClass="classname"
+          buttonText="upload new photo"
+          buttonClass="form-button"
           // options={options}
           onSuccess={res => this.setState({ image: res.filesUploaded[0].url })}
         />
         <img src={`${this.state.image}`} />
-        <button>Submit</button>
+        <button
+          className="form-button"
+        >Submit</button>
       </form>
     );
   }

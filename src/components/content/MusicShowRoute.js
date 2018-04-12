@@ -96,47 +96,44 @@ class MusicShowRoute extends React.Component {
   render() {
 
     return (
-      <section className="columns">
-        <div className="column">
-          <img src={this.state.content.artwork}/>
+      <section className="show-container">
+        <img src={this.state.content.artwork}/>
+        <div>
+          <img
+            className="show-buttons"
+            src={!this.state.playing ? '/assets/play.png' : '/assets/pause.png'}
+            onClick={this.handlePlay}
+          />
+          <img
+            className="show-buttons"
+            src="/assets/plus.png"
+            onClick={this.handleAdd}
+          />
+          {/* Share this content with a followedUser */}
+          <img
+            className="show-buttons"
+            src="/assets/share.png"
+            onClick={this.handleShareToggle}
+          />
+          {this.state.share &&
+            <ul className="columns is-multiline">
+              {this.state.followedUsers.map((user, i) =>
+                <div key={i} className="column is-one-third">
+                  <button
+                    value={user._id}
+                    onClick={this.handleShare}
+                  >{user.username}</button>
+                </div>
+              )}
+            </ul>
+          }
         </div>
-        <div className="column">
-          <h1>{this.state.content.name}</h1>
-          <ul>{this.state.content.artists.map((artist, i) =>
-            <li key={i}>{artist.name}</li>
-          )} </ul>
-          <audio src={this.state.content.previewUrl} ref={element => this.audioElem = element}></audio>
-          <div>
-            <img
-              className="show-buttons"
-              src={!this.state.playing ? '/assets/play.png' : '/assets/pause.png'}
-              onClick={this.handlePlay}
-            />
-            <img
-              className="show-buttons"
-              src="/assets/plus.png"
-              onClick={this.handleAdd}
-            />
-            {/* Share this content with a followedUser */}
-            <img
-              className="show-buttons"
-              src="/assets/share.png"
-              onClick={this.handleShareToggle}
-            />
-            {this.state.share &&
-                <ul className="columns is-multiline">
-                  {this.state.followedUsers.map((user, i) =>
-                    <div key={i} className="column is-one-third">
-                      <button
-                        value={user._id}
-                        onClick={this.handleShare}
-                      >{user.username}</button>
-                    </div>
-                  )}
-                </ul>
-            }
-          </div>
-        </div>
+
+        <h1>{this.state.content.name}</h1>
+        <ul>{this.state.content.artists.map((artist, i) =>
+          <li key={i}>{artist.name}</li>
+        )} </ul>
+        <audio src={this.state.content.previewUrl} ref={element => this.audioElem = element}></audio>
 
       </section>
     );

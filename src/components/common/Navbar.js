@@ -47,7 +47,7 @@ class Navbar2 extends React.Component {
       zIndex: '3',
       bottom: '0',
       left: '0',
-      backgroundColor: 'lightGrey',
+      backgroundColor: 'rgb(203, 230, 255)',
       color: 'white',
       overflowX: 'hidden',
       transition: '0.5s',
@@ -107,25 +107,25 @@ class Navbar2 extends React.Component {
           />
         </div>
         <div style={bottomNavMiddle}>
-          <h1 style={contentLogo}>content</h1>
+          <h1 style={contentLogo}>c o n t e n t</h1>
           {this.state.navIsOpen &&
             <div>
               <div className="bottom-nav-button">
-                <Link className="nav-button" to="/">home</Link>
+                <Link className="nav-button" to="/">h o m e</Link>
               </div>
               <div className="bottom-nav-button">
-                <Link className="nav-button" to="/content">browse</Link>
+                <Link className="nav-button" to="/content">b r o w s e</Link>
               </div>
               <div className="bottom-nav-button">
                 {Auth.isAuthenticated() &&
-                  <a onClick={this.handleLogout} className="nav-button">logout</a>
+                  <a onClick={this.handleLogout} className="nav-button">l o g o u t</a>
                 }
               </div>
               <div className="bottom-nav-button">
-                {!Auth.isAuthenticated() && <Link className="nav-button" to="/login">login</Link>}
+                {!Auth.isAuthenticated() && <Link className="nav-button" to="/login">l o g i n</Link>}
               </div>
               <div className="bottom-nav-button">
-                {!Auth.isAuthenticated() && <Link className="nav-button" to="/register">register</Link>}
+                {!Auth.isAuthenticated() && <Link className="nav-button" to="/register">r e g i s t e r</Link>}
               </div>
             </div>
           }

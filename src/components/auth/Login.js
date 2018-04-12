@@ -20,26 +20,29 @@ class Login extends React.Component {
   render() {
 
     return(
-      <form
-        className="form-styles"
-        onSubmit={this.handleSubmit}>
-        <input
-          className="input-styles"
-          placeholder="email"
-          onChange={this.handleChange}
-          name="email"
-        />
-        <input
-          type="password"
-          className="input-styles"
-          placeholder="password"
-          onChange={this.handleChange}
-          name="password"
-        />
-        <button
-          className="form-button"
-        >Login</button>
-      </form>
+      <div>
+        <h1 className="home-main-logo">c o n t e n t</h1>
+        <form
+          className="form-styles"
+          onSubmit={this.handleSubmit}>
+          <input
+            className="input-styles"
+            placeholder="email"
+            onChange={this.handleChange}
+            name="email"
+          />
+          <input
+            type="password"
+            className="input-styles"
+            placeholder="password"
+            onChange={this.handleChange}
+            name="password"
+          />
+          <button
+            className="form-button"
+          >Login</button>
+        </form>
+      </div>
     );
   }
 }

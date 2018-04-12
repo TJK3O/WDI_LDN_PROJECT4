@@ -10,8 +10,8 @@ const Search = ({ handleChange, handleSubmit }) => {
   const inputStyles = {
     width: '100%',
     color: 'white',
-    lineHeight: '1.5em',
-    fontSize: '25px',
+    lineHeight: '3em',
+    fontSize: '30px',
     outline: 'none',
     border: 'none',
     borderBottom: '4px solid white',

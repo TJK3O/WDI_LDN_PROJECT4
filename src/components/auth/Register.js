@@ -28,47 +28,50 @@ class Register extends React.Component {
   render() {
 
     return(
-      <form className="form-styles" onSubmit={this.handleSubmit}>
-        <input
-          className="input-styles"
-          placeholder="username"
-          name="username"
-          onChange={this.handleChange}
-        />
-        {this.state.errors.username && <small>{this.state.errors.username}</small>}
-        <input
-          className="input-styles"
-          placeholder="email"
-          name="email"
-          onChange={this.handleChange}
-        />
-        {this.state.errors.email && <small>{this.state.errors.email}</small>}
-        <input
-          type="password"
-          className="input-styles"
-          placeholder="password"
-          name="password"
-          onChange={this.handleChange}
-        />
-        {this.state.errors.password && <small>{this.state.errors.password}</small>}
-        <input
-          type="password"
-          className="input-styles"
-          placeholder="password confirmation"
-          name="passwordConfirmation"
-          onChange={this.handleChange}
-        />
-        <ReactFilestack
-          apikey={'AathCQHBORnSzPBb8eXW6z'}
-          buttonText="upload image"
-          buttonClass="form-button"
-          // options={options}
-          onSuccess={res => this.setState({ image: res.filesUploaded[0].url })}
-        />
-        <button
-          className="form-button"
-        >register</button>
-      </form>
+      <div>
+        <h1 className="home-main-logo">c o n t e n t</h1>
+        <form className="form-styles" onSubmit={this.handleSubmit}>
+          <input
+            className="input-styles"
+            placeholder="username"
+            name="username"
+            onChange={this.handleChange}
+          />
+          {this.state.errors.username && <small>{this.state.errors.username}</small>}
+          <input
+            className="input-styles"
+            placeholder="email"
+            name="email"
+            onChange={this.handleChange}
+          />
+          {this.state.errors.email && <small>{this.state.errors.email}</small>}
+          <input
+            type="password"
+            className="input-styles"
+            placeholder="password"
+            name="password"
+            onChange={this.handleChange}
+          />
+          {this.state.errors.password && <small>{this.state.errors.password}</small>}
+          <input
+            type="password"
+            className="input-styles"
+            placeholder="password confirmation"
+            name="passwordConfirmation"
+            onChange={this.handleChange}
+          />
+          <ReactFilestack
+            apikey={'AathCQHBORnSzPBb8eXW6z'}
+            buttonText="upload image"
+            buttonClass="form-button"
+            // options={options}
+            onSuccess={res => this.setState({ image: res.filesUploaded[0].url })}
+          />
+          <button
+            className="form-button"
+          >register</button>
+        </form>
+      </div>
     );
   }
 }

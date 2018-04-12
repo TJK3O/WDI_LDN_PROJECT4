@@ -378,7 +378,10 @@ class ShowRoute extends React.Component {
             {this.state.followedUsers.map((followedUser, i) =>
               <li key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
                 <Link to={`/user/${followedUser._id}`}>
-                  <img className="profile-pic" src={followedUser.image} />
+                  <img
+                    className="profile-pic"
+                    src={followedUser.image}
+                  />
                 </Link>
                 <h1>{followedUser.username}</h1>
                 {this.isCurrentUser() &&

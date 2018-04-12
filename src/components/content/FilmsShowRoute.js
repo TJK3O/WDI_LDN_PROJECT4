@@ -79,36 +79,28 @@ class FilmsShowRoute extends React.Component {
 
   render() {
 
-    const showContainer = {
-      width: '60vw',
-      margin: '0 auto'
-    };
-
     return (
-      <section className="columns is-multiline" style={showContainer}>
+      <section className="show-container">
+        <img
+          className="show-image"
+          src={this.state.content.artwork}
+        />
+        <img
+          className="show-buttons"
+          src="/assets/plus.png"
+          onClick={this.handleAdd}
+        />
 
-        <div className="column">
-          <img src={this.state.content.artwork}/>
-        </div>
-
-        <div className="column">
-          <h1>{this.state.content.name}</h1>
-          <h2>{this.state.content.overview}</h2>
-
-          <img
-            className="show-buttons"
-            src="/assets/plus.png"
-            onClick={this.handleAdd}
-          />
-
-          {/* Share this content with a followedUser */}
-          <img
-            className="show-buttons"
-            src="/assets/share.png"
-            onClick={this.handleShareToggle}
-          />
-        </div>
-
+        {/* Share this content with a followedUser */}
+        <img
+          className="show-buttons"
+          src="/assets/share.png"
+          onClick={this.handleShareToggle}
+        />
+        <h1>{this.state.content.name}</h1>
+        <h2
+          className="show-text"
+        >{this.state.content.overview}</h2>
         <div>
         </div>
 

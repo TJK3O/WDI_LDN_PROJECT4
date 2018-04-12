@@ -269,7 +269,10 @@ class IndexRoute extends React.Component {
           {this.state.users.map((user, i) =>
             <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
               <Link to={`/user/${this.state.users[i]._id}`}>
-                <img src={user.image} />
+                <img
+                  className="profile-pic"
+                  src={user.image}
+                />
                 <h1>{user.username}</h1>
               </Link>
             </div>
