@@ -201,10 +201,10 @@ class ShowRoute extends React.Component {
               <hr/>
             </div>
           }
-          <ul className="columns is-multiline">
+          <ul className="columns is-multiline is-mobile">
             {this.state.content.map((content, i) =>
               this.state.content[i].mediaType === 'music' && !this.state.content[i].consumedStatus &&
-              <li key={i} className="column is-one-fifth">
+              <li key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
                 {!this.state.content[i].consumedStatus &&
                   <Link to={`/content/music/${this.state.content[i].isrc}`}>
                     <img src={content.artwork} />
@@ -240,10 +240,10 @@ class ShowRoute extends React.Component {
               <hr/>
             </div>
           }
-          <ul className="columns is-multiline">
+          <ul className="columns is-multiline is-mobile">
             {this.state.content.map((content, i) =>
               this.state.content[i].mediaType === 'film'  && !this.state.content[i].consumedStatus &&
-              <li key={i} className="column is-one-fifth">
+              <li key={i} className="column is-half-mobile is-one-quarter-tablet is-one-fifth-desktop">
                 {!this.state.content[i].consumedStatus &&
                     <Link to={`/content/films/${this.state.content[i].filmId}`}>
                       <img src={content.artwork} />
@@ -277,10 +277,10 @@ class ShowRoute extends React.Component {
               <hr/>
             </div>
           }
-          <ul className="columns is-multiline">
+          <ul className="columns is-multiline is-mobile">
             {this.state.content.map((content, i) =>
               this.state.content[i].mediaType === 'tv'  && !this.state.content[i].consumedStatus &&
-              <li key={i} className="column is-one-fifth">
+              <li key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
                 {!this.state.content[i].consumedStatus &&
                   <Link to={`/content/tv/${this.state.content[i].tvId}`}>
                     <img src={content.artwork} />
@@ -316,10 +316,10 @@ class ShowRoute extends React.Component {
             </div>
           }
 
-          <ul className="columns is-multiline">
+          <ul className="columns is-multiline is-mobile">
             {this.state.content.map((content, i) =>
               this.state.content[i].consumedStatus &&
-              <li key={i} className="column is-one-fifth">
+              <li key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
                 {this.state.content[i].consumedStatus &&
                     <img src={content.artwork} />}
 
@@ -348,10 +348,10 @@ class ShowRoute extends React.Component {
               <hr/>
             </div>
           }
-          <ul className="columns is-multiline">
+          <ul className="columns is-multiline is-mobile">
             {this.state.suggestedContent.map((suggestions, i) =>
               <div key={i}>
-                <li className="column is-one-fifth">
+                <li className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
 
 
                   {suggestions.mediaType === 'music' &&
@@ -372,10 +372,12 @@ class ShowRoute extends React.Component {
 
                 </li>
                 {this.isCurrentUser() &&
-                  <button
+                  <img
+                    className="show-buttons"
+                    src="/assets/trash.png"
                     value={i}
                     onClick={() => this.handleRemoveSuggestedContent(suggestions)}
-                  >Remove</button>
+                  />
                 }
               </div>
             )}
@@ -388,18 +390,20 @@ class ShowRoute extends React.Component {
               <hr/>
             </div>
           }
-          <ul className="columns is-multiline">
+          <ul className="columns is-multiline is-mobile">
             {this.state.followedUsers.map((followedUser, i) =>
-              <li key={i} className="column is-one-fifth">
+              <li key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
                 <Link to={`/user/${followedUser._id}`}>
                   <img style={profilePic} src={followedUser.image} />
                 </Link>
                 <h1>{followedUser.username}</h1>
                 {this.isCurrentUser() &&
-                  <button
+                  <img
+                    className="show-buttons"
+                    src="/assets/trash.png"
                     value={i}
                     onClick={() => this.handleRemoveFollowedUser(followedUser)}
-                  >Remove</button>
+                  />
                 }
               </li>
             )}
