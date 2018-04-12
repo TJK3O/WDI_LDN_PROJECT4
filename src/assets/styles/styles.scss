@@ -26,6 +26,23 @@ body {
     font-size: 80px;
   }
 
+  .content-nav {
+    width: 100%;
+    text-align: center;
+    padding-top: 40px;
+
+    .content-nav-buttons {
+      color: white;
+      font-size: 20px
+    };
+
+    .content-nav-buttons-active {
+      color: white;
+      font-size: 30px;
+    }
+  };
+
+
   .show-container {
     padding-top: 50px;
   }
@@ -48,11 +65,20 @@ body {
     margin-top: 40px;
   }
 
+  // .search-placeholder {
+  //   saekfnqpwofksea[pogk[eapgkaewp[flwp[fkp[wld]]]]]
+  // }
+
   hr {
     width: 100%;
     background-color: white;
     border: none;
     height: 4px;
+  }
+
+  .indexpage-user {
+    text-align: center;
+    color: white !important;
   }
 
   .show-container {
@@ -110,14 +136,14 @@ body {
   }
 
   .badges-card {
-    width: 300px;
+    width: 180px;
     height: 100px;
     margin: 0 auto;
   }
 
   .badges {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
   }
 
   img.profile-pic {
@@ -166,10 +192,14 @@ body {
     }
 
 }
-
 h1.home-main-logo {
   font-size: 50px;
 }
+
+.show-container {
+  width: 100% !important;
+}
+
 a.nav-button {
   font-size: 15px !important;
 }

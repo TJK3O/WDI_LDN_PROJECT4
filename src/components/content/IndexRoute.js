@@ -118,42 +118,27 @@ class IndexRoute extends React.Component {
   }
 
   render() {
-    const contentNav = {
-      width: '100%',
-      textAlign: 'center',
-      paddingTop: '40px'
-    };
-
-    const contentNavButtons = {
-      color: 'white',
-      fontSize: '20px'
-    };
-
-    const categoryFont = {
-      color: 'white',
-      fontSize: '30px'
-    };
 
     return (
       <section>
-        <div style={contentNav}>
+        <div className="content-nav">
           <a
-            style={contentNavButtons}
+            className={this.state.selectedContent === 'music' ? 'content-nav-buttons-active' : 'content-nav-buttons'}
             onClick={this.handleContentSelection}
             name="music"
           >music</a> |
           <a
-            style={contentNavButtons}
+            className={this.state.selectedContent === 'films' ? 'content-nav-buttons-active' : 'content-nav-buttons'}
             onClick={this.handleContentSelection}
             name="films"
           > films</a> |
           <a
-            style={contentNavButtons}
+            className={this.state.selectedContent === 'tv' ? 'content-nav-buttons-active' : 'content-nav-buttons'}
             onClick={this.handleContentSelection}
             name="tv"
           > tv</a> |
           <a
-            style={contentNavButtons}
+            className={this.state.selectedContent === 'users' ? 'content-nav-buttons-active' : 'content-nav-buttons'}
             onClick={this.handleContentSelection}
             name="users"
           > users</a>
@@ -176,26 +161,25 @@ class IndexRoute extends React.Component {
           handleSubmit={this.handleTvSubmit}
         />
         }
-        <h1 style={categoryFont}>{this.state.selectedContent}</h1>
-        <hr/>
         {this.state.selectedContent === 'music' && this.state.musicSearch &&
-        <ul
-          className="columns is-multiline content-grid is-mobile"
-        >
-          {this.state.musicSearchResults.map((track, i) =>
-            <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-              {this.state.musicSearchResults &&
-                <Link to={`/content/music/${this.state.musicSearchResults[i].external_ids.isrc}`}>
-                  <img src={track.album.images[0].url} />
-                </Link>}
-              <h2>{track.album.name}</h2>
-
-              {/* artists are in an array so we need to map over them */}
-              {track.album.artists.map((artists, j) =>
-                <h3 key={j}>{artists.name}</h3>)}
-
-            </div>)}
-        </ul>
+        <div>
+          <h1 className="search-placeholder">search for your favourite content...</h1>
+          <ul
+            className="columns is-multiline content-grid is-mobile"
+          >
+            {this.state.musicSearchResults.map((track, i) =>
+              <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+                {this.state.musicSearchResults &&
+                  <Link to={`/content/music/${this.state.musicSearchResults[i].external_ids.isrc}`}>
+                    <img src={track.album.images[0].url} />
+                  </Link>}
+                <h2>{track.album.name}</h2>
+                {/* artists are in an array so we need to map over them */}
+                {track.album.artists.map((artists, j) =>
+                  <h3 key={j}>{artists.name}</h3>)}
+              </div>)}
+          </ul>
+        </div>
         }
         {this.state.music.items && !this.state.musicSearch && this.state.selectedContent === 'music' &&
         <ul className="columns is-multiline is-mobile">
@@ -273,7 +257,7 @@ class IndexRoute extends React.Component {
                   className="profile-pic"
                   src={user.image}
                 />
-                <h1>{user.username}</h1>
+                <h1 className="indexpage-user">{user.username}</h1>
               </Link>
             </div>
           )}

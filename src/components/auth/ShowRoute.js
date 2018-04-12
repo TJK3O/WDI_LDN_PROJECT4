@@ -315,11 +315,14 @@ class ShowRoute extends React.Component {
                       value={i}
                       onClick={() => this.handleTickContent(content)}
                     />
-                    <button
+                    <img
+                      className="show-buttons"
+                      src="/assets/trash.png"
                       value={i}
                       onClick={() => this.handleRemoveContent(content)}
-                    >Remove</button>
+                    />
                   </div>
+
                 }
               </li>
             )}

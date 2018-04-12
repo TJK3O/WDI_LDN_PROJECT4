@@ -10,11 +10,12 @@ const Search = ({ handleChange, handleSubmit }) => {
   const inputStyles = {
     width: '100%',
     color: 'white',
-    lineHeight: '3em',
+    lineHeight: '1em',
     fontSize: '30px',
     outline: 'none',
     border: 'none',
     borderBottom: '4px solid white',
+    marginBottom: '10px',
     backgroundColor: 'rgba(255,255,255,0)'
   };
 
