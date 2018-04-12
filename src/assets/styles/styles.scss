@@ -10,6 +10,24 @@ body {
     width: 90vw;
   }
 
+  .form-styles {
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+  };
+
+  .input-styles {
+    width: 100%;
+    color: grey;
+    line-height: 1.5em;
+    font-size: 25px;
+    outline: none;
+    border: none;
+    border-bottom: 4px solid white;
+    background-color: rgba(255,255,255,0);
+    margin-top: 40px;
+  };
+
   hr {
     width: 100%;
     color: white;

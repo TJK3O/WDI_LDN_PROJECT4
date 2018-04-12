@@ -3,7 +3,7 @@ import React from 'react';
 const Search = ({ handleChange, handleSubmit }) => {
 
   const formStyles = {
-    width: '400px',
+    width: '100%',
     margin: '10px auto'
   };
 
