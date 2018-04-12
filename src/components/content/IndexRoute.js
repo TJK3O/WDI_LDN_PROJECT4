@@ -213,9 +213,9 @@ class IndexRoute extends React.Component {
         }
 
         {this.state.films.results && !this.state.filmsSearch && this.state.selectedContent === 'films' &&
-        <ul className="columns is-multiline">
+        <ul className="columns is-multiline is-mobile">
           {this.state.films.results.map((film, i) =>
-            <div key={i} className="column is-one-quarter is-half-mobile">
+            <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
               {this.state.films.results &&
                 <Link to={`/content/films/${this.state.films.results[i].id}`}>
                   <img src={this.state.films.results[i].poster_path ? `https://image.tmdb.org/t/p/w500/${film.poster_path}` : '/assets/poster-placeholder.png'} />
