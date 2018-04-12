@@ -28,13 +28,21 @@ class ShowRoute extends React.Component {
     tvLoverBadge: 0
   }
 
-
-  componentDidMount() {
+  getUser = () => {
     const userId = this.props.match.params.id;
     axios.get(`/api/user/${userId}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState(res.data,() => console.log('here: ', this.state)));
+  }
+
+  componentDidMount() {
+    this.getUser();
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.match.params.id === this.props.match.params.id) return false;
+    this.getUser();
   }
 
   handleTickContent = (content) => {
@@ -108,6 +116,10 @@ class ShowRoute extends React.Component {
   isCurrentUser = () => {
     // this checks that the id in the url matches the id of the logged in user. This means that we can show an edit button below only if the profile page being shown is that of the logged in user. And conversely we can show a follow button only if the profile page is NOT that of the logged in user.
     return this.props.match.params.id === Auth.getPayload().sub;
+  }
+
+  hasConsumedContent = () => {
+    return this.state.content.filter(content => content.consumedStatus);
   }
 
   render() {
@@ -262,8 +274,14 @@ class ShowRoute extends React.Component {
           </ul>
 
           {/* Consumed */}
-          <h1 style={categoryFont}>done :)</h1>
-          <hr style={hr}/>
+
+          {this.hasConsumedContent().length > 0 &&
+            <div>
+              <h1 style={categoryFont}>done :)</h1>
+              <hr style={hr}/>
+            </div>
+          }
+
           <ul className="columns is-multiline">
             {this.state.content.map((content, i) =>
               this.state.content[i].consumedStatus &&
@@ -318,12 +336,6 @@ class ShowRoute extends React.Component {
                 </Link>
                   }
 
-
-
-
-
-
-
                 </li>
                 {this.isCurrentUser() &&
                   <button
@@ -345,7 +357,9 @@ class ShowRoute extends React.Component {
           <ul className="columns is-multiline">
             {this.state.followedUsers.map((followedUser, i) =>
               <li key={i} className="column is-one-fifth">
-                <img src={followedUser.image} />
+                <Link to={`/user/${followedUser._id}`}>
+                  <img src={followedUser.image} />
+                </Link>
                 <h1>{followedUser.username}</h1>
                 {this.isCurrentUser() &&
                   <button
