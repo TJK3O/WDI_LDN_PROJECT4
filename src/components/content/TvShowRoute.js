@@ -44,7 +44,8 @@ class TvShowRoute extends React.Component {
             mediaType: 'tv',
             consumedStatus: false,
             userId: userId,
-            resourceId: res.data.id
+            resourceId: res.data.id,
+            tvId: res.data.id
           }
         }));
 

@@ -232,7 +232,7 @@ class IndexRoute extends React.Component {
             <div key={i} className="column is-one-quarter is-half-mobile">
               {this.state.films.results &&
                 <Link to={`/content/films/${this.state.films.results[i].id}`}>
-                  <img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} />
+                  <img src={this.state.films.results[i].poster_path ? `https://image.tmdb.org/t/p/w500/${film.poster_path}` : '/assets/poster-placeholder.png'} />
                 </Link>}
               <h1>{film.original_title}</h1>
             </div>
@@ -245,7 +245,7 @@ class IndexRoute extends React.Component {
             <div key={i} className="column is-one-quarter is-half-mobile">
               {this.state.filmsSearchResults &&
                 <Link to={`/content/films/${this.state.filmsSearchResults[i].id}`}>
-                  <img src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`} />
+                  <img src={film.poster_path ? `https://image.tmdb.org/t/p/w500/${film.poster_path}` : '/assets/poster-placeholder.png'} />
                 </Link>}
               <h1>{film.original_title}</h1>
             </div>)}
@@ -258,7 +258,7 @@ class IndexRoute extends React.Component {
             <div key={i} className="column is-one-quarter is-half-mobile">
               {this.state.tv.results &&
                 <Link to={`/content/tv/${this.state.tv.results[i].id}`}>
-                  <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />
+                  <img src={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}` : '/assets/tv-placeholder.png'} />
                 </Link>}
               <h1>{tv.original_name}</h1>
             </div>
@@ -271,7 +271,7 @@ class IndexRoute extends React.Component {
             <div key={i} className="column is-one-quarter is-half-mobile">
               {this.state.filmsSearchResults &&
                 <Link to={`/content/${this.state.tvSearchResults[i].id}`}>
-                  <img src={`https://image.tmdb.org/t/p/w500/${tv.poster_path}`} />
+                  <img src={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}` : '/assets/tv-placeholder.png'} />
                 </Link>}
               <h1>{tv.original_name}</h1>
             </div>)}

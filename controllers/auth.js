@@ -70,6 +70,13 @@ function suggestedContentCreate(req, res, next){
     .catch(next);
 }
 
+function suggestedContentRemove(req, res, next){
+  req.currentUser.suggestedContent = req.currentUser.suggestedContent.filter(suggestion => suggestion.resourceId !== req.params.suggestionId);
+  req.currentUser.save()
+    .then(user => res.json(user))
+    .catch(next);
+}
+
 function followUser(req, res, next){
   // req.currentUser was created in secureRoute. Req.params.id is the id in the url of whoevers profile page we are on. So here we are pushing the id of the user whose page we are on into the current user's followedUsers. We will need to populate followedUsers on the show route so that followedUsers are objects rather than ObjectIds. This is done in the show function.
   req.currentUser.followedUsers.push(req.params.id);
@@ -95,5 +102,6 @@ module.exports = {
   todoCreate,
   followUser,
   unFollowUser,
-  suggestedContentCreate
+  suggestedContentCreate,
+  suggestedContentRemove
 };

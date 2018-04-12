@@ -38,9 +38,14 @@ router.route('/login')
   .post(auth.login);
 
 router.route('/user/:id')
-  .get(secureRoute, auth.show)
+  .get(secureRoute, auth.show);
+
+
+router.route('/user/:id/suggestion')
   .post(secureRoute, auth.suggestedContentCreate);
-// .delete(auth.suggestedContentDelete);
+
+router.route('/user/:id/suggestion/:suggestionId')
+  .delete(secureRoute, auth.suggestedContentRemove);
 
 router.route('/user')
   .get(secureRoute, auth.index);

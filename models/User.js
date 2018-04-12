@@ -14,7 +14,10 @@ const userSchema = new mongoose.Schema({
     previewUrl: { type: String },
     consumedStatus: { type: Boolean },
     userId: { type: String },
-    resourceId: { type: String }
+    resourceId: { type: String },
+    isrc: { type: String },
+    filmId: { type: String },
+    tvId: { type: String }
   }],
   image: { type: String },
   followedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],

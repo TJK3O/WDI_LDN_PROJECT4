@@ -52,7 +52,8 @@ class MusicShowRoute extends React.Component {
           previewUrl: res.data.tracks.items[0].preview_url,
           consumedStatus: false,
           userId: userId,
-          resourceId: res.data.tracks.items[0].id
+          resourceId: res.data.tracks.items[0].id,
+          isrc: res.data.tracks.items[0].external_ids.isrc
         }
       }));
 
@@ -89,7 +90,7 @@ class MusicShowRoute extends React.Component {
 
   handleShare = (e) => {
     console.log(e.target.value);
-    axios.post(`/api/user/${e.target.value}`, this.state, {
+    axios.post(`/api/user/${e.target.value}/suggestion`, this.state, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     });
   }

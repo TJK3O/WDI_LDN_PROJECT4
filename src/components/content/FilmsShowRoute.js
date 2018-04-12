@@ -44,9 +44,11 @@ class FilmsShowRoute extends React.Component {
             mediaType: 'film',
             consumedStatus: false,
             userId: userId,
-            resourceId: res.data.imdb_id
+            resourceId: res.data.imdb_id,
+            filmId: res.data.id
           }
         }));
+
 
     axios.get(`/api/user/${Auth.getPayload().sub}`, {
       headers: {
@@ -110,26 +112,13 @@ class FilmsShowRoute extends React.Component {
         <div className="column">
           <h1>{this.state.content.name}</h1>
           <h2>{this.state.content.overview}</h2>
-          {/* <button
-            onClick={this.handleAdd}
-          >Add</button>
-          <button
-            onClick={this.handleContentConsumed}
-          >Ticked</button>
-          Share this content with a followedUser
-          <button
-            onClick={this.handleShareToggle}
-          >Share</button> */}
+
           <img
             style={showButtons}
             src="/assets/plus.png"
             onClick={this.handleAdd}
           />
-          <img
-            style={showButtons}
-            src="/assets/tick.png"
-            onClick={this.handleContentConsumed}
-          />
+
           {/* Share this content with a followedUser */}
           <img
             style={showButtons}

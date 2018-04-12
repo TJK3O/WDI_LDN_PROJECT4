@@ -17,7 +17,9 @@ class ShowRoute extends React.Component {
       mediaType: '',
       previewUrl: '',
       consumedStatus: '',
-      userId: ''
+      userId: '',
+      isrc: '',
+      filmId: ''
     }],
     followedUsers: [],
     suggestedContent: [],
@@ -86,13 +88,13 @@ class ShowRoute extends React.Component {
       .then(() => this.props.history.push('/content'));
   }
 
-  // handleRemoveSuggestedContent = (suggestions) => {
-  //   console.log(suggestions);
-  //   axios.delete(`/api/user/${this.props.match.params.id}`, {
-  //     headers: { Authorization: `Bearer ${Auth.getToken()}` }
-  //   })
-  //     .then(() => this.props.history.push('/content'));
-  // }
+  handleRemoveSuggestedContent = (suggestions) => {
+    console.log(suggestions);
+    axios.delete(`/api/user/${this.props.match.params.id}/suggestion/${suggestions.resourceId}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => this.props.history.push('/content'));
+  }
 
   handleFollowUser = () => {
     console.log(this.state);
@@ -174,7 +176,12 @@ class ShowRoute extends React.Component {
               this.state.content[i].mediaType === 'music' && !this.state.content[i].consumedStatus &&
               <li key={i} className="column is-one-fifth">
                 {!this.state.content[i].consumedStatus &&
-                    <img src={content.artwork} />}
+                  <Link to={`/content/music/${this.state.content[i].isrc}`}>
+                    <img src={content.artwork} />
+                  </Link>
+                }
+
+
 
                 {this.isCurrentUser() && !this.state.content[i].consumedStatus &&
                   <div>
@@ -204,7 +211,10 @@ class ShowRoute extends React.Component {
               this.state.content[i].mediaType === 'film'  && !this.state.content[i].consumedStatus &&
               <li key={i} className="column is-one-fifth">
                 {!this.state.content[i].consumedStatus &&
-                    <img src={content.artwork} />}
+                    <Link to={`/content/films/${this.state.content[i].filmId}`}>
+                      <img src={content.artwork} />
+                    </Link>
+                }
 
                 {this.isCurrentUser() && !this.state.content[i].consumedStatus &&
                   <div>
@@ -230,7 +240,10 @@ class ShowRoute extends React.Component {
               this.state.content[i].mediaType === 'tv'  && !this.state.content[i].consumedStatus &&
               <li key={i} className="column is-one-fifth">
                 {!this.state.content[i].consumedStatus &&
-                    <img src={content.artwork} />}
+                  <Link to={`/content/tv/${this.state.content[i].tvId}`}>
+                    <img src={content.artwork} />
+                  </Link>
+                }
 
                 {this.isCurrentUser() && !this.state.content[i].consumedStatus &&
                   <div>
@@ -275,6 +288,8 @@ class ShowRoute extends React.Component {
               </li>
             )}
           </ul>
+
+          {/* Suggested */}
           {this.state.suggestedContent.length > 0 &&
             <div>
               <h1 style={categoryFont}>suggested by others</h1>
@@ -285,7 +300,30 @@ class ShowRoute extends React.Component {
             {this.state.suggestedContent.map((suggestions, i) =>
               <div key={i}>
                 <li className="column is-one-fifth">
+
+
+                  {suggestions.mediaType === 'music' &&
+                <Link to={`/content/music/${suggestions.isrc}`}>
                   <img src={suggestions.artwork} />
+                </Link>
+                  }
+                  {suggestions.mediaType === 'film' &&
+                <Link to={`/content/films/${suggestions.filmId}`}>
+                  <img src={suggestions.artwork} />
+                </Link>
+                  }
+                  {suggestions.mediaType === 'tv' &&
+                <Link to={`/content/tv/${suggestions.tvId}`}>
+                  <img src={suggestions.artwork} />
+                </Link>
+                  }
+
+
+
+
+
+
+
                 </li>
                 {this.isCurrentUser() &&
                   <button
