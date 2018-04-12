@@ -25,10 +25,10 @@ class App extends React.Component {
       // Any routes need to sit in the BrowserRouter tags
       <BrowserRouter>
         {/* Switch shows a single route at once. */}
-        <main>
+        <main className="container">
           <Navbar />
           <FlashMessages />
-          <section className="container">
+          <section>
             <Switch>
               <ProtectedRoute path="/user/:id/edit" component={AuthEditRoute} />
               <ProtectedRoute path="/user/:id" component={AuthShowRoute} />

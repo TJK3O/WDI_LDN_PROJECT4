@@ -118,15 +118,8 @@ class IndexRoute extends React.Component {
   }
 
   render() {
-    // Inline styles
-    const main = {
-      width: '90vw',
-      margin: '0 auto'
-    };
-
     const contentNav = {
       width: '100%',
-      margin: '0 auto',
       textAlign: 'center'
     };
 
@@ -141,7 +134,7 @@ class IndexRoute extends React.Component {
     };
 
     return (
-      <section style={main}>
+      <section>
         <div style={contentNav}>
           <a
             style={contentNavButtons}

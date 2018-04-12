@@ -28,8 +28,9 @@ class Register extends React.Component {
   render() {
 
     const formStyles = {
-      width: '400px',
-      margin: '10px auto'
+      width: '300px',
+      height: '200px',
+      margin: '0 auto'
     };
 
     const inputStyles = {
@@ -39,8 +40,9 @@ class Register extends React.Component {
       fontSize: '25px',
       outline: 'none',
       border: 'none',
-      borderBottom: '4px solid grey',
-      backgroundColor: 'rgba(255,255,255,0)'
+      borderBottom: '4px solid white',
+      backgroundColor: 'rgba(255,255,255,0)',
+      marginTop: '40px'
     };
 
     return(
@@ -75,11 +77,13 @@ class Register extends React.Component {
         <ReactFilestack
           apikey={'AathCQHBORnSzPBb8eXW6z'}
           buttonText="upload image"
-          buttonClass="classname"
+          buttonClass="form-button"
           // options={options}
           onSuccess={res => this.setState({ image: res.filesUploaded[0].url })}
         />
-        <button>Register</button>
+        <button
+          className="form-button"
+        >register</button>
       </form>
     );
   }

@@ -28,7 +28,7 @@ class Navbar2 extends React.Component {
     const inactiveBottomNav = {
       textAlign: 'center',
       width: '100%',
-      height: '60px',
+      height: '80px',
       position: 'fixed',
       zIndex: '3',
       bottom: '0',
@@ -74,24 +74,24 @@ class Navbar2 extends React.Component {
     };
 
     const burger = {
-      width: '30px',
-      height: '30px',
+      width: '40px',
+      height: '40px',
       float: 'left',
       marginLeft: '10px',
       marginTop: '15px'
     };
 
+    const contentLogo = {
+      lineHeight: '2em',
+      fontSize: '30px'
+    };
+
     const profile = {
-      width: '30px',
-      height: '30px',
+      width: '40px',
+      height: '40px',
       float: 'right',
       marginRight: '10px',
       marginTop: '15px'
-    };
-
-    const contentLogo = {
-      marginTop: '10px',
-      height: '40px'
     };
 
     return (
@@ -107,7 +107,7 @@ class Navbar2 extends React.Component {
           />
         </div>
         <div style={bottomNavMiddle}>
-          <img src="/assets/content-logo.png" style={contentLogo} />
+          <h1 style={contentLogo}>content</h1>
           {this.state.navIsOpen &&
             <div>
               <div className="bottom-nav-button">
@@ -122,17 +122,17 @@ class Navbar2 extends React.Component {
                 }
               </div>
               <div className="bottom-nav-button">
-                {!Auth.isAuthenticated() && <Link className="nav-button" to="/login">Login</Link>}
+                {!Auth.isAuthenticated() && <Link className="nav-button" to="/login">login</Link>}
               </div>
               <div className="bottom-nav-button">
-                {!Auth.isAuthenticated() && <Link className="nav-button" to="/register">Register</Link>}
+                {!Auth.isAuthenticated() && <Link className="nav-button" to="/register">register</Link>}
               </div>
             </div>
           }
         </div>
         <div style={bottomNavLeft}>
           {Auth.isAuthenticated() && !this.state.navIsOpen &&
-              <Link style={profile} className="nav-button" to={`/user/${Auth.getPayload().sub}`}><img src="/assets/profile.png" /></Link>
+              <Link style={profile} to={`/user/${Auth.getPayload().sub}`}><img src="/assets/profile.png" /></Link>
           }
         </div>
       </div>
