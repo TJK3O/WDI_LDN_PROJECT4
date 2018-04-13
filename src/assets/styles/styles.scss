@@ -177,6 +177,14 @@ body {
     }
 
   }
+
+  .burger-icon {
+    cursor: pointer;
+  }
+
+  .center-button {
+    margin: 0 auto;
+  }
 }
 
 
@@ -186,7 +194,8 @@ body {
   z-index: 3;
   top: 0;
   left: 0;
-  background-color: orange;
+  background-color: white;
+  color: black;
   overflow-x: hidden;
   height: 60px;
   width: 100%;

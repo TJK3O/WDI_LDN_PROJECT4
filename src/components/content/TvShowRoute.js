@@ -108,11 +108,11 @@ class TvShowRoute extends React.Component {
                       value={user._id}
                       onClick={this.handleShare}
                     />
-                    <a
-                      className="followed-user-show-card"
+                    <button
+                      className="center-button followed-user-show-card"
                       value={user._id}
                       onClick={this.handleShare}
-                    >{user.username}</a>
+                    >{user.username}</button>
                   </div>
                 </div>
               )}

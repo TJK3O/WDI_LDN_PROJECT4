@@ -101,7 +101,7 @@ class Navbar2 extends React.Component {
         <div style={bottomNavRight}>
           <img
             onClick={this.handleToggle}
-            className="nav-button"
+            className="nav-button burger-icon"
             src="/assets/burger.png"
             style={burger}
           />
