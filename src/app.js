@@ -39,7 +39,7 @@ class App extends React.Component {
               <ProtectedRoute path="/content" component={IndexRoute} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route path="/" component={HomeRoute} />
+              <Route exact path="/" component={HomeRoute} />
               <Route component={NotFound} />
             </Switch>
           </section>

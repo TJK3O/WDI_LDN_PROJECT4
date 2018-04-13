@@ -30,7 +30,7 @@ class Register extends React.Component {
     return(
       <div>
         <h1 className="home-main-logo">c o n t e n t</h1>
-        <form className="form-styles" onSubmit={this.handleSubmit}>
+        <form className="form-styles extra-form-margin" onSubmit={this.handleSubmit}>
           <input
             className="input-styles"
             placeholder="username"
@@ -68,7 +68,7 @@ class Register extends React.Component {
             onSuccess={res => this.setState({ image: res.filesUploaded[0].url })}
           />
           <button
-            className="form-button edit-button"
+            className="form-button"
           >register</button>
         </form>
       </div>

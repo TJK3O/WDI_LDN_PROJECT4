@@ -152,13 +152,30 @@ body {
       margin: 0 auto;
   }
 
-  .edit-button {
-    margin-bottom: 20vh !important;
-  }
-
   .followed-user-show-card {
     display: block;
     text-align: center;
+  }
+
+  .extra-form-margin {
+    margin-bottom: 800px;
+  }
+
+  .home-button {
+    color: white;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    background-color: white;
+    color: black;
+    box-shadow: 1px 1px;
+
+    a {
+      color: black;
+      font-size: 20px;
+      line-height: 2.5em;
+    }
+
   }
 }
 

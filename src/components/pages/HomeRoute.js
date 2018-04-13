@@ -7,9 +7,9 @@ class HomeRoute extends React.Component {
       <section className="homepage-container">
         <h1 className="home-main-logo">c o n t e n t</h1>
 
-        <p>Use content to keep track of all the content you want to see and hear.</p>
+        <p>use content to keep track of all the content you want to see and hear.</p>
 
-        <p>Add, share, consume</p>
+        <p>add, share, consume</p>
 
         <p>be content :)</p>
       </section>
