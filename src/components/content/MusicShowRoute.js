@@ -119,10 +119,20 @@ class MusicShowRoute extends React.Component {
             <ul className="columns is-multiline">
               {this.state.followedUsers.map((user, i) =>
                 <div key={i} className="column is-one-third">
-                  <button
-                    value={user._id}
-                    onClick={this.handleShare}
-                  >{user.username}</button>
+                  <div>
+                    <img
+                      className="profile-pic followed-user-show-card"
+                      src={user.image}
+                      value={user._id}
+                      onClick={this.handleShare}
+                    />
+                    <a
+                      className="followed-user-show-card"
+                      value={user._id}
+                      onClick={this.handleShare}
+                    >{user.username}</a>
+                  </div>
+
                 </div>
               )}
             </ul>

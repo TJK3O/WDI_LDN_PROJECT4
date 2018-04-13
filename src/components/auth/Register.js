@@ -68,7 +68,7 @@ class Register extends React.Component {
             onSuccess={res => this.setState({ image: res.filesUploaded[0].url })}
           />
           <button
-            className="form-button"
+            className="form-button edit-button"
           >register</button>
         </form>
       </div>

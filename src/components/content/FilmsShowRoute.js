@@ -97,6 +97,27 @@ class FilmsShowRoute extends React.Component {
           src="/assets/share.png"
           onClick={this.handleShareToggle}
         />
+        {this.state.share &&
+          <ul className="columns is-multiline">
+            {this.state.followedUsers.map((user, i) =>
+              <div key={i} className="column is-one-quarter">
+                <div>
+                  <img
+                    className="profile-pic followed-user-show-card"
+                    src={user.image}
+                    value={user._id}
+                    onClick={this.handleShare}
+                  />
+                  <a
+                    className="followed-user-show-card"
+                    value={user._id}
+                    onClick={this.handleShare}
+                  >{user.username}</a>
+                </div>
+              </div>
+            )}
+          </ul>
+        }
         <h1>{this.state.content.name}</h1>
         <h2
           className="show-text"
@@ -104,18 +125,6 @@ class FilmsShowRoute extends React.Component {
         <div>
         </div>
 
-        {this.state.share &&
-        <ul className="columns is-multiline">
-          {this.state.followedUsers.map((user, i) =>
-            <div key={i} className="column is-one-quarter">
-              <button
-                value={user._id}
-                onClick={this.handleShare}
-              >{user.username}</button>
-            </div>
-          )}
-        </ul>
-        }
       </section>
     );
   }

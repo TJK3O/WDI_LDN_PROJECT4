@@ -152,6 +152,15 @@ body {
       border-radius: 50%;
       margin: 0 auto;
   }
+
+  .edit-button {
+    margin-bottom: 300px !important;
+  }
+
+  .followed-user-show-card {
+    display: block;
+    text-align: center;
+  }
 }
 
 
@@ -202,5 +211,10 @@ h1.home-main-logo {
 
 a.nav-button {
   font-size: 15px !important;
+}
+
+div.bottom-nav-button {
+  line-height: 2.5em;
+  width: 100%;
 }
 }

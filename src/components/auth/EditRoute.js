@@ -52,7 +52,7 @@ class EditRoute extends React.Component {
         />
         <img src={`${this.state.image}`} />
         <button
-          className="form-button"
+          className="form-button edit-button"
         >Submit</button>
       </form>
     );
