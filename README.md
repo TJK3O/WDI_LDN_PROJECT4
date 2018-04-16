@@ -13,13 +13,15 @@ c o n t e n t is a fully RESTful MERN stack application. React proved a valuable
 
 ---
 
-<p align="center"><img src="https://imgur.com/a/6RXCX" width="700"></p>
+<p align="center"><img src="https://i.imgur.com/5NItUyD.png" width="700"></p>
 
 ###### During the planning process I always had a good idea of what the MVP should contain. I wanted to set up basic user profiles, import and display data from a media/CONTENT API, and enable a badge logic. Once this had been set up it would be relatively straightforward to add more content types, display additional meta data, and store more information for users. I created detailed wireframes with Sketch so that I would have a useful reference when structuring my site, and although the finished product differed in places it was largely true to my initial wireframes.
 
-<p align="center"><img src="https://imgur.com/a/4UTC7" width="700"></p>
+<p align="center"><img src="https://i.imgur.com/rjHNboN.png" width="700"></p>
 
 ###### Once a user has logged in they can browse the top 50 spotify tracks, and top 20 Films and TV shows from TMDB. If they don't find what they are looking for there, each tab has a search function. When a user taps on the content a show page is displayed with artwork, and additional meta data, and for tracks, a short preview. Once a user has added a track, film, or show to their todo list it will appear on their profile, where they can tick it off to work toward Music, Film, and TV lover badges. Users can also follow others and suggest content to them. Suggested content is listed on the profile page.
+
+<p align="center"><img src="https://i.imgur.com/G5WuupX.jpg" width="700"></p>
 
 ---
 
