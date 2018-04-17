@@ -1,6 +1,6 @@
 ![image](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
-# GA WDI-30 Project 4 - CONTENT
+# GA WDI-32 Project 4 - CONTENT
 
 Whilst studying a General Assembly I continued to receive recommendations from friends about TV shows and films I should watch, music I should listen to, video games I needed to play etc. I was worried about missing out on all this great content, and so I decided to create a todo list where users could find and recommend different kinds of media to one another. I decided to add achievements so that the ‘watch list’ would have a competitive aspect. Users are rewarded for watching a certain number of TV shows, films, or ticking off a certain number of tracks.
 
