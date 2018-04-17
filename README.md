@@ -32,3 +32,6 @@ Before I even got started with my wireframes I made sure to check the feasibilit
 This app was a real challenge. A lot of research went into simply achieving MVP - which made achieving MVP all the more satisfying. I was pleased to be able to integrate multiple APIs on the backend, and I am glad that I have built an expandable site that can be built upon. Although I am pleased with what I have managed to achieve in 7 days, I plan to add more functionality and polish in future.
 - For example I would like to implement the YouTube API so that a user can preview film and tv content as well as Music.
 - It would also be useful to split the app into additional components and work on refactoring too.
+
+###### Installation Instructions
+- You'll need run your yarn package manager, to run the necessary dependencies which are already listed in the package.json.
