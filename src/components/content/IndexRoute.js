@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Search from './Search';
 import Auth from '../../lib/Auth';
+import ResultsDisplay from './ResultsDisplay';
 
 class IndexRoute extends React.Component {
 
@@ -198,55 +199,17 @@ class IndexRoute extends React.Component {
         }
 
         {this.state.films.results && !this.state.filmsSearch && this.state.selectedContent === 'films' &&
-        <ul className="columns is-multiline is-mobile">
-          {this.state.films.results.map((film, i) =>
-            <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
-              {this.state.films.results &&
-                <Link to={`/content/films/${this.state.films.results[i].id}`}>
-                  <img src={this.state.films.results[i].poster_path ? `https://image.tmdb.org/t/p/w500/${film.poster_path}` : '/assets/poster-placeholder.png'} />
-                </Link>}
-              <h1>{film.original_title}</h1>
-            </div>
-          )}
-        </ul>
+          <ResultsDisplay results={this.state.films.results} />
         }
         {this.state.selectedContent === 'films' && this.state.filmsSearch &&
-        <ul className="columns is-multiline is-mobile">
-          {this.state.filmsSearchResults.map((film, i) =>
-            <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
-              {this.state.filmsSearchResults &&
-                <Link to={`/content/films/${this.state.filmsSearchResults[i].id}`}>
-                  <img src={film.poster_path ? `https://image.tmdb.org/t/p/w500/${film.poster_path}` : '/assets/poster-placeholder.png'} />
-                </Link>}
-              <h1>{film.original_title}</h1>
-            </div>)}
-        </ul>
+          <ResultsDisplay results={this.state.filmsSearchResults} />
         }
 
         {this.state.tv.results && !this.state.tvSearch && this.state.selectedContent === 'tv' &&
-        <ul className="columns is-multiline is-mobile">
-          {this.state.tv.results.map((tv, i) =>
-            <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
-              {this.state.tv.results &&
-                <Link to={`/content/tv/${this.state.tv.results[i].id}`}>
-                  <img src={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}` : '/assets/tv-placeholder.png'} />
-                </Link>}
-              <h1>{tv.original_name}</h1>
-            </div>
-          )}
-        </ul>
+          <ResultsDisplay results={this.state.tv.results} />
         }
         {this.state.selectedContent === 'tv' && this.state.tvSearch &&
-        <ul className="columns is-multiline is-mobile">
-          {this.state.tvSearchResults.map((tv, i) =>
-            <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
-              {this.state.filmsSearchResults &&
-                <Link to={`/content/${this.state.tvSearchResults[i].id}`}>
-                  <img src={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}` : '/assets/tv-placeholder.png'} />
-                </Link>}
-              <h1>{tv.original_name}</h1>
-            </div>)}
-        </ul>
+          <ResultsDisplay results={this.state.tvSearchResults} />
         }
         {this.state.selectedContent === 'users' &&
         <ul className="columns is-multiline is-mobile">
