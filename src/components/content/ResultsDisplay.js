@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ResultsDisplay = ({ results, items, searchItems }) => {
-  if(results)
+const ResultsDisplay = ({ films, music, users, tv }) => {
+  if(films)
     return (
       <ul className="columns is-multiline is-mobile">
-        {results.map((film, i) =>
+        {films.map((film, i) =>
           <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
             <Link to={`/content/films/${film.id}`}>
               <img src={film.poster_path ? `https://image.tmdb.org/t/p/w500/${film.poster_path}` : '/assets/poster-placeholder.png'} />
@@ -15,10 +15,25 @@ const ResultsDisplay = ({ results, items, searchItems }) => {
         )}
       </ul>
     );
-  else if(items)
+
+  else if(tv)
     return (
       <ul className="columns is-multiline is-mobile">
-        {items.map((track, i) =>
+        {tv.map((tv, i) =>
+          <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
+            <Link to={`/content/tv/${tv.id}`}>
+              <img src={tv.poster_path ? `https://image.tmdb.org/t/p/w500/${tv.poster_path}` : '/assets/poster-placeholder.png'} />
+            </Link>
+            <h1>{tv.original_title}</h1>
+          </div>
+        )}
+      </ul>
+    );
+
+  else if(music)
+    return (
+      <ul className="columns is-multiline is-mobile">
+        {music.map((track, i) =>
           <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
             {track.track &&
               <div>
@@ -41,6 +56,23 @@ const ResultsDisplay = ({ results, items, searchItems }) => {
                   <h3 key={j}>{artists.name}</h3>)}
               </div>
             }
+          </div>
+        )}
+      </ul>
+    );
+
+  else if(users)
+    return (
+      <ul className="columns is-multiline is-mobile">
+        {users.map((user, i) =>
+          <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
+            <Link to={`/user/${user._id}`}>
+              <img
+                className="profile-pic"
+                src={user.image}
+              />
+              <h1 className="indexpage-user">{user.username}</h1>
+            </Link>
           </div>
         )}
       </ul>

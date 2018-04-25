@@ -164,40 +164,28 @@ class IndexRoute extends React.Component {
         }
 
         {this.state.selectedContent === 'music' && this.state.musicSearch &&
-          <ResultsDisplay items={this.state.musicSearchResults} />
+          <ResultsDisplay music={this.state.musicSearchResults} />
         }
 
         {this.state.music.items && !this.state.musicSearch && this.state.selectedContent === 'music' &&
-          <ResultsDisplay items={this.state.music.items} />
+          <ResultsDisplay music={this.state.music.items} />
         }
 
         {this.state.films.results && !this.state.filmsSearch && this.state.selectedContent === 'films' &&
-          <ResultsDisplay results={this.state.films.results} />
+          <ResultsDisplay films={this.state.films.results} />
         }
         {this.state.selectedContent === 'films' && this.state.filmsSearch &&
-          <ResultsDisplay results={this.state.filmsSearchResults} />
+          <ResultsDisplay films={this.state.filmsSearchResults} />
         }
 
         {this.state.tv.results && !this.state.tvSearch && this.state.selectedContent === 'tv' &&
-          <ResultsDisplay results={this.state.tv.results} />
+          <ResultsDisplay tv={this.state.tv.results} />
         }
         {this.state.selectedContent === 'tv' && this.state.tvSearch &&
-          <ResultsDisplay results={this.state.tvSearchResults} />
+          <ResultsDisplay tv={this.state.tvSearchResults} />
         }
         {this.state.selectedContent === 'users' &&
-        <ul className="columns is-multiline is-mobile">
-          {this.state.users.map((user, i) =>
-            <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
-              <Link to={`/user/${this.state.users[i]._id}`}>
-                <img
-                  className="profile-pic"
-                  src={user.image}
-                />
-                <h1 className="indexpage-user">{user.username}</h1>
-              </Link>
-            </div>
-          )}
-        </ul>
+          <ResultsDisplay users={this.state.users} />
         }
       </section>
     );
