@@ -162,40 +162,13 @@ class IndexRoute extends React.Component {
           handleSubmit={this.handleTvSubmit}
         />
         }
+
         {this.state.selectedContent === 'music' && this.state.musicSearch &&
-        <div>
-          <h1 className="search-placeholder">search for your favourite content...</h1>
-          <ul
-            className="columns is-multiline content-grid is-mobile"
-          >
-            {this.state.musicSearchResults.map((track, i) =>
-              <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-                {this.state.musicSearchResults &&
-                  <Link to={`/content/music/${this.state.musicSearchResults[i].external_ids.isrc}`}>
-                    <img src={track.album.images[0].url} />
-                  </Link>}
-                <h2>{track.album.name}</h2>
-                {/* artists are in an array so we need to map over them */}
-                {track.album.artists.map((artists, j) =>
-                  <h3 key={j}>{artists.name}</h3>)}
-              </div>)}
-          </ul>
-        </div>
+          <ResultsDisplay items={this.state.musicSearchResults} />
         }
+
         {this.state.music.items && !this.state.musicSearch && this.state.selectedContent === 'music' &&
-        <ul className="columns is-multiline is-mobile">
-          {this.state.music.items.map((track, i) =>
-            <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-third-tablet is-one-quarter-desktop">
-              {this.state.music.items &&
-                <Link to={`/content/music/${this.state.music.items[i].track.external_ids.isrc}`}>
-                  <img src={track.track.album.images[0].url} />
-                </Link>}
-              <h2>{track.track.album.name}</h2>
-              {track.track.album.artists.map((artists, j) =>
-                <h3 key={j}>{artists.name}</h3>)}
-            </div>
-          )}
-        </ul>
+          <ResultsDisplay items={this.state.music.items} />
         }
 
         {this.state.films.results && !this.state.filmsSearch && this.state.selectedContent === 'films' &&

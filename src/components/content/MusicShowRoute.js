@@ -99,11 +99,13 @@ class MusicShowRoute extends React.Component {
       <section className="show-container">
         <img src={this.state.content.artwork}/>
         <div>
+          {this.state.content.previewUrl &&
           <img
             className="show-buttons"
             src={!this.state.playing ? '/assets/play.png' : '/assets/pause.png'}
             onClick={this.handlePlay}
           />
+          }
           <img
             className="show-buttons"
             src="/assets/plus.png"
