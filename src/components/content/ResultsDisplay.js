@@ -77,22 +77,6 @@ const ResultsDisplay = ({ films, music, users, tv }) => {
         )}
       </ul>
     );
-  // else if(items.)
-  //   return (
-  //     <ul className="columns is-multiline content-grid is-mobile">
-  //       {searchItems.map((track, i) =>
-  //         <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-  // <Link to={`/content/music/${track.external_ids.isrc}`}>
-  //   <img src={track.album.images[0].url} />
-  // </Link>
-  //           <h2>{track.album.name}</h2>
-  //           artists are in an array so we need to map over them
-  //           {track.album.artists.map((artists, j) =>
-  //             <h3 key={j}>{artists.name}</h3>)}
-  //         </div>)}
-  //     </ul>
-  //   );
-
 };
 
 export default ResultsDisplay;
