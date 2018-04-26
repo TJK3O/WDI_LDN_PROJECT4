@@ -32,7 +32,8 @@ class IndexRoute extends React.Component {
   }
 
   handleMusicChange = (e) => {
-    this.setState({ musicSearch: e.target.value }, () => console.log(this.state));
+    this.setState({ musicSearchResults: [] });
+    this.setState({ musicSearch: e.target.value });
   }
 
   handleMusicSubmit = (e) => {
@@ -48,11 +49,12 @@ class IndexRoute extends React.Component {
         Authorization: `Bearer ${Auth.getToken()}`
       }
     })
-      .then(res => this.setState({ musicSearchResults: res.data.tracks.items }, () => console.log(this.state.MusicSearchResults)));
+      .then(res => this.setState({ musicSearchResults: res.data.tracks.items }));
   }
 
   handleFilmsChange = (e) => {
-    this.setState({ filmsSearch: e.target.value }, () => console.log(this.state));
+    this.setState({ filmsSearchResults: [] });
+    this.setState({ filmsSearch: e.target.value });
   }
 
   handleFilmsSubmit = (e) => {
@@ -71,7 +73,8 @@ class IndexRoute extends React.Component {
   }
 
   handleTvChange = (e) => {
-    this.setState({ tvSearch: e.target.value }, () => console.log(this.state));
+    this.setState({ tvSearchResults: [] });
+    this.setState({ tvSearch: e.target.value });
   }
 
   handleTvSubmit = (e) => {
@@ -174,7 +177,7 @@ class IndexRoute extends React.Component {
         }
 
         {this.state.selectedContent === 'music' && this.state.musicSearch && this.state.musicSearchResults.length < 1 &&
-        <h1>Search for your favourite track...</h1>
+        <h1>Search for your favourite track by typing it&apos;s name and hitting return...</h1>
         }
 
         {this.state.selectedContent === 'music' && this.state.musicSearch && this.state.musicSearchResults &&
@@ -188,7 +191,7 @@ class IndexRoute extends React.Component {
         }
 
         {this.state.selectedContent === 'films' && this.state.filmsSearch && this.state.filmsSearchResults.length < 1 &&
-        <h1>Search for your favourite film...</h1>
+        <h1>Search for your favourite film by typing it&apos;s name and hitting return...</h1>
         }
 
         {this.state.selectedContent === 'films' && this.state.filmsSearch &&
@@ -202,7 +205,7 @@ class IndexRoute extends React.Component {
         }
 
         {this.state.selectedContent === 'tv' && this.state.tvSearch && this.state.tvSearchResults.length < 1 &&
-        <h1>Search for your favourite tv show...</h1>
+        <h1>Search for your favourite TV show by typing it&apos;s name and hitting return...</h1>
         }
 
         {this.state.selectedContent === 'tv' && this.state.tvSearch &&
