@@ -1,7 +1,12 @@
+// This functional component allows users to search for a piece of content
 import React from 'react';
 
+
+
+//---------------------------------------//
 const Search = ({ handleChange, handleSubmit }) => {
 
+  // These are the inline styles for the component
   const formStyles = {
     width: '100%',
     margin: '10px auto'

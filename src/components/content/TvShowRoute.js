@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 // Auth contains functions that let us establish if a user is logged in, and allows us to log them in, out, and examine their token
 import Auth from '../../lib/Auth';
+import Share from '../common/ShareContent';
 
 
 
@@ -81,7 +82,7 @@ class TvShowRoute extends React.Component {
 
   handleShare = (e) => {
     // This posts the content to the record of the clicked user
-    axios.post(`/api/user/${e.target.value}`, this.state, {
+    axios.post(`/api/user/${e.target.value}/suggestion`, this.state, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     });
   }
@@ -108,28 +109,14 @@ class TvShowRoute extends React.Component {
             src="/assets/share.png"
             onClick={this.handleShareToggle}
           />
-          
+
           {/* Share this content with a followedUser */}
           {this.state.share &&
-            <ul className="columns is-multiline">
-              {this.state.followedUsers.map((user, i) =>
-                <div key={i} className="column is-one-third">
-                  <div>
-                    <img
-                      className="profile-pic followed-user-show-card"
-                      src={user.image}
-                      value={user._id}
-                      onClick={this.handleShare}
-                    />
-                    <button
-                      className="center-button followed-user-show-card"
-                      value={user._id}
-                      onClick={this.handleShare}
-                    >{user.username}</button>
-                  </div>
-                </div>
-              )}
-            </ul>
+            <Share
+              followedUsers={this.state.followedUsers}
+              share={this.state.share}
+              handleShare={this.handleShare}
+            />
           }
         </div>
         <h1>{this.state.content.name}</h1>

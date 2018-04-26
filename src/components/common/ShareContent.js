@@ -1,24 +1,31 @@
+// This functional component allows you to share a piece of content with a followedUser
 import React from 'react';
 
-const Share = ( props ) => {
+
+
+//---------------------------------------//
+const Share = ( { handleShare, followedUsers } ) => {
 
   return (
-    <div>
-
-      <button
-        onClick={props.handleShareToggle}
-      >Share</button>
-
-      {props.content &&
-      <ul className="columns is-multiline">
-        {props.content.followedUsers.map((user, i) =>
-          <div key={i} className="column is-one-third">
-            <a>{user.username}</a>
+    <ul className="columns is-multiline">
+      {followedUsers.map((user, i) =>
+        <div key={i} className="column is-one-third">
+          <div>
+            <img
+              className="profile-pic followed-user-show-card"
+              src={user.image}
+              value={user._id}
+              onClick={handleShare}
+            />
+            <button
+              className="center-button followed-user-show-card"
+              value={user._id}
+              onClick={handleShare}
+            >{user.username}</button>
           </div>
-        )}
-      </ul>
-      }
-    </div>
+        </div>
+      )}
+    </ul>
   );
 };
 

@@ -1,6 +1,10 @@
+// This component loads if no matching page is found
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
+
+//---------------------------------------//
 const NotFound = () => {
   return (
     <div className="show-container">

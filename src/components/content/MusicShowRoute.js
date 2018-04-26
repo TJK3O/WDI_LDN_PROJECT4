@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 // Auth contains functions that let us establish if a user is logged in, and allows us to log them in, out, and examine their token
 import Auth from '../../lib/Auth';
+import Share from '../common/ShareContent';
 
 
 
@@ -135,26 +136,11 @@ class MusicShowRoute extends React.Component {
           />
           {/* This list shows all your followedUsers, it is toggled on and off with the handleShareToggle function */}
           {this.state.share &&
-            <ul className="columns is-multiline">
-              {this.state.followedUsers.map((user, i) =>
-                <div key={i} className="column is-one-third">
-                  <div>
-                    <img
-                      className="profile-pic followed-user-show-card"
-                      src={user.image}
-                      value={user._id}
-                      onClick={this.handleShare}
-                    />
-                    <button
-                      className="center-button followed-user-show-card"
-                      value={user._id}
-                      onClick={this.handleShare}
-                    >{user.username}</button>
-                  </div>
-
-                </div>
-              )}
-            </ul>
+            <Share
+              followedUsers={this.state.followedUsers}
+              share={this.state.share}
+              handleShare={this.handleShare}
+            />
           }
         </div>
 
