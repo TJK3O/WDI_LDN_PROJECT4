@@ -51,7 +51,6 @@ class MusicShowRoute extends React.Component {
         content: {
           artwork: res.data.tracks.items[0].album.images[0].url,
           name: res.data.tracks.items[0].name,
-          // artist: res.data.tracks.items[0].album.artists[0].name,
           artists: res.data.tracks.items[0].album.artists,
           album: res.data.tracks.items[0].album.name,
           mediaType: 'music',
