@@ -1,8 +1,11 @@
 import React from 'react';
-
 import axios from 'axios';
+// Auth contains functions that let us establish if a user is logged in, and allows us to log them in, out, and examine their token
 import Auth from '../../lib/Auth';
 
+
+
+//---------------------------------------//
 class MusicShowRoute extends React.Component {
 
   state = {
@@ -30,13 +33,16 @@ class MusicShowRoute extends React.Component {
   }
 
   componentDidMount() {
+    // In the ResultsDisplay component we link each content to /content/music/:id - this means we can get the id out of the url and request that specific content from the API
     const spotifyId = this.props.match.params.id;
+    // We get a user's id from their token
     const userId = Auth.getPayload().sub;
     axios.get('/api/spotify', {
       params: {
         q: `isrc:${spotifyId}`,
         type: 'track'
       },
+      // This Authorization header satisfies our backend API - which in turn sends a separate header to Spotify with it's request
       headers: {
         Authorization: `Bearer ${Auth.getToken()}`
       }
@@ -57,6 +63,7 @@ class MusicShowRoute extends React.Component {
         }
       }));
 
+    // Here we get the logged in users followedUsers so that they can share the track with any of them
     axios.get(`/api/user/${Auth.getPayload().sub}`, {
       headers: {
         Authorization: `Bearer ${Auth.getToken()}`
@@ -67,28 +74,32 @@ class MusicShowRoute extends React.Component {
 
   handleAdd = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    // The put request adds the content to a users record
     axios.put(`/api/user/${this.state.content.userId}/content`, this.state, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
+    // The user is then redirected to the index page by pushing this into their history
       .then(() => this.props.history.push('/content'));
   }
 
   handleShareToggle = () => {
-    this.setState({ share: !this.state.share }, () => console.log(this.state));
+    // We toggle displaying followedUsers by setting state to the opposite of what it is
+    this.setState({ share: !this.state.share });
   }
 
   handleShare = (e) => {
-    console.log(e.target.value);
+    // This posts the content to the record of the clicked user
     axios.post(`/api/user/${e.target.value}/suggestion`, this.state, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     });
   }
 
   handlePlay = () => {
+    // Audio is paused by default. It will then play if paused and vice versa
     if(this.audioElem.paused) this.audioElem.play();
     else this.audioElem.pause();
 
+    // We store whether the track is paused or playing in state so that we can toggle the img from playing to paused
     const playing = !this.state.playing;
     this.setState({ playing: playing });
   }
@@ -99,24 +110,31 @@ class MusicShowRoute extends React.Component {
       <section className="show-container">
         <img src={this.state.content.artwork}/>
         <div>
+
+          {/* The play button only appears if a previewUrl is defined */}
           {this.state.content.previewUrl &&
           <img
             className="show-buttons"
+            // This ternary displays the play button if the music is paused and vice versa
             src={!this.state.playing ? '/assets/play.png' : '/assets/pause.png'}
             onClick={this.handlePlay}
           />
           }
+
+          {/* Add the item to your todo list */}
           <img
             className="show-buttons"
             src="/assets/plus.png"
             onClick={this.handleAdd}
           />
+
           {/* Share this content with a followedUser */}
           <img
             className="show-buttons"
             src="/assets/share.png"
             onClick={this.handleShareToggle}
           />
+          {/* This list shows all your followedUsers, it is toggled on and off with the handleShareToggle function */}
           {this.state.share &&
             <ul className="columns is-multiline">
               {this.state.followedUsers.map((user, i) =>
@@ -145,8 +163,8 @@ class MusicShowRoute extends React.Component {
         <ul>{this.state.content.artists.map((artist, i) =>
           <li key={i}>{artist.name}</li>
         )} </ul>
+        {/* ref is a react attribute that lets us dynamically change the node. In this case we are playing and pausing */}
         <audio src={this.state.content.previewUrl} ref={element => this.audioElem = element}></audio>
-
       </section>
     );
   }
