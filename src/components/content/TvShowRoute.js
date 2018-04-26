@@ -1,8 +1,11 @@
 import React from 'react';
-
 import axios from 'axios';
+// Auth contains functions that let us establish if a user is logged in, and allows us to log them in, out, and examine their token
 import Auth from '../../lib/Auth';
 
+
+
+//---------------------------------------//
 class TvShowRoute extends React.Component {
 
   state = {
@@ -27,10 +30,13 @@ class TvShowRoute extends React.Component {
   }
 
   componentDidMount() {
+    // In the ResultsDisplay component we link each content to /content/tv/:id - this means we can get the id out of the url and request that specific content from the API
     const tmdbId = this.props.match.params.id;
+    // We get a user's id from their token
     const userId = Auth.getPayload().sub;
 
     axios.get(`/api/tmdbTv/show/${tmdbId}`, {
+      // This Authorization header satisfies our backend API
       headers: {
         Authorization: `Bearer ${Auth.getToken()}`
       }
@@ -49,6 +55,7 @@ class TvShowRoute extends React.Component {
           }
         }));
 
+    // Here we get the logged in users followedUsers so that they can share the track with any of them
     axios.get(`/api/user/${Auth.getPayload().sub}`, {
       headers: {
         Authorization: `Bearer ${Auth.getToken()}`
@@ -59,19 +66,21 @@ class TvShowRoute extends React.Component {
 
   handleAdd = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    // The put request adds the content to a users record
     axios.put(`/api/user/${this.state.content.userId}/content`, this.state, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
+      // The user is then redirected to the index page by pushing this into their history
       .then(() => this.props.history.push('/content'));
   }
 
   handleShareToggle = () => {
-    this.setState({ share: !this.state.share }, () => console.log(this.state));
+    // We toggle displaying followedUsers by setting state to the opposite of what it is
+    this.setState({ share: !this.state.share });
   }
 
   handleShare = (e) => {
-    console.log(e.target.value);
+    // This posts the content to the record of the clicked user
     axios.post(`/api/user/${e.target.value}`, this.state, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     });
@@ -85,17 +94,21 @@ class TvShowRoute extends React.Component {
           className="show-image"
           src={this.state.content.artwork}/>
         <div>
+
+          {/* Add the item to your todo list */}
           <img
             className="show-buttons"
             src="/assets/plus.png"
             onClick={this.handleAdd}
           />
+
           {/* Share this content with a followedUser */}
           <img
             className="show-buttons"
             src="/assets/share.png"
             onClick={this.handleShareToggle}
           />
+          
           {/* Share this content with a followedUser */}
           {this.state.share &&
             <ul className="columns is-multiline">
