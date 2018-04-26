@@ -1,5 +1,5 @@
 const rp = require('request-promise');
-// request-promise is like axios. its a way of formatting api requests
+// request-promise is like axios. its a way of formatting api requests that uses the .then() syntax
 function searchMusic(req, res) {
   rp({
     method: 'POST',

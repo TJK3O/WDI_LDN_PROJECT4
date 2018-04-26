@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// bcrypt is used to hash and salt our passwords
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
@@ -20,6 +21,7 @@ const userSchema = new mongoose.Schema({
     tvId: { type: String }
   }],
   image: { type: String },
+  // This means that we can store ObjectIds in the array and then simply populate them
   followedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
   suggestedContent: [],
   musicLoverBadge: { type: String },
@@ -28,6 +30,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema
+  // We us a virtual as we don't need to store this in the database it just allows us to compare passwords
   .virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
     this._passwordConfirmation = passwordConfirmation;

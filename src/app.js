@@ -25,11 +25,11 @@ class App extends React.Component {
     return (
       // Any routes need to sit in the BrowserRouter tags
       <BrowserRouter>
-        {/* Switch shows a single route at once. */}
         <main className="container">
           <Navbar />
           <FlashMessages />
           <section>
+            {/* Switch shows a single route at once, so Navbar and FlashMessages must sit outside */}
             <Switch>
               <ProtectedRoute path="/user/:id/edit" component={AuthEditRoute} />
               <ProtectedRoute path="/user/:id" component={AuthShowRoute} />
@@ -51,5 +51,6 @@ class App extends React.Component {
 
 ReactDOM.render(
   <App />,
+  // This renders the app.js component in the index.html div with an id of 'root'
   document.getElementById('root')
 );
