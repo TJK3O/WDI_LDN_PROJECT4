@@ -8,7 +8,8 @@
     "test:server": "nyc mocha \"test/server/**/*_spec.js\" --require \"test/server/spec_helper\" --recursive --exit",
     "test:client": "mocha --require ignore-styles test/client/helper \"test/client/**/*_test.js\" --recursive --exit",
     "build": "webpack -p",
-    "start": "yarn build && node index"
+    "start": "yarn build && node index",
+    "test": "node_modules/.bin/_mocha --require ignore-styles test/client/helper \"test/**/*_test.js\""
   },
   "author": "Students",
   "license": "ISC",
@@ -28,8 +29,8 @@
     "file-loader": "^1.1.8",
     "html-webpack-plugin": "^2.30.1",
     "ignore-styles": "^5.0.1",
-    "jsdom": "^11.7.0",
-    "mocha": "^5.0.5",
+    "jsdom": "^11.9.0",
+    "mocha": "^5.1.1",
     "node-sass": "^4.7.2",
     "nyc": "^11.6.0",
     "sass-loader": "^6.0.6",

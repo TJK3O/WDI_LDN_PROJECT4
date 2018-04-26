@@ -30,8 +30,8 @@ const Search = ({ handleChange, handleSubmit }) => {
       style={formStyles}
     >
       <input
-        style={inputStyles}
         onChange={handleChange}
+        style={inputStyles}
         placeholder="search"
       />
     </form>
