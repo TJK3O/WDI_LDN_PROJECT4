@@ -1,8 +1,13 @@
+// This route shows a users profile
 import React from 'react';
 import axios from 'axios';
+// Auth contains functions that let us establish if a user is logged in, and allows us to log them in, out, and examine their token
 import Auth from '../../lib/Auth';
 import { Link } from 'react-router-dom';
 
+
+
+//---------------------------------------//
 class ShowRoute extends React.Component {
 
   state = {
@@ -29,11 +34,12 @@ class ShowRoute extends React.Component {
   }
 
   getUser = () => {
+    // We retrieve the users data from the database and set it in state
     const userId = this.props.match.params.id;
     axios.get(`/api/user/${userId}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then(res => this.setState(res.data,() => console.log('here: ', this.state)));
+      .then(res => this.setState(res.data));
   }
 
   componentDidMount() {
@@ -41,6 +47,7 @@ class ShowRoute extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // This checks whether a users record has changed and if so fetches their new record
     if(prevProps.match.params.id === this.props.match.params.id) return false;
     this.getUser();
   }
@@ -88,7 +95,6 @@ class ShowRoute extends React.Component {
   }
 
   handleRemoveFollowedUser = (followedUser) => {
-    console.log(followedUser);
     // we don't need to pass any data for delete requests
     axios.delete(`/api/user/${followedUser._id}/follow`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -97,7 +103,6 @@ class ShowRoute extends React.Component {
   }
 
   handleRemoveSuggestedContent = (suggestions) => {
-    console.log(suggestions);
     axios.delete(`/api/user/${this.props.match.params.id}/suggestion/${suggestions.resourceId}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
@@ -105,7 +110,6 @@ class ShowRoute extends React.Component {
   }
 
   handleFollowUser = () => {
-    console.log(this.state);
     // because the userId is all we need for the post request we don't need to pass any other data. But since post requests require you to pass data, we pass null.
     axios.post(`/api/user/${this.props.match.params.id}/follow`, null, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -194,8 +198,6 @@ class ShowRoute extends React.Component {
                     <img src={content.artwork} />
                   </Link>
                 }
-
-
 
                 {this.isCurrentUser() && !this.state.content[i].consumedStatus &&
                   <div>
