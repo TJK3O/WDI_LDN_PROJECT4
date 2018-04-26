@@ -24,21 +24,21 @@ class IndexRoute extends React.Component {
     tvSearchResults: []
   }
 
+  // This function changes the content type being displayed to what the user has selected
   handleContentSelection = (e) => {
-    this.setState({ selectedContent: e.target.name });
-    this.setState({ musicSearch: '' });
-    this.setState({ filmsSearch: '' });
-    this.setState({ tvSearch: '' });
+    this.setState({ selectedContent: e.target.name, musicSearch: '', filmsSearch: '', tvSearch: '' });
   }
 
+  // This function stores a users search string in state as they type
   handleMusicChange = (e) => {
     this.setState({ musicSearchResults: [] });
     this.setState({ musicSearch: e.target.value });
   }
 
+  // This function submits a users search results and sets state to be the response
   handleMusicSubmit = (e) => {
     e.preventDefault();
-
+    // This makes a request to our back end which in turn makes a request to Spotifys API
     axios.get('/api/spotify', {
       params: {
         q: this.state.musicSearch,
@@ -64,12 +64,11 @@ class IndexRoute extends React.Component {
       params: {
         query: this.state.filmsSearch
       },
-      // Now that spotify is a secure route we need to add an authorization header to the request
       headers: {
         Authorization: `Bearer ${Auth.getToken()}`
       }
     })
-      .then(res => this.setState({ filmsSearchResults: res.data.results }, () => console.log(this.state.filmsSearchResults)));
+      .then(res => this.setState({ filmsSearchResults: res.data.results }));
   }
 
   handleTvChange = (e) => {
@@ -84,15 +83,15 @@ class IndexRoute extends React.Component {
       params: {
         query: this.state.tvSearch
       },
-      // Now that spotify is a secure route we need to add an authorization header to the request
       headers: {
         Authorization: `Bearer ${Auth.getToken()}`
       }
     })
-      .then(res => this.setState({ tvSearchResults: res.data.results }, () => console.log(this.state.tvSearchResults)));
+      .then(res => this.setState({ tvSearchResults: res.data.results }));
   }
 
   componentDidMount() {
+    // Music is the automatic category when the page loads
     if(!this.state.selectedContent) {
       this.setState({ selectedContent: 'music' });
       axios.get('/api/spotify/topMusic', {
@@ -101,7 +100,7 @@ class IndexRoute extends React.Component {
         }
       })
         .then(res => this.setState({ music: res.data }));
-
+      // We make a request for the other media types so that they are immediately available should a user switch
       axios.get('/api/tmdbmovies/topFilms', {
         headers: {
           Authorization: `Bearer ${Auth.getToken()}`
@@ -129,6 +128,9 @@ class IndexRoute extends React.Component {
 
     return (
       <section>
+
+
+        {/* The content-nav lets a user select their mediatype */}
         <div className="content-nav">
           <a
             className={this.state.selectedContent === 'music' ? 'content-nav-buttons-active' : 'content-nav-buttons'}
@@ -151,6 +153,9 @@ class IndexRoute extends React.Component {
             name="users"
           > users</a>
         </div>
+
+
+        {/* Only the search bar for the specific content that is currently displayed is shown  */}
         {this.state.selectedContent === 'music' &&
         <Search
           handleChange={this.handleMusicChange}
