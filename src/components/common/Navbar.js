@@ -1,30 +1,37 @@
 import React from 'react';
 // withRouter lets us pass in history from props
 import { Link, withRouter } from 'react-router-dom';
-// import Auth
+// Auth contains functions that let us establish if a user is logged in, and allows us to log them in, out, and examine their token
 import Auth from '../../lib/Auth';
 
-class Navbar2 extends React.Component {
+
+
+//---------------------------------------//
+class Navbar extends React.Component {
 
   state = {
     navIsOpen: false
   }
 
   handleToggle = () => {
+    // We toggle by setting navIsOpen to be the opposite of what it currently is in state
     this.setState({ navIsOpen: !this.state.navIsOpen });
   }
 
   handleLogout = () => {
+    // We log the user out and redirect them to /login by pushing this into their history
     Auth.logout();
     this.props.history.push('/login');
   }
 
   componentWillUpdate() {
+    // Before the page has rendered if the nav is open we close it
     if(this.state.navIsOpen) this.setState({ navIsOpen: false });
   }
 
   render() {
 
+    // These are inline styles for the Navbar component
     const inactiveBottomNav = {
       textAlign: 'center',
       width: '100%',
@@ -96,6 +103,7 @@ class Navbar2 extends React.Component {
 
     return (
       <div
+        // This ternary changes the class of the nav according to whether it is open or closed
         style={this.state.navIsOpen ? activeBottomNav : inactiveBottomNav}
       >
         <div style={bottomNavRight}>
@@ -117,6 +125,8 @@ class Navbar2 extends React.Component {
                 <Link className="nav-button" to="/content">b r o w s e</Link>
               </div>
               <div className="bottom-nav-button">
+
+                {/* Certain buttons are only shown if a user is logged in. To check this we use Auth.isAuthenticated() */}
                 {Auth.isAuthenticated() &&
                   <a onClick={this.handleLogout} className="nav-button">l o g o u t</a>
                 }
@@ -140,4 +150,4 @@ class Navbar2 extends React.Component {
   }
 }
 
-export default withRouter(Navbar2);
+export default withRouter(Navbar);
