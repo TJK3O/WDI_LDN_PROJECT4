@@ -1,11 +1,15 @@
 import React from 'react';
-
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Search from './Search';
+// This is a search bar to allow users to search for specific content by hitting return
+import Search from '../common/Search';
+// Auth contains functions that let us establish if a user is logged in, and allows us to log them in, out, and examine their token
 import Auth from '../../lib/Auth';
+// ResultsDisplay renders a list of content for the relevant mediatype
 import ResultsDisplay from './ResultsDisplay';
 
+
+
+//---------------------------------------//
 class IndexRoute extends React.Component {
 
   state = {
@@ -21,7 +25,7 @@ class IndexRoute extends React.Component {
   }
 
   handleContentSelection = (e) => {
-    this.setState({ selectedContent: e.target.name }, () => console.log(this.state));
+    this.setState({ selectedContent: e.target.name });
     this.setState({ musicSearch: '' });
     this.setState({ filmsSearch: '' });
     this.setState({ tvSearch: '' });
@@ -163,27 +167,50 @@ class IndexRoute extends React.Component {
         />
         }
 
-        {this.state.selectedContent === 'music' && this.state.musicSearch &&
+
+        {/* This section displays the music results in a list */}
+        {this.state.music.items && !this.state.musicSearch && this.state.selectedContent === 'music' &&
+        <ResultsDisplay music={this.state.music.items} />
+        }
+
+        {this.state.selectedContent === 'music' && this.state.musicSearch && this.state.musicSearchResults.length < 1 &&
+        <h1>Search for your favourite track...</h1>
+        }
+
+        {this.state.selectedContent === 'music' && this.state.musicSearch && this.state.musicSearchResults &&
           <ResultsDisplay music={this.state.musicSearchResults} />
         }
 
-        {this.state.music.items && !this.state.musicSearch && this.state.selectedContent === 'music' &&
-          <ResultsDisplay music={this.state.music.items} />
+
+        {/* This section displays the films results in a list */}
+        {this.state.films.results && !this.state.filmsSearch && this.state.selectedContent === 'films' &&
+        <ResultsDisplay films={this.state.films.results} />
         }
 
-        {this.state.films.results && !this.state.filmsSearch && this.state.selectedContent === 'films' &&
-          <ResultsDisplay films={this.state.films.results} />
+        {this.state.selectedContent === 'films' && this.state.filmsSearch && this.state.filmsSearchResults.length < 1 &&
+        <h1>Search for your favourite film...</h1>
         }
+
         {this.state.selectedContent === 'films' && this.state.filmsSearch &&
           <ResultsDisplay films={this.state.filmsSearchResults} />
         }
 
+
+        {/* This section displays the TV results in a list */}
         {this.state.tv.results && !this.state.tvSearch && this.state.selectedContent === 'tv' &&
           <ResultsDisplay tv={this.state.tv.results} />
         }
+
+        {this.state.selectedContent === 'tv' && this.state.tvSearch && this.state.tvSearchResults.length < 1 &&
+        <h1>Search for your favourite tv show...</h1>
+        }
+
         {this.state.selectedContent === 'tv' && this.state.tvSearch &&
           <ResultsDisplay tv={this.state.tvSearchResults} />
         }
+
+
+        {/* This section displays all the users on the platform in a list */}
         {this.state.selectedContent === 'users' &&
           <ResultsDisplay users={this.state.users} />
         }
