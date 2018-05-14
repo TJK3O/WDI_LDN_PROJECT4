@@ -26,7 +26,7 @@ c o n t e n t is a fully RESTful MERN stack application. React proved a valuable
 - react-dom
 - react-router-dom
 - request-promise
-
+ 
 
 ##### The app is fully responsive, so please [click here](https://wdi-content.herokuapp.com/) if you would like to visit c o n t e n t.
 
