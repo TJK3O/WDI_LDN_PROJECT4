@@ -1,6 +1,6 @@
 # ![image](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
-# GA WDI-32 Project 4 - c o n t e n t React Web Application
+# GA WDI-32 Project 4 -  c o n t e n t  React Web Application
 
 Individual MERN stack project
 
