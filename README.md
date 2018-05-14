@@ -56,7 +56,42 @@ c o n t e n t is a fully RESTful MERN stack application. React proved a valuable
 
 This project was my first real chance to use React and while there was a learning curve around the use of state, and props I found it to be both intuitive and useful for my application. As I was making requests to multiple APIs it was invaluable to be able to store information in state and update the user without reloading the page.
 
-Before I even got started with my wireframes I made sure to check the feasibility of my idea. I used Insomnia to see what meta data I was able to get from the various APIs I hoped to use and to ensure that I could successfully authenticate my requests. An initial challenge was successfully authenticating myself when making Spotify requests. I was able to obtain a token that I sent with my requests which responded with the correct information, however my token was expiring once an hour. I thankfully found an alternative authorisation flow that negated this problem.
+Before I even got started with my wireframes I made sure to check the feasibility of my idea. I used Insomnia to see what meta data I was able to get from the various APIs I hoped to use and to ensure that I could successfully authenticate my requests. An initial challenge was successfully authenticating myself when making Spotify requests. I was able to obtain a token that I sent with my requests which responded with the correct information, however my token was expiring once an hour. I thankfully found an alternative authorisation flow that negated this problem:
+
+```
+function topMusic(req, res) {
+  rp({
+    method: 'POST',
+    url: 'https://accounts.spotify.com/api/token',
+    // the grant type is the kind of authorization flow (no login needed)
+    form: {
+      grant_type: 'client_credentials'
+    },
+    // we send out client id and secret in the header as 'Basic id secret' (a format required by spotify)
+    headers: {
+      'Authorization': 'Basic ' + (new Buffer(
+        process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_SECRET
+      ).toString('base64'))
+    },
+    // we send it as json
+    json: true
+  })
+    .then(response => {
+      return rp({
+        // we then immediately fire a get request using the access_token from the response
+        method: 'GET',
+        // we put the access token in the header of our get request
+        headers: {
+          Authorization: `Bearer ${response.access_token}`
+        },
+        url: 'https://api.spotify.com/v1/users/topsify/playlists/1QM1qz09ZzsAPiXphF1l4S/tracks',
+        json: true
+      });
+    })
+    .then(data => res.json(data));
+
+}
+```
 
 This app was a real challenge. A lot of research went into simply achieving MVP - which made achieving MVP all the more satisfying. I was pleased to be able to integrate multiple APIs on the backend, and I am glad that I have built an expandable site that can be built upon. Although I am pleased with what I have managed to achieve in 7 days, I plan to add more functionality and polish in future.
 - For example I would like to implement the YouTube API so that a user can preview film and tv content as well as Music.
